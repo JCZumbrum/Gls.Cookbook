@@ -26,11 +26,17 @@ namespace Gls.Cookbook.DataAccess
             }
         }
 
-        public EfRecipeContext()
+        private EfRecipeContext(CookbookDbContext dbContext)
         {
-            Lazy<IRecipeRepository> myRepo = new Lazy<IRecipeRepository>(() => new EfRecipeRepository(dbContext));
+            this.dbContext = dbContext;
 
-            dbContext = new CookbookDbContext();
+            Lazy<IRecipeRepository> myRepo = new Lazy<IRecipeRepository>(() => new EfRecipeRepository(dbContext));
+        }
+
+        public static async Task<EfRecipeContext> CreateAsync()
+        {
+            CookbookDbContext dbContext = await CookbookDbContext.CreateAsync();
+            return new EfRecipeContext(dbContext);
         }
 
         public async Task BeginTransactionAsync()
