@@ -10,7 +10,7 @@ namespace Gls.Cookbook.DataAccess.Models
     public class RecipeIngredientEntity
     {
         public int Id { get; set; }
-        public RecipeEntity Recipe { get; set; }
+        public RecipeSectionEntity RecipeSection { get; set; }
         public IngredientEntity Ingredient { get; set; }
         public decimal Quantity { get; set; }
         public MeasurementEntity Measurement { get; set; }
