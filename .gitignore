@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/code/Cookbook.db3
+/code/Cookbook.db3-shm
+/code/Cookbook.db3-wal

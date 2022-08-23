@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Gls.Cookbook.Domain\Gls.Cookbook.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

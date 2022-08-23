@@ -37,7 +37,7 @@ namespace Gls.Cookbook.DataAccess
 
         public static async Task<EfCookbookContext> CreateAsync()
         {
-            CookbookDbContext dbContext = await CookbookDbContext.CreateAsync();
+            CookbookDbContext dbContext = await CookbookDbContext.CreateAsync("");
             return new EfCookbookContext(dbContext);
         }
 
