@@ -97,12 +97,11 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RecipeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
                     IngredientId = table.Column<int>(type: "INTEGER", nullable: true),
                     Quantity = table.Column<decimal>(type: "TEXT", nullable: false),
                     MeasurementId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Note = table.Column<string>(type: "TEXT", nullable: true),
-                    RecipeSectionEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -118,13 +117,8 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         principalTable: "Measurements",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_RecipeIngredients_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_RecipeIngredients_RecipeSections_RecipeSectionEntityId",
-                        column: x => x.RecipeSectionEntityId,
+                        name: "FK_RecipeIngredients_RecipeSections_RecipeSectionId",
+                        column: x => x.RecipeSectionId,
                         principalTable: "RecipeSections",
                         principalColumn: "Id");
                 });
@@ -135,23 +129,17 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RecipeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
                     LineNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     Instruction = table.Column<string>(type: "TEXT", nullable: true),
-                    Note = table.Column<string>(type: "TEXT", nullable: true),
-                    RecipeSectionEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RecipeInstructions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RecipeInstructions_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_RecipeInstructions_RecipeSections_RecipeSectionEntityId",
-                        column: x => x.RecipeSectionEntityId,
+                        name: "FK_RecipeInstructions_RecipeSections_RecipeSectionId",
+                        column: x => x.RecipeSectionId,
                         principalTable: "RecipeSections",
                         principalColumn: "Id");
                 });
@@ -167,24 +155,14 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 column: "MeasurementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredients_RecipeId",
+                name: "IX_RecipeIngredients_RecipeSectionId",
                 table: "RecipeIngredients",
-                column: "RecipeId");
+                column: "RecipeSectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredients_RecipeSectionEntityId",
-                table: "RecipeIngredients",
-                column: "RecipeSectionEntityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipeInstructions_RecipeId",
+                name: "IX_RecipeInstructions_RecipeSectionId",
                 table: "RecipeInstructions",
-                column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipeInstructions_RecipeSectionEntityId",
-                table: "RecipeInstructions",
-                column: "RecipeSectionEntityId");
+                column: "RecipeSectionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeNotes_RecipeId",

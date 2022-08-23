@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gls.Cookbook.DataAccess.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    [Migration("20220822025415_InitialCreate")]
+    [Migration("20220823003310_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,10 +94,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     b.Property<decimal>("Quantity")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("RecipeSectionEntityId")
+                    b.Property<int?>("RecipeSectionId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -106,9 +103,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
 
                     b.HasIndex("MeasurementId");
 
-                    b.HasIndex("RecipeId");
-
-                    b.HasIndex("RecipeSectionEntityId");
+                    b.HasIndex("RecipeSectionId");
 
                     b.ToTable("RecipeIngredients");
                 });
@@ -128,17 +123,12 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("RecipeSectionEntityId")
+                    b.Property<int?>("RecipeSectionId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeId");
-
-                    b.HasIndex("RecipeSectionEntityId");
+                    b.HasIndex("RecipeSectionId");
 
                     b.ToTable("RecipeInstructions");
                 });
@@ -194,32 +184,24 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("MeasurementId");
 
-                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeEntity", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId");
-
-                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeSectionEntity", null)
+                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeSectionEntity", "RecipeSection")
                         .WithMany("Ingredients")
-                        .HasForeignKey("RecipeSectionEntityId");
+                        .HasForeignKey("RecipeSectionId");
 
                     b.Navigation("Ingredient");
 
                     b.Navigation("Measurement");
 
-                    b.Navigation("Recipe");
+                    b.Navigation("RecipeSection");
                 });
 
             modelBuilder.Entity("Gls.Cookbook.DataAccess.Models.RecipeInstructionEntity", b =>
                 {
-                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeEntity", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId");
-
-                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeSectionEntity", null)
+                    b.HasOne("Gls.Cookbook.DataAccess.Models.RecipeSectionEntity", "RecipeSection")
                         .WithMany("Instructions")
-                        .HasForeignKey("RecipeSectionEntityId");
+                        .HasForeignKey("RecipeSectionId");
 
-                    b.Navigation("Recipe");
+                    b.Navigation("RecipeSection");
                 });
 
             modelBuilder.Entity("Gls.Cookbook.DataAccess.Models.RecipeNoteEntity", b =>
