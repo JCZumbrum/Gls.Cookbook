@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gls.Cookbook.DataAccess.Models;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,11 @@ namespace Gls.Cookbook.DataAccess.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task AddAsync(Recipe recipe)
+        public async Task AddAsync(Recipe recipe)
         {
-            throw new NotImplementedException();
+            RecipeEntity recipeEntity = recipe.MapToEntity();
+            await dbContext.Recipes.AddAsync(recipeEntity);
+            await dbContext.SaveChangesAsync();
         }
 
         public Task Delete(int recipeId)
@@ -28,10 +31,10 @@ namespace Gls.Cookbook.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Recipe> GetByIdAsync(int recipeId)
+        public async Task<Recipe> GetByIdAsync(int recipeId)
         {
-            throw new NotImplementedException();
-            //dbContext.Recipes.FirstOrDefaultAsync(r => r.Id == recipeId);
+            RecipeEntity entity = await dbContext.Recipes.FirstOrDefaultAsync(r => r.Id == recipeId);
+            return entity.MapToRecipe();
         }
 
         public Task UpdateAsync(Recipe recipe)
