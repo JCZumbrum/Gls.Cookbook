@@ -63,18 +63,21 @@ namespace Gls.Cookbook.DataAccess.Repositories
             recipeEntity.Name = recipe.Name;
             recipeEntity.Description = recipe.Description;
 
+            #region Refresh Recipe Sections
+
             Dictionary<int, RecipeSectionEntity> entitySectionDictionary = recipeEntity.Sections.ToDictionary(rs => rs.Id);
-
             ILookup<bool, RecipeSection> recipeSectionLookupByState = recipe.Sections.ToLookup(rs => rs.Id == 0);
-
-            // recipeSectionLookupByState[false] => sections that are not new
-            IEnumerable<RecipeSectionEntity> exceptSectionList = recipeEntity.Sections.ExceptBy(recipeSectionLookupByState[false].Select(rs => rs.Id), e => e.Id);
+            List<RecipeSectionEntity> exceptSectionList = recipeEntity.Sections.ExceptBy(recipeSectionLookupByState[false].Select(rs => rs.Id), e => e.Id).ToList();
 
             // delete sections that no longer exist
             foreach (RecipeSectionEntity exceptSection in exceptSectionList)
+            {
+                recipeEntity.Sections.Remove(exceptSection);
                 DeleteSection(exceptSection);
+            }
 
-            // modify existing sections
+            // update existing sections
+            // recipeSectionLookupByState[false] => sections that are not new
             foreach (RecipeSection modifySection in recipeSectionLookupByState[false])
             {
                 RecipeSectionEntity recipeSectionEntity = entitySectionDictionary[modifySection.Id];
@@ -83,25 +86,36 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
             // add new sections
             foreach (RecipeSection newSection in recipeSectionLookupByState[true])
-            {
-                RecipeSectionEntity recipeSectionEntity = new RecipeSectionEntity()
-                {
-                    Recipe = recipeEntity,
-                    Name = newSection.Name,
-                    Order = newSection.Order
-                };
+                recipeEntity.Sections.Add(newSection.MapToEntity(recipeEntity));
 
-                recipeSectionEntity.Ingredients = newSection.Ingredients.Select(
-                    i => new RecipeIngredientEntity()
-                    {
-                        RecipeSection = recipeSectionEntity,
-                        Ingredient = i.Ingredient,
-                        Measurement = i.Measurement,
-                        Quantity = i.Quantity,
-                        Note = i.Note
-                    }).ToList();
-                recipeSectionEntity.Instructions = newSection.Instructions.Select(i => new RecipeInstructionEntity() { }).ToList();
+            #endregion
+
+            #region Refresh Recipe Notes
+
+            Dictionary<int, RecipeNoteEntity> entityNoteDictionary = recipeEntity.Notes.ToDictionary(n => n.Id);
+            ILookup<bool, RecipeNote> recipeNoteLookupByState = recipe.Notes.ToLookup(n => n.Id == 0);
+            List<RecipeNoteEntity> exceptNoteList = recipeEntity.Notes.ExceptBy(recipeNoteLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+
+            // delete notes that no longer exist
+            foreach (RecipeNoteEntity exceptNote in exceptNoteList)
+            {
+                recipeEntity.Notes.Remove(exceptNote);
+                dbContext.RecipeNotes.Remove(exceptNote);
             }
+
+            // update existing notes
+            // recipeNoteLookupByState[false] => notes that are not new
+            foreach (RecipeNote modifyNote in recipeNoteLookupByState[false])
+            {
+                RecipeNoteEntity recipeNoteEntity = entityNoteDictionary[modifyNote.Id];
+                recipeNoteEntity.Note = modifyNote.Note;
+            }
+
+            // add new notes
+            foreach (RecipeNote newNote in recipeNoteLookupByState[true])
+                recipeEntity.Notes.Add(new RecipeNoteEntity() { Recipe = recipeEntity, Note = newNote.Note });
+
+            #endregion
 
             dbContext.Update(recipeEntity);
             await dbContext.SaveChangesAsync();
@@ -122,7 +136,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             recipeSectionEntity.Name = recipeSection.Name;
 
-
+            // TODO
         }
     }
 }

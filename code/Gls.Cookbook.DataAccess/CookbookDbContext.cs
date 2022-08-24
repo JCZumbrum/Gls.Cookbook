@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Gls.Cookbook.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,11 @@ namespace Gls.Cookbook.DataAccess
         public DbSet<MeasurementEntity> Measurements { get; set; }
 
         private CookbookDbContext(string sourcePath) { this.sourcePath = sourcePath; }
+
+        public static async Task<CookbookDbContext> CreateAsync()
+        {
+            return await CreateAsync(String.Empty);
+        }
 
         public static async Task<CookbookDbContext> CreateAsync(string sourcePath)
         {
