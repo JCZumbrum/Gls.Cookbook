@@ -17,17 +17,15 @@ namespace Gls.Cookbook.DataAccess.Models
                 Name = recipe.Name,
                 Description = recipe.Description
             };
-            entity.Notes = new List<RecipeNoteEntity>(
-                recipe.Notes.Select(
+            entity.Notes = recipe.Notes.Select(
                     n => new RecipeNoteEntity()
                     {
                         Id = n.Id,
                         Recipe = entity,
                         Note = n.Note
-                    }));
-            entity.Sections = new List<RecipeSectionEntity>(
-                recipe.Sections.Select(
-                    s => s.MapToEntity(entity)));
+                    }).ToList();
+            entity.Sections = recipe.Sections.Select(
+                    s => s.MapToEntity(entity)).ToList();
 
             return entity;
         }
@@ -43,16 +41,14 @@ namespace Gls.Cookbook.DataAccess.Models
                 Name = entity.Name,
                 Description = entity.Description
             };
-            recipe.Notes = new List<RecipeNote>(
-                entity.Notes.Select(
+            recipe.Notes = entity.Notes.Select(
                     n => new RecipeNote
                     {
                         Id = n.Id,
                         Note = n.Note
-                    }));
-            recipe.Sections = new List<RecipeSection>(
-                entity.Sections.Select(
-                    s => s.MapToRecipeSection()));
+                    }).ToList();
+            recipe.Sections = entity.Sections.Select(
+                    s => s.MapToRecipeSection()).ToList();
 
             return recipe;
         }

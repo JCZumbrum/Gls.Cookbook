@@ -10,8 +10,9 @@ namespace Gls.Cookbook.Domain.Repositories
     public interface IRecipeRepository
     {
         Task AddAsync(Recipe recipe);
+        Task<List<RecipeHeader>> GetHeaders();
         Task<Recipe> GetByIdAsync(int recipeId);
         Task UpdateAsync(Recipe recipe);
-        Task Delete(int recipeId);
+        Task DeleteAsync(int recipeId);
     }
 }
