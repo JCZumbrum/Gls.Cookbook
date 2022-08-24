@@ -21,15 +21,7 @@ namespace Gls.Cookbook.DataAccess.Models
 
             entity.Ingredients = new List<RecipeIngredientEntity>(
                 recipeSection.Ingredients.Select(
-                    i => new RecipeIngredientEntity()
-                    {
-                        Id = i.Id,
-                        RecipeSection = entity,
-                        Ingredient = new IngredientEntity() { Id = i.Ingredient.Id, Name = i.Ingredient.Name, Description = i.Ingredient.Description },
-                        Measurement = new MeasurementEntity() { Id = i.Measurement.Id, MeasurementType = i.Measurement.MeasurementType, MeasurementSystem = i.Measurement.MeasurementSystem, Name = i.Measurement.Name, Abbreviation = i.Measurement.Abbreviation },
-                        Quantity = i.Quantity,
-                        Note = i.Note
-                    }));
+                    i => i.MapToEntity(entity)));
 
             entity.Instructions = new List<RecipeInstructionEntity>(
                 recipeSection.Instructions.Select(

@@ -136,7 +136,42 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             recipeSectionEntity.Name = recipeSection.Name;
 
+            #region Refresh Ingredients
+
+            Dictionary<int, RecipeIngredientEntity> entityIngredientDictionary = recipeSectionEntity.Ingredients.ToDictionary(i => i.Id);
+            ILookup<bool, RecipeIngredient> ingredientLookupByState = recipeSection.Ingredients.ToLookup(i => i.Id == 0);
+            List<RecipeIngredientEntity> exceptIngredientList = recipeSectionEntity.Ingredients.ExceptBy(ingredientLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+
+            // delete ingredients that no longer exist
+            foreach (RecipeIngredientEntity exceptIngredient in exceptIngredientList)
+            {
+                recipeSectionEntity.Ingredients.Remove(exceptIngredient);
+                dbContext.RecipeIngredients.Remove(exceptIngredient);
+            }
+
+            // update existing ingredients
+            // ingredientLookupByState[false] => ingredients that are not new
+            foreach (RecipeIngredient modifyIngredient in ingredientLookupByState[false])
+            {
+                RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
+
+                ingredientEntity.Ingredient = modifyIngredient.Ingredient.MapToEntity();
+                ingredientEntity.Quantity = modifyIngredient.Quantity;
+                ingredientEntity.Measurement = modifyIngredient.Measurement.MapToEntity();
+                ingredientEntity.Note = modifyIngredient.Note;
+            }
+
+            // add new ingredients
+            foreach (RecipeIngredient newIngredient in ingredientLookupByState[true])
+                recipeSectionEntity.Ingredients.Add(newIngredient.MapToEntity(recipeSectionEntity));
+
+            #endregion
+
+            #region Refresh Instructions
+
             // TODO
+
+            #endregion
         }
     }
 }
