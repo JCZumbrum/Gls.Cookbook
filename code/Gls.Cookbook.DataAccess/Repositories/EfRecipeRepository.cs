@@ -169,7 +169,31 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
             #region Refresh Instructions
 
-            // TODO
+            Dictionary<int, RecipeInstructionEntity> entityInstructionDictionary = recipeSectionEntity.Instructions.ToDictionary(i => i.Id);
+            ILookup<bool, RecipeInstruction> instructionLookupByState = recipeSection.Instructions.ToLookup(i => i.Id == 0);
+            List<RecipeInstructionEntity> exceptInstructionList = recipeSectionEntity.Instructions.ExceptBy(instructionLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+
+            // delete instructions that no longer exist
+            foreach (RecipeInstructionEntity exceptInstruction in exceptInstructionList)
+            {
+                recipeSectionEntity.Instructions.Remove(exceptInstruction);
+                dbContext.RecipeInstructions.Remove(exceptInstruction);
+            }
+
+            // update existing instructions
+            // instructionLookupByState[false] => ingredients that are not new
+            foreach (RecipeInstruction modifyInstruction in instructionLookupByState[false])
+            {
+                RecipeInstructionEntity instructionEntity = entityInstructionDictionary[modifyInstruction.Id];
+
+                instructionEntity.LineNumber = modifyInstruction.LineNumber;
+                instructionEntity.Instruction = modifyInstruction.Instruction;
+                instructionEntity.Note = modifyInstruction.Note;
+            }
+
+            // add new instructions
+            foreach (RecipeInstruction newInstruction in instructionLookupByState[true])
+                recipeSectionEntity.Instructions.Add(newInstruction.MapToEntity(recipeSectionEntity));
 
             #endregion
         }
