@@ -117,7 +117,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
             #endregion
 
-            dbContext.Update(recipeEntity);
+            dbContext.Recipes.Update(recipeEntity);
             await dbContext.SaveChangesAsync();
         }
 

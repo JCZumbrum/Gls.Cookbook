@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gls.Cookbook.DataAccess.Models;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gls.Cookbook.DataAccess.Repositories
 {
@@ -17,29 +19,44 @@ namespace Gls.Cookbook.DataAccess.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task AddAsync(Ingredient ingredient)
+        public async Task AddAsync(Ingredient ingredient)
         {
-            throw new NotImplementedException();
+            IngredientEntity ingredientEntity = ingredient.MapToEntity();
+            await dbContext.Ingredients.AddAsync(ingredientEntity);
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int ingredientId)
+        public async Task DeleteAsync(int ingredientId)
         {
-            throw new NotImplementedException();
+            IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(r => r.Id == ingredientId);
+            if (ingredientEntity == null)
+                return;
+
+            dbContext.Ingredients.Remove(ingredientEntity);
+
+            await dbContext.SaveChangesAsync();
         }
 
         public Task<List<Ingredient>> GetAll()
         {
-            throw new NotImplementedException();
+             
         }
 
-        public Task<Ingredient> GetByIdAsync(int ingredientId)
+        public async Task<Ingredient> GetByIdAsync(int ingredientId)
         {
-            throw new NotImplementedException();
+            IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == ingredientId);
+            return ingredientEntity.MapToIngredient();
         }
 
-        public Task UpdateAsync(Ingredient ingredient)
+        public async Task UpdateAsync(Ingredient ingredient)
         {
-            throw new NotImplementedException();
+            IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == ingredient.Id);
+
+            ingredientEntity.Name = ingredient.Name;
+            ingredientEntity.Description = ingredient.Description;
+
+            dbContext.Ingredients.Update(ingredientEntity);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

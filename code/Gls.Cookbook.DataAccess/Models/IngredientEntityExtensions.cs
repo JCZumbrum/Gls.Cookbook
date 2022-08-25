@@ -18,5 +18,15 @@ namespace Gls.Cookbook.DataAccess.Models
                 Description = ingredient.Description
             };
         }
+
+        public static Ingredient MapToIngredient(this IngredientEntity entity)
+        {
+            return new Ingredient()
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Description = entity.Description
+            };
+        }
     }
 }

@@ -20,5 +20,17 @@ namespace Gls.Cookbook.DataAccess.Models
                 Abbreviation = measurement.Abbreviation
             };
         }
+
+        public static Measurement MapToMeasurement(this MeasurementEntity entity)
+        {
+            return new Measurement()
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Abbreviation = entity.Abbreviation,
+                MeasurementType = entity.MeasurementType,
+                MeasurementSystem = entity.MeasurementSystem
+            };
+        }
     }
 }
