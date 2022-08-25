@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gls.Cookbook.Domain.Models;
 
 namespace Gls.Cookbook.Domain.Repositories
 {
     public interface IIngredientRepository
     {
+        Task AddAsync(Ingredient ingredient);
+        Task<Ingredient> GetByIdAsync(int ingredientId);
+        Task<List<Ingredient>> GetAll();
+        Task UpdateAsync(Ingredient ingredient);
+        Task DeleteAsync(int ingredientId);
     }
 }

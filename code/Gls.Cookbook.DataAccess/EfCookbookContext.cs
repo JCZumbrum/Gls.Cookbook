@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Gls.Cookbook.DataAccess.Repositories;
 using Gls.Cookbook.Domain.Repositories;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Gls.Cookbook.DataAccess
@@ -15,6 +13,8 @@ namespace Gls.Cookbook.DataAccess
     {
         private CookbookDbContext dbContext = null;
         private IRecipeRepository recipeRepository = null;
+        private IIngredientRepository ingredientRepository = null;
+        private IMeasurementRepository measurementRepository = null;
 
         private IDbContextTransaction transaction = null;
 
@@ -28,11 +28,29 @@ namespace Gls.Cookbook.DataAccess
             }
         }
 
+        public IIngredientRepository IngredientRepository
+        {
+            get
+            {
+                ingredientRepository ??= new EfIngredientRepository(dbContext);
+
+                return ingredientRepository;
+            }
+        }
+
+        public IMeasurementRepository MeasurementRepository
+        {
+            get
+            {
+                measurementRepository ??= new EfMeasurementRepository(dbContext);
+
+                return measurementRepository;
+            }
+        }
+
         private EfCookbookContext(CookbookDbContext dbContext)
         {
             this.dbContext = dbContext;
-
-            Lazy<IRecipeRepository> myRepo = new Lazy<IRecipeRepository>(() => new EfRecipeRepository(dbContext));
         }
 
         public static async Task<EfCookbookContext> CreateAsync()
