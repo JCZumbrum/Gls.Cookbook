@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Gls.Cookbook.Domain;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -173,6 +175,8 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 name: "IX_RecipeSections_RecipeId",
                 table: "RecipeSections",
                 column: "RecipeId");
+
+            SeedData(migrationBuilder);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -197,6 +201,69 @@ namespace Gls.Cookbook.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipes");
+        }
+
+        private void SeedData(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Teaspoon", "t", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Tablespoon", "T", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Cup", "c", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Pint", "pt", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Quart", "qt", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Fluid Ounce", "fl. oz", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Milliliter", "ml", (int)MeasurementType.Volume, (int)MeasurementSystem.Metric });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Liter", "l", (int)MeasurementType.Volume, (int)MeasurementSystem.Metric });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Ounce", "oz", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Pound", "lb", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Milligram", "mg", (int)MeasurementType.Weight, (int)MeasurementSystem.Metric });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Gram", "g", (int)MeasurementType.Weight, (int)MeasurementSystem.Metric });
         }
     }
 }

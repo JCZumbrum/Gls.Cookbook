@@ -8,8 +8,8 @@ namespace Gls.Cookbook.Domain
 {
     public enum MeasurementSystem
     {
-        UsCustomary,
-        Metric,
-        Agnostic
+        UsCustomary = 1,
+        Metric = 2,
+        Agnostic = 3
     }
 }

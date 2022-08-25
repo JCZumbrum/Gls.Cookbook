@@ -8,8 +8,8 @@ namespace Gls.Cookbook.Domain
 {
     public enum MeasurementType
     {
-        Weight,
-        Volume,
-        Each
+        Weight = 1,
+        Volume = 2,
+        Each = 3
     }
 }
