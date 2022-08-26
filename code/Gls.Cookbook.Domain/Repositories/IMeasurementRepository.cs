@@ -11,6 +11,7 @@ namespace Gls.Cookbook.Domain.Repositories
     {
         Task AddAsync(Measurement measurement);
         Task<Measurement> GetByIdAsync(int measurementId);
+        Task<Measurement> GetByNameAsync(string name);
         Task<List<Measurement>> GetAllAsync();
         Task UpdateAsync(Measurement measurement);
         Task DeleteAsync(int measurementId);

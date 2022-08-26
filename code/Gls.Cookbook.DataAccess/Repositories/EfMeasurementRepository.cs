@@ -50,6 +50,12 @@ namespace Gls.Cookbook.DataAccess.Repositories
             return measurementEntity.MapToMeasurement();
         }
 
+        public async Task<Measurement> GetByNameAsync(string name)
+        {
+            MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Name == name);
+            return measurementEntity.MapToMeasurement();
+        }
+
         public async Task UpdateAsync(Measurement measurement)
         {
             MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Id == measurement.Id);
