@@ -48,6 +48,12 @@ namespace Gls.Cookbook.DataAccess.Repositories
             return ingredientEntity.MapToIngredient();
         }
 
+        public async Task<Ingredient> GetByNameAsync(string name)
+        {
+            IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
+            return ingredientEntity.MapToIngredient();
+        }
+
         public async Task UpdateAsync(Ingredient ingredient)
         {
             IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == ingredient.Id);

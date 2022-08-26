@@ -9,6 +9,8 @@ namespace Gls.Cookbook.Domain.Repositories
     public interface ICookbookContext
     {
         IRecipeRepository RecipeRepository { get; }
+        IIngredientRepository IngredientRepository { get; }
+        IMeasurementRepository MeasurementRepository { get; }
 
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();
