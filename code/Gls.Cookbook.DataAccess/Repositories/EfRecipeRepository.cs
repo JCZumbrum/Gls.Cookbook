@@ -23,8 +23,8 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             RecipeEntity recipeEntity = recipe.MapToEntity();
 
-            var ingredients = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Ingredient));
-            var measurements = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Measurement));
+            var ingredients = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Ingredient)).DistinctBy(i => i.Id);
+            var measurements = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Measurement)).DistinctBy(m => m.Id);
 
             dbContext.Ingredients.AttachRange(ingredients);
             dbContext.Measurements.AttachRange(measurements);
