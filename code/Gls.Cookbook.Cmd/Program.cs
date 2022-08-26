@@ -10,14 +10,16 @@ namespace Gls.Cookbook.Cmd
     {
         static async Task Main(string[] args)
         {
-            //await CreateRecipe();
-            await DeleteRecipe();
+            //await CreateIngredients();
+            await CreateRecipe();
+            //await DeleteRecipe();
         }
 
-        static async Task CreateIngredient()
+        static async Task CreateIngredients()
         {
             ICookbookContext cookbookContext = await EfCookbookContext.CreateAsync();
 
+            await cookbookContext.IngredientRepository.AddAsync(new Ingredient() { Name = "Flour" });
             await cookbookContext.IngredientRepository.AddAsync(new Ingredient() { Name = "Water" });
         }
 
@@ -38,12 +40,12 @@ namespace Gls.Cookbook.Cmd
         static async Task CreateRecipe()
         {
             Ingredient flourIngredient;
-            Measurement measurement;
+            Measurement cupMeasurement;
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
                 flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
-                measurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
+                cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
             }
 
             Recipe recipe = new Recipe() { Name = "Bread" };
@@ -51,7 +53,11 @@ namespace Gls.Cookbook.Cmd
             {
                 Name = "Main",
                 Instructions = new List<RecipeInstruction>() { new RecipeInstruction() { LineNumber = 1, Instruction = "Knead dough." } },
-                Ingredients = new List<RecipeIngredient>() { new RecipeIngredient() { Ingredient = flourIngredient, Measurement = measurement, Quantity = 1 } }
+                Ingredients = new List<RecipeIngredient>()
+                {
+                    new RecipeIngredient() { Ingredient = flourIngredient, Measurement = cupMeasurement, Quantity = 1 },
+                    new RecipeIngredient() { Ingredient = flourIngredient, Measurement = cupMeasurement, Quantity = 1 }
+                }
             });
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
