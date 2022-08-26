@@ -22,6 +22,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
         public async Task AddAsync(Recipe recipe)
         {
             RecipeEntity recipeEntity = recipe.MapToEntity();
+
+            var ingredients = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Ingredient));
+            var measurements = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Measurement));
+
+            dbContext.Ingredients.AttachRange(ingredients);
+            dbContext.Measurements.AttachRange(measurements);
+
             await dbContext.Recipes.AddAsync(recipeEntity);
             await dbContext.SaveChangesAsync();
         }
