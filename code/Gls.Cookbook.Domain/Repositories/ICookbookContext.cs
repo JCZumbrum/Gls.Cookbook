@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gls.Cookbook.Domain.Repositories
 {
-    public interface IRecipeContext
+    public interface ICookbookContext
     {
         IRecipeRepository RecipeRepository { get; }
 

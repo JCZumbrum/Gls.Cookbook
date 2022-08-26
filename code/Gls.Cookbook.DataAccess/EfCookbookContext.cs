@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Gls.Cookbook.DataAccess
 {
-    public class EfCookbookContext : IRecipeContext, IAsyncDisposable
+    public class EfCookbookContext : ICookbookContext, IAsyncDisposable
     {
         private CookbookDbContext dbContext = null;
         private IRecipeRepository recipeRepository = null;
