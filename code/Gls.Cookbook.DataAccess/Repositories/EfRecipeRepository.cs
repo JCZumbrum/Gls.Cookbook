@@ -56,6 +56,12 @@ namespace Gls.Cookbook.DataAccess.Repositories
             return entity.MapToRecipe();
         }
 
+        public async Task<Recipe> GetByNameAsync(string name)
+        {
+            RecipeEntity entity = await dbContext.Recipes.FirstOrDefaultAsync(m => m.Name == name);
+            return entity.MapToRecipe();
+        }
+
         public async Task UpdateAsync(Recipe recipe)
         {
             RecipeEntity recipeEntity = await dbContext.Recipes.Include(r => r.Notes).Include(r => r.Sections).FirstOrDefaultAsync(r => r.Id == recipe.Id);

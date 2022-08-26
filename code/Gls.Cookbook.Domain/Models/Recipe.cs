@@ -11,7 +11,7 @@ namespace Gls.Cookbook.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<RecipeNote> Notes { get; set; }
-        public List<RecipeSection> Sections { get; set; }
+        public List<RecipeNote> Notes { get; set; } = new List<RecipeNote>();
+        public List<RecipeSection> Sections { get; set; } = new List<RecipeSection>();
     }
 }
