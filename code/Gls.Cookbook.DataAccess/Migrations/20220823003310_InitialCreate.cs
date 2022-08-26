@@ -264,6 +264,11 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
                 new object[] { "Gram", "g", (int)MeasurementType.Weight, (int)MeasurementSystem.Metric });
+
+            migrationBuilder.InsertData(
+                "Measurements",
+                new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
+                new object[] { "Each", "each", (int)MeasurementType.Each, (int)MeasurementSystem.Agnostic });
         }
     }
 }
