@@ -37,7 +37,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Ingredient>> GetAll()
+        public async Task<List<Ingredient>> GetAllAsync()
         {
             return await dbContext.Ingredients.Select(e => e.MapToIngredient()).ToListAsync();
         }

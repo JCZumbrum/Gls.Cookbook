@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gls.Cookbook.DataAccess.Models;
+using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gls.Cookbook.DataAccess.Repositories
 {
@@ -17,29 +21,46 @@ namespace Gls.Cookbook.DataAccess.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task AddAsync(Measurement measurement)
+        public async Task AddAsync(Measurement measurement)
         {
-            throw new NotImplementedException();
+            MeasurementEntity measurementEntity = measurement.MapToEntity();
+            await dbContext.Measurements.AddAsync(measurementEntity);
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int measurementId)
+        public async Task DeleteAsync(int measurementId)
         {
-            throw new NotImplementedException();
+            MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Id == measurementId);
+            if (measurementEntity == null)
+                return;
+
+            dbContext.Measurements.Remove(measurementEntity);
+
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Measurement>> GetAll()
+        public async Task<List<Measurement>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await dbContext.Measurements.Select(e => e.MapToMeasurement()).ToListAsync();
         }
 
-        public Task<Measurement> GetByIdAsync(int measurementId)
+        public async Task<Measurement> GetByIdAsync(int measurementId)
         {
-            throw new NotImplementedException();
+            MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Id == measurementId);
+            return measurementEntity.MapToMeasurement();
         }
 
-        public Task UpdateAsync(Measurement measurement)
+        public async Task UpdateAsync(Measurement measurement)
         {
-            throw new NotImplementedException();
+            MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Id == measurement.Id);
+
+            measurementEntity.Name = measurement.Name;
+            measurementEntity.Abbreviation = measurement.Abbreviation;
+            measurementEntity.MeasurementType = measurement.MeasurementType;
+            measurementEntity.MeasurementSystem = measurement.MeasurementSystem;
+
+            dbContext.Measurements.Update(measurementEntity);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

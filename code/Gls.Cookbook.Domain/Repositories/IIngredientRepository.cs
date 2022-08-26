@@ -11,7 +11,7 @@ namespace Gls.Cookbook.Domain.Repositories
     {
         Task AddAsync(Ingredient ingredient);
         Task<Ingredient> GetByIdAsync(int ingredientId);
-        Task<List<Ingredient>> GetAll();
+        Task<List<Ingredient>> GetAllAsync();
         Task UpdateAsync(Ingredient ingredient);
         Task DeleteAsync(int ingredientId);
     }
