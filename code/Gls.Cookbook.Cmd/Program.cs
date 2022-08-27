@@ -11,8 +11,9 @@ namespace Gls.Cookbook.Cmd
         static async Task Main(string[] args)
         {
             //await CreateIngredients();
-            await CreateRecipe();
-            //await DeleteRecipe();
+            //await CreateRecipe();
+            //await UpdateRecipe();
+            await DeleteRecipe();
         }
 
         static async Task CreateIngredients()
@@ -63,6 +64,34 @@ namespace Gls.Cookbook.Cmd
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
                 await cookbookContext.RecipeRepository.AddAsync(recipe);
+            }
+        }
+
+        static async Task UpdateRecipe()
+        {
+            Ingredient flourIngredient;
+            Ingredient waterIngredient;
+            Measurement cupMeasurement;
+            Measurement fluidOunceMeasurement;
+            Recipe recipe;
+
+            await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
+            {
+                flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
+                waterIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Water");
+                cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
+                fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Fluid Ounce");
+
+                recipe = await cookbookContext.RecipeRepository.GetByNameAsync("Bread");
+            }
+
+            recipe.Sections[0].Instructions.Add(new RecipeInstruction() { LineNumber = 2, Instruction = "Activate yeast" });
+
+            recipe.Sections[0].Ingredients[1] = new RecipeIngredient() { Ingredient = waterIngredient, Measurement = fluidOunceMeasurement, Quantity = 8 };
+
+            await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
+            {
+                await cookbookContext.RecipeRepository.UpdateAsync(recipe);
             }
         }
     }
