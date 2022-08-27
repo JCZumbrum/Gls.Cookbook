@@ -19,15 +19,23 @@ namespace Gls.Cookbook.DataAccess.Repositories
             this.dbContext = dbContext;
         }
 
+        private async Task<RecipeEntity> GetEntityByIdAsync(int recipeId)
+        {
+            return await GetEntities().FirstOrDefaultAsync(r => r.Id == recipeId);
+        }
+
+        private IQueryable<RecipeEntity> GetEntities()
+        {
+            return dbContext.Recipes
+                .Include(r => r.Notes)
+                .Include(r => r.Sections).ThenInclude(s => s.Ingredients).ThenInclude(i => i.Ingredient)
+                .Include(r => r.Sections).ThenInclude(s => s.Ingredients).ThenInclude(i => i.Measurement)
+                .Include(r => r.Sections).ThenInclude(s => s.Instructions);
+        }
+
         public async Task AddAsync(Recipe recipe)
         {
             RecipeEntity recipeEntity = recipe.MapToEntity();
-
-            var ingredients = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Ingredient)).DistinctBy(i => i.Id);
-            var measurements = recipeEntity.Sections.SelectMany(s => s.Ingredients.Select(i => i.Measurement)).DistinctBy(m => m.Id);
-
-            dbContext.Ingredients.AttachRange(ingredients);
-            dbContext.Measurements.AttachRange(measurements);
 
             await dbContext.Recipes.AddAsync(recipeEntity);
             await dbContext.SaveChangesAsync();
@@ -35,7 +43,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public async Task DeleteAsync(int recipeId)
         {
-            RecipeEntity entity = await dbContext.Recipes.FirstOrDefaultAsync(r => r.Id == recipeId);
+            RecipeEntity entity = await GetEntityByIdAsync(recipeId);
             if (entity == null)
                 return;
 
@@ -59,19 +67,19 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public async Task<Recipe> GetByIdAsync(int recipeId)
         {
-            RecipeEntity entity = await dbContext.Recipes.Include(r => r.Notes).Include(r => r.Sections).FirstOrDefaultAsync(r => r.Id == recipeId);
+            RecipeEntity entity = await GetEntityByIdAsync(recipeId);
             return entity.MapToRecipe();
         }
 
         public async Task<Recipe> GetByNameAsync(string name)
         {
-            RecipeEntity entity = await dbContext.Recipes.FirstOrDefaultAsync(m => m.Name == name);
+            RecipeEntity entity = await GetEntities().FirstOrDefaultAsync(r => r.Name == name);
             return entity.MapToRecipe();
         }
 
         public async Task UpdateAsync(Recipe recipe)
         {
-            RecipeEntity recipeEntity = await dbContext.Recipes.Include(r => r.Notes).Include(r => r.Sections).FirstOrDefaultAsync(r => r.Id == recipe.Id);
+            RecipeEntity recipeEntity = await GetEntityByIdAsync(recipe.Id);
 
             recipeEntity.Name = recipe.Name;
             recipeEntity.Description = recipe.Description;
