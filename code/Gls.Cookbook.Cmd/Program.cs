@@ -12,8 +12,18 @@ namespace Gls.Cookbook.Cmd
         {
             //await CreateIngredients();
             //await CreateRecipe();
+            await RetrieveRecipe();
             //await UpdateRecipe();
-            await DeleteRecipe();
+            //await DeleteRecipe();
+        }
+
+        private static async Task RetrieveRecipe()
+        {
+            Recipe recipe;
+            await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
+            {
+                recipe = await cookbookContext.RecipeRepository.GetByNameAsync("Bread");
+            }
         }
 
         static async Task CreateIngredients()
@@ -41,12 +51,16 @@ namespace Gls.Cookbook.Cmd
         static async Task CreateRecipe()
         {
             Ingredient flourIngredient;
+            Ingredient waterIngredient;
             Measurement cupMeasurement;
+            Measurement fluidOunceMeasurement;
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
                 flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
+                waterIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Water");
                 cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
+                fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Fluid Ounce");
             }
 
             Recipe recipe = new Recipe() { Name = "Bread" };
@@ -56,8 +70,7 @@ namespace Gls.Cookbook.Cmd
                 Instructions = new List<RecipeInstruction>() { new RecipeInstruction() { LineNumber = 1, Instruction = "Knead dough." } },
                 Ingredients = new List<RecipeIngredient>()
                 {
-                    new RecipeIngredient() { Ingredient = flourIngredient, Measurement = cupMeasurement, Quantity = 1 },
-                    new RecipeIngredient() { Ingredient = flourIngredient, Measurement = cupMeasurement, Quantity = 1 }
+                    new RecipeIngredient() { IngredientId = flourIngredient.Id, MeasurementId = cupMeasurement.Id, Quantity = 1 }
                 }
             });
 
@@ -87,7 +100,7 @@ namespace Gls.Cookbook.Cmd
 
             recipe.Sections[0].Instructions.Add(new RecipeInstruction() { LineNumber = 2, Instruction = "Activate yeast" });
 
-            recipe.Sections[0].Ingredients[1] = new RecipeIngredient() { Ingredient = waterIngredient, Measurement = fluidOunceMeasurement, Quantity = 8 };
+            recipe.Sections[0].Ingredients[1] = new RecipeIngredient() { IngredientId = waterIngredient.Id, MeasurementId = fluidOunceMeasurement.Id, Quantity = 8 };
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
