@@ -28,8 +28,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             return dbContext.Recipes
                 .Include(r => r.Notes)
-                .Include(r => r.Sections).ThenInclude(s => s.Ingredients).ThenInclude(i => i.Ingredient)
-                .Include(r => r.Sections).ThenInclude(s => s.Ingredients).ThenInclude(i => i.Measurement)
+                .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
                 .Include(r => r.Sections).ThenInclude(s => s.Instructions);
         }
 
@@ -176,9 +175,9 @@ namespace Gls.Cookbook.DataAccess.Repositories
             {
                 RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
 
-                ingredientEntity.Ingredient = modifyIngredient.Ingredient.MapToEntity();
+                ingredientEntity.IngredientId = modifyIngredient.IngredientId;
                 ingredientEntity.Quantity = modifyIngredient.Quantity;
-                ingredientEntity.Measurement = modifyIngredient.Measurement.MapToEntity();
+                ingredientEntity.MeasurementId = modifyIngredient.MeasurementId;
                 ingredientEntity.Note = modifyIngredient.Note;
             }
 

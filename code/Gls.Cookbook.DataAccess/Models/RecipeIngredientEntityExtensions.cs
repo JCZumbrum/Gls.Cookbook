@@ -15,8 +15,8 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = recipeIngredient.Id,
                 RecipeSection = recipeSectionEntity,
-                IngredientId = recipeIngredient.Ingredient.Id,
-                MeasurementId = recipeIngredient.Measurement.Id,
+                IngredientId = recipeIngredient.IngredientId,
+                MeasurementId = recipeIngredient.MeasurementId,
                 Quantity = recipeIngredient.Quantity,
                 Note = recipeIngredient.Note
             };
