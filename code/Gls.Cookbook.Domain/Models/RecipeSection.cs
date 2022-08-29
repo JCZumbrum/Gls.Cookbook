@@ -10,6 +10,6 @@ namespace Gls.Cookbook.Domain.Models
         public int Order { get; set; }
         public string Name { get; set; }
         public List<RecipeIngredient> Ingredients { get; set; } = new List<RecipeIngredient>();
-        public List<RecipeInstruction> Instructions { get; set; } = new List<RecipeInstruction>();
+        public List<RecipeDirection> Directions { get; set; } = new List<RecipeDirection>();
     }
 }

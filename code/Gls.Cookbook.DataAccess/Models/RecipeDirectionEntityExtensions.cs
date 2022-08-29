@@ -7,16 +7,16 @@ using Gls.Cookbook.Domain.Models;
 
 namespace Gls.Cookbook.DataAccess.Models
 {
-    public static class RecipeInstructionEntityExtensions
+    public static class RecipeDirectionEntityExtensions
     {
-        public static RecipeInstructionEntity MapToEntity(this RecipeInstruction instruction, RecipeSectionEntity recipeSectionEntity)
+        public static RecipeDirectionEntity MapToEntity(this RecipeDirection instruction, RecipeSectionEntity recipeSectionEntity)
         {
-            return new RecipeInstructionEntity()
+            return new RecipeDirectionEntity()
             {
                 Id = instruction.Id,
                 RecipeSection = recipeSectionEntity,
                 LineNumber = instruction.LineNumber,
-                Instruction = instruction.Instruction,
+                Direction = instruction.Direction,
                 Note = instruction.Note
             };
         }

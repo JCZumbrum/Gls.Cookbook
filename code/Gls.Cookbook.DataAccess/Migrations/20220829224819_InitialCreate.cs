@@ -1,5 +1,4 @@
-﻿using System;
-using Gls.Cookbook.Domain;
+﻿using Gls.Cookbook.Domain;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -100,9 +99,9 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
-                    IngredientId = table.Column<int>(type: "INTEGER", nullable: true),
+                    IngredientId = table.Column<int>(type: "INTEGER", nullable: false),
                     Quantity = table.Column<decimal>(type: "TEXT", nullable: false),
-                    MeasurementId = table.Column<int>(type: "INTEGER", nullable: true),
+                    MeasurementId = table.Column<int>(type: "INTEGER", nullable: false),
                     Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -112,12 +111,14 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         name: "FK_RecipeIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
                         principalTable: "Ingredients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_Measurements_MeasurementId",
                         column: x => x.MeasurementId,
                         principalTable: "Measurements",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_RecipeSections_RecipeSectionId",
                         column: x => x.RecipeSectionId,
@@ -133,7 +134,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
                     LineNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    Instruction = table.Column<string>(type: "TEXT", nullable: true),
+                    Direction = table.Column<string>(type: "TEXT", nullable: true),
                     Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

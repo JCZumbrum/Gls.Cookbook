@@ -23,14 +23,14 @@ namespace Gls.Cookbook.DataAccess.Models
                 recipeSection.Ingredients.Select(
                     i => i.MapToEntity(entity)));
 
-            entity.Instructions = new List<RecipeInstructionEntity>(
-                recipeSection.Instructions.Select(
-                    i => new RecipeInstructionEntity()
+            entity.Directions = new List<RecipeDirectionEntity>(
+                recipeSection.Directions.Select(
+                    i => new RecipeDirectionEntity()
                     {
                         Id = i.Id,
                         RecipeSection = entity,
                         LineNumber = i.LineNumber,
-                        Instruction = i.Instruction,
+                        Direction = i.Direction,
                         Note = i.Note
                     }));
 
@@ -56,13 +56,13 @@ namespace Gls.Cookbook.DataAccess.Models
                         Note = i.Note
                     }));
 
-            recipeSection.Instructions = new List<RecipeInstruction>(
-                entity.Instructions.Select(
-                    i => new RecipeInstruction()
+            recipeSection.Directions = new List<RecipeDirection>(
+                entity.Directions.Select(
+                    i => new RecipeDirection()
                     {
                         Id = i.Id,
                         LineNumber = i.LineNumber,
-                        Instruction = i.Instruction,
+                        Direction = i.Direction,
                         Note = i.Note
                     }));
 

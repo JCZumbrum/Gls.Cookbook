@@ -29,7 +29,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
             return dbContext.Recipes
                 .Include(r => r.Notes)
                 .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
-                .Include(r => r.Sections).ThenInclude(s => s.Instructions);
+                .Include(r => r.Sections).ThenInclude(s => s.Directions);
         }
 
         public async Task AddAsync(Recipe recipe)
@@ -143,7 +143,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         private void DeleteSection(RecipeSectionEntity section)
         {
-            foreach (RecipeInstructionEntity instruction in section.Instructions)
+            foreach (RecipeDirectionEntity instruction in section.Directions)
                 dbContext.RecipeInstructions.Remove(instruction);
 
             foreach (RecipeIngredientEntity ingredient in section.Ingredients)
@@ -189,31 +189,31 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
             #region Refresh Instructions
 
-            Dictionary<int, RecipeInstructionEntity> entityInstructionDictionary = recipeSectionEntity.Instructions.ToDictionary(i => i.Id);
-            ILookup<bool, RecipeInstruction> instructionLookupByState = recipeSection.Instructions.ToLookup(i => i.Id == 0);
-            List<RecipeInstructionEntity> exceptInstructionList = recipeSectionEntity.Instructions.ExceptBy(instructionLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+            Dictionary<int, RecipeDirectionEntity> entityInstructionDictionary = recipeSectionEntity.Directions.ToDictionary(i => i.Id);
+            ILookup<bool, RecipeDirection> instructionLookupByState = recipeSection.Directions.ToLookup(i => i.Id == 0);
+            List<RecipeDirectionEntity> exceptInstructionList = recipeSectionEntity.Directions.ExceptBy(instructionLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
 
             // delete instructions that no longer exist
-            foreach (RecipeInstructionEntity exceptInstruction in exceptInstructionList)
+            foreach (RecipeDirectionEntity exceptInstruction in exceptInstructionList)
             {
-                recipeSectionEntity.Instructions.Remove(exceptInstruction);
+                recipeSectionEntity.Directions.Remove(exceptInstruction);
                 dbContext.RecipeInstructions.Remove(exceptInstruction);
             }
 
             // update existing instructions
             // instructionLookupByState[false] => ingredients that are not new
-            foreach (RecipeInstruction modifyInstruction in instructionLookupByState[false])
+            foreach (RecipeDirection modifyInstruction in instructionLookupByState[false])
             {
-                RecipeInstructionEntity instructionEntity = entityInstructionDictionary[modifyInstruction.Id];
+                RecipeDirectionEntity instructionEntity = entityInstructionDictionary[modifyInstruction.Id];
 
                 instructionEntity.LineNumber = modifyInstruction.LineNumber;
-                instructionEntity.Instruction = modifyInstruction.Instruction;
+                instructionEntity.Direction = modifyInstruction.Direction;
                 instructionEntity.Note = modifyInstruction.Note;
             }
 
             // add new instructions
-            foreach (RecipeInstruction newInstruction in instructionLookupByState[true])
-                recipeSectionEntity.Instructions.Add(newInstruction.MapToEntity(recipeSectionEntity));
+            foreach (RecipeDirection newInstruction in instructionLookupByState[true])
+                recipeSectionEntity.Directions.Add(newInstruction.MapToEntity(recipeSectionEntity));
 
             #endregion
         }
