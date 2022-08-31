@@ -67,7 +67,7 @@ namespace Gls.Cookbook.Cmd
             recipe.Sections.Add(new RecipeSection()
             {
                 Name = "Main",
-                Directions = new List<RecipeDirection>() { new RecipeDirection() { LineNumber = 1, Direction = "Knead dough." } },
+                Directions = new List<RecipeDirection>() { new RecipeDirection() { Index = 1, Direction = "Knead dough." } },
                 Ingredients = new List<RecipeIngredient>()
                 {
                     new RecipeIngredient() { IngredientId = flourIngredient.Id, MeasurementId = cupMeasurement.Id, Quantity = 1 }
@@ -98,7 +98,7 @@ namespace Gls.Cookbook.Cmd
                 recipe = await cookbookContext.RecipeRepository.GetByNameAsync("Bread");
             }
 
-            recipe.Sections[0].Directions.Add(new RecipeDirection() { LineNumber = 2, Direction = "Activate yeast" });
+            recipe.Sections[0].Directions.Add(new RecipeDirection() { Index = 2, Direction = "Activate yeast" });
 
             recipe.Sections[0].Ingredients[1] = new RecipeIngredient() { IngredientId = waterIngredient.Id, MeasurementId = fluidOunceMeasurement.Id, Quantity = 8 };
 

@@ -15,7 +15,7 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = instruction.Id,
                 RecipeSection = recipeSectionEntity,
-                LineNumber = instruction.LineNumber,
+                Index = instruction.Index,
                 Direction = instruction.Direction,
                 Note = instruction.Note
             };

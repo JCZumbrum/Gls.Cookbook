@@ -22,6 +22,7 @@ namespace Gls.Cookbook.DataAccess.Models
                     {
                         Id = n.Id,
                         Recipe = entity,
+                        Index = n.Index,
                         Note = n.Note
                     }).ToList();
             entity.Sections = recipe.Sections.Select(
@@ -45,6 +46,7 @@ namespace Gls.Cookbook.DataAccess.Models
                     n => new RecipeNote
                     {
                         Id = n.Id,
+                        Index = n.Index,
                         Note = n.Note
                     }).ToList();
             recipe.Sections = entity.Sections.Select(

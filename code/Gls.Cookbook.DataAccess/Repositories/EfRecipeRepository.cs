@@ -128,12 +128,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
             foreach (RecipeNote modifyNote in recipeNoteLookupByState[false])
             {
                 RecipeNoteEntity recipeNoteEntity = entityNoteDictionary[modifyNote.Id];
+                recipeNoteEntity.Index = modifyNote.Index;
                 recipeNoteEntity.Note = modifyNote.Note;
             }
 
             // add new notes
             foreach (RecipeNote newNote in recipeNoteLookupByState[true])
-                recipeEntity.Notes.Add(new RecipeNoteEntity() { Recipe = recipeEntity, Note = newNote.Note });
+                recipeEntity.Notes.Add(new RecipeNoteEntity() { Recipe = recipeEntity, Index = newNote.Index, Note = newNote.Note });
 
             #endregion
 
@@ -175,7 +176,9 @@ namespace Gls.Cookbook.DataAccess.Repositories
             {
                 RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
 
+                ingredientEntity.Index = modifyIngredient.Index;
                 ingredientEntity.IngredientId = modifyIngredient.IngredientId;
+                ingredientEntity.QuantityText = modifyIngredient.QuantityText;
                 ingredientEntity.Quantity = modifyIngredient.Quantity;
                 ingredientEntity.MeasurementId = modifyIngredient.MeasurementId;
                 ingredientEntity.Note = modifyIngredient.Note;
@@ -206,7 +209,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
             {
                 RecipeDirectionEntity instructionEntity = entityInstructionDictionary[modifyInstruction.Id];
 
-                instructionEntity.LineNumber = modifyInstruction.LineNumber;
+                instructionEntity.Index = modifyInstruction.Index;
                 instructionEntity.Direction = modifyInstruction.Direction;
                 instructionEntity.Note = modifyInstruction.Note;
             }

@@ -11,7 +11,7 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public int Id { get; set; }
         public RecipeEntity Recipe { get; set; }
-        public int Order { get; set; }
+        public int Index { get; set; }
         public string Name { get; set; }
         public List<RecipeIngredientEntity> Ingredients { get; set; } = new List<RecipeIngredientEntity>();
         public List<RecipeDirectionEntity> Directions { get; set; } = new List<RecipeDirectionEntity>();

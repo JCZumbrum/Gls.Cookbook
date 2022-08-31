@@ -15,7 +15,7 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = recipeSection.Id,
                 Recipe = recipeEntity,
-                Order = recipeSection.Order,
+                Index = recipeSection.Index,
                 Name = recipeSection.Name
             };
 
@@ -29,7 +29,7 @@ namespace Gls.Cookbook.DataAccess.Models
                     {
                         Id = i.Id,
                         RecipeSection = entity,
-                        LineNumber = i.LineNumber,
+                        Index = i.Index,
                         Direction = i.Direction,
                         Note = i.Note
                     }));
@@ -42,7 +42,7 @@ namespace Gls.Cookbook.DataAccess.Models
             RecipeSection recipeSection = new RecipeSection()
             {
                 Id = entity.Id,
-                Order = entity.Order,
+                Index = entity.Index,
                 Name = entity.Name
             };
 
@@ -51,6 +51,7 @@ namespace Gls.Cookbook.DataAccess.Models
                     i => new RecipeIngredient()
                     {
                         Id = i.Id,
+                        Index = i.Index,
                         IngredientId = i.IngredientId,
                         MeasurementId = i.MeasurementId,
                         Note = i.Note
@@ -61,7 +62,7 @@ namespace Gls.Cookbook.DataAccess.Models
                     i => new RecipeDirection()
                     {
                         Id = i.Id,
-                        LineNumber = i.LineNumber,
+                        Index = i.Index,
                         Direction = i.Direction,
                         Note = i.Note
                     }));

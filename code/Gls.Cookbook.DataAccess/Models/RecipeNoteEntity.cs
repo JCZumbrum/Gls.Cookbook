@@ -10,6 +10,7 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public int Id { get; set; }
         public RecipeEntity Recipe { get; set; }
+        public int Index { get; set; }
         public string Note { get; set; }
     }
 }
