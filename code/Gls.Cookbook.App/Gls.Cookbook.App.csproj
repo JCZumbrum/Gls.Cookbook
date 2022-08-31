@@ -13,7 +13,7 @@
 		<ApplicationTitle>Recipe Box</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.gls.cookbook.app</ApplicationId>
+		<ApplicationId>com.gls.cookbook.app</ApplicationId>
 		<ApplicationIdGuid>2DCB237B-7F38-4595-AA57-AB4723E77944</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -23,7 +23,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<BaseOutputPath>..\..\output</BaseOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
