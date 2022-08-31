@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gls.Cookbook.DataAccess.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    [Migration("20220829224819_InitialCreate")]
+    [Migration("20220831010530_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     b.Property<string>("Direction")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LineNumber")
+                    b.Property<int>("Index")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Note")
@@ -107,6 +107,9 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("IngredientId")
                         .HasColumnType("INTEGER");
 
@@ -116,7 +119,10 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Quantity")
+                    b.Property<double>("Quantity")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("QuantityText")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("RecipeSectionId")
@@ -139,6 +145,9 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Note")
                         .HasColumnType("TEXT");
 
@@ -158,11 +167,11 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("RecipeId")
                         .HasColumnType("INTEGER");

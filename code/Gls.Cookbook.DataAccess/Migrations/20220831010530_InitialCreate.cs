@@ -60,6 +60,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Index = table.Column<int>(type: "INTEGER", nullable: false),
                     Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -79,7 +80,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    Index = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -99,8 +100,10 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Index = table.Column<int>(type: "INTEGER", nullable: false),
                     IngredientId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<decimal>(type: "TEXT", nullable: false),
+                    QuantityText = table.Column<string>(type: "TEXT", nullable: true),
+                    Quantity = table.Column<double>(type: "REAL", nullable: false),
                     MeasurementId = table.Column<int>(type: "INTEGER", nullable: false),
                     Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -133,7 +136,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RecipeSectionId = table.Column<int>(type: "INTEGER", nullable: true),
-                    LineNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    Index = table.Column<int>(type: "INTEGER", nullable: false),
                     Direction = table.Column<string>(type: "TEXT", nullable: true),
                     Note = table.Column<string>(type: "TEXT", nullable: true)
                 },
