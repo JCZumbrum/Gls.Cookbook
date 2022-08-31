@@ -89,6 +89,8 @@ namespace Gls.Cookbook.DataAccess
         {
             if (transaction != null)
                 await transaction.RollbackAsync();
+
+            await dbContext.DisposeAsync();
         }
     }
 }
