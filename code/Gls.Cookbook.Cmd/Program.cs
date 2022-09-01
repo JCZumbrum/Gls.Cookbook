@@ -19,10 +19,12 @@ namespace Gls.Cookbook.Cmd
 
         private static async Task RetrieveRecipe()
         {
-            Recipe recipe;
+            //List<Recipe> recipes;
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
-                recipe = await cookbookContext.RecipeRepository.GetByNameAsync("Bread");
+                //recipes = await cookbookContext.RecipeRepository.GetAllAsync();
+
+                var tags = await cookbookContext.RecipeRepository.GetAllTagsAsync();
             }
         }
 
@@ -50,33 +52,41 @@ namespace Gls.Cookbook.Cmd
 
         static async Task CreateRecipe()
         {
-            Ingredient flourIngredient;
-            Ingredient waterIngredient;
-            Measurement cupMeasurement;
-            Measurement fluidOunceMeasurement;
+            //Ingredient flourIngredient;
+            //Ingredient waterIngredient;
+            //Measurement cupMeasurement;
+            //Measurement fluidOunceMeasurement;
+
+            //await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
+            //{
+            //    flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
+            //    waterIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Water");
+            //    cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
+            //    fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Fluid Ounce");
+            //}
+
+            Recipe breadRecipe = new Recipe() { Name = "Bread" };
+            breadRecipe.Tags = new List<string>() { "Baking" };
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
-                flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
-                waterIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Water");
-                cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
-                fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Fluid Ounce");
+                await cookbookContext.RecipeRepository.AddAsync(breadRecipe);
             }
 
-            Recipe recipe = new Recipe() { Name = "Bread" };
-            recipe.Sections.Add(new RecipeSection()
-            {
-                Name = "Main",
-                Directions = new List<RecipeDirection>() { new RecipeDirection() { Index = 1, Direction = "Knead dough." } },
-                Ingredients = new List<RecipeIngredient>()
-                {
-                    new RecipeIngredient() { IngredientId = flourIngredient.Id, MeasurementId = cupMeasurement.Id, Quantity = 1 }
-                }
-            });
+            Recipe cakeRecipe = new Recipe() { Name = "Carrot Cake" };
+            cakeRecipe.Tags = new List<string>() { "Baking", "Dessert" };
 
             await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
             {
-                await cookbookContext.RecipeRepository.AddAsync(recipe);
+                await cookbookContext.RecipeRepository.AddAsync(cakeRecipe);
+            }
+
+            Recipe pieRecipe = new Recipe() { Name = "Cherry Pie" };
+            pieRecipe.Tags = new List<string>() { "Baking", "Dessert", "Fruit" };
+
+            await using (EfCookbookContext cookbookContext = await EfCookbookContext.CreateAsync())
+            {
+                await cookbookContext.RecipeRepository.AddAsync(pieRecipe);
             }
         }
 
