@@ -94,6 +94,9 @@ namespace Gls.Cookbook.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");

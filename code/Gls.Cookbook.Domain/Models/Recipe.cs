@@ -13,5 +13,6 @@ namespace Gls.Cookbook.Domain.Models
         public string Description { get; set; }
         public List<RecipeNote> Notes { get; set; } = new List<RecipeNote>();
         public List<RecipeSection> Sections { get; set; } = new List<RecipeSection>();
+        public List<string> Tags { get; set; } = new List<string>();
     }
 }

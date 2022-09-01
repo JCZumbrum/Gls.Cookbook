@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gls.Cookbook.DataAccess.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    [Migration("20220831010530_InitialCreate")]
+    [Migration("20220901012138_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,9 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Tags")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

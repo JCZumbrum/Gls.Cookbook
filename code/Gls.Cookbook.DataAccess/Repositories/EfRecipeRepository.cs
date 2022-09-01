@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Gls.Cookbook.DataAccess.Models;
 using Gls.Cookbook.Domain.Models;
@@ -82,6 +83,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
             recipeEntity.Name = recipe.Name;
             recipeEntity.Description = recipe.Description;
+            recipeEntity.Tags = JsonSerializer.Serialize(recipe.Tags);
 
             #region Refresh Recipe Sections
 

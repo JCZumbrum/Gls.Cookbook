@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Gls.Cookbook.Domain.Models;
 
@@ -15,7 +16,8 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = recipe.Id,
                 Name = recipe.Name,
-                Description = recipe.Description
+                Description = recipe.Description,
+                Tags = JsonSerializer.Serialize(recipe.Tags)
             };
             entity.Notes = recipe.Notes.Select(
                     n => new RecipeNoteEntity()
@@ -40,7 +42,8 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Description = entity.Description
+                Description = entity.Description,
+                Tags = JsonSerializer.Deserialize<List<string>>(entity.Tags)
             };
             recipe.Notes = entity.Notes.Select(
                     n => new RecipeNote

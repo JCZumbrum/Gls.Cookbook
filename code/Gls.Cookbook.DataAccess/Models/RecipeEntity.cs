@@ -14,5 +14,6 @@ namespace Gls.Cookbook.DataAccess.Models
         public string Description { get; set; }
         public List<RecipeNoteEntity> Notes { get; set; } = new List<RecipeNoteEntity>();
         public List<RecipeSectionEntity> Sections { get; set; } = new List<RecipeSectionEntity>();
+        public string Tags { get; set; }
     }
 }
