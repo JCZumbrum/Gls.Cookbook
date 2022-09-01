@@ -60,9 +60,14 @@ namespace Gls.Cookbook.DataAccess.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RecipeHeader>> GetHeaders()
+        public async Task<List<RecipeHeader>> GetHeadersAsync()
         {
             return await dbContext.Recipes.Select(r => new RecipeHeader() { Id = r.Id, Name = r.Name, Description = r.Description }).ToListAsync();
+        }
+
+        public async Task<List<Recipe>> GetAllAsync()
+        {
+            return await GetEntities().Select(e => e.MapToRecipe()).ToListAsync();
         }
 
         public async Task<Recipe> GetByIdAsync(int recipeId)
@@ -221,6 +226,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
                 recipeSectionEntity.Directions.Add(newInstruction.MapToEntity(recipeSectionEntity));
 
             #endregion
+        }
+
+        public Task<List<(string Tag, int Count)>> GetAllTagsAsync()
+        {
+            List<(string Tag, int Count)> tags = dbContext.Recipes.AsEnumerable().SelectMany(r => JsonSerializer.Deserialize<List<string>>(r.Tags, default(JsonSerializerOptions))).GroupBy(t => t).Select(g => new Tuple<string, int>(g.Key, g.Count()).ToValueTuple()).ToList();
+
+            return Task.FromResult(tags);
         }
     }
 }
