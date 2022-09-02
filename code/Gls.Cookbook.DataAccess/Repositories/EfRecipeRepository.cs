@@ -230,7 +230,14 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public Task<List<(string Tag, int Count)>> GetAllTagsAsync()
         {
-            List<(string Tag, int Count)> tags = dbContext.Recipes.AsEnumerable().SelectMany(r => JsonSerializer.Deserialize<List<string>>(r.Tags, default(JsonSerializerOptions))).GroupBy(t => t).Select(g => new Tuple<string, int>(g.Key, g.Count()).ToValueTuple()).ToList();
+            List<(string Tag, int Count)> tags = 
+                dbContext.Recipes
+                .Select(r => r.Tags)
+                .AsEnumerable()
+                .SelectMany(t => JsonSerializer.Deserialize<List<string>>(t, default(JsonSerializerOptions)))
+                .GroupBy(t => t)
+                .Select(g => new Tuple<string, int>(g.Key, g.Count()).ToValueTuple())
+                .ToList();
 
             return Task.FromResult(tags);
         }
