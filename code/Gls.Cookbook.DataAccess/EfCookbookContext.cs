@@ -15,7 +15,6 @@ namespace Gls.Cookbook.DataAccess
         private IRecipeRepository recipeRepository = null;
         private IIngredientRepository ingredientRepository = null;
         private IMeasurementRepository measurementRepository = null;
-        private IRecipeTagRepository recipeTagRepository = null;
 
         private IDbContextTransaction transaction = null;
 
@@ -46,16 +45,6 @@ namespace Gls.Cookbook.DataAccess
                 measurementRepository ??= new EfMeasurementRepository(dbContext);
 
                 return measurementRepository;
-            }
-        }
-
-        public IRecipeTagRepository RecipeTagRepository
-        {
-            get
-            {
-                recipeTagRepository ??= new EfRecipeTagRepository(dbContext);
-
-                return recipeTagRepository;
             }
         }
 
