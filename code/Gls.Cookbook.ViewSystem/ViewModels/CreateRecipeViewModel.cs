@@ -7,7 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MainViewModel : ObservableObject
+    public class CreateRecipeViewModel : ObservableObject
     {
     }
 }
