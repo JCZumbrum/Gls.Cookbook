@@ -18,5 +18,6 @@ namespace Gls.Cookbook.Domain.Repositories
         Task UpdateAsync(Recipe recipe);
         Task DeleteAsync(int recipeId);
         Task<bool> ExistsByMeasurementId(int measurementId);
+        Task<bool> ExistsByIngredientId(int ingredientId);
     }
 }

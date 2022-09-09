@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -247,6 +248,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
             return await dbContext.Recipes
                 .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
                 .AnyAsync(r => r.Sections.Any(s => s.Ingredients.Any(i => i.MeasurementId == measurementId)));
+        }
+
+        public async Task<bool> ExistsByIngredientId(int ingredientId)
+        {
+            return await dbContext.Recipes
+                .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
+                .AnyAsync(r => r.Sections.Any(s => s.Ingredients.Any(i => i.IngredientId == ingredientId)));
         }
     }
 }
