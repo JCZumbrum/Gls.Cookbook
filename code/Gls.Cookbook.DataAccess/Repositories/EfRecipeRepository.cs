@@ -230,7 +230,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public Task<List<(string Tag, int Count)>> GetAllTagsAsync()
         {
-            List<(string Tag, int Count)> tags = 
+            List<(string Tag, int Count)> tags =
                 dbContext.Recipes
                 .Select(r => r.Tags)
                 .AsEnumerable()
@@ -240,6 +240,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
                 .ToList();
 
             return Task.FromResult(tags);
+        }
+
+        public async Task<bool> ExistsByMeasurementId(int measurementId)
+        {
+            return await dbContext.Recipes
+                .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
+                .AnyAsync(r => r.Sections.Any(s => s.Ingredients.Any(i => i.MeasurementId == measurementId)));
         }
     }
 }

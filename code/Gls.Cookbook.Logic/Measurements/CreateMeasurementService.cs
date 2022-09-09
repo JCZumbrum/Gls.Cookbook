@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Gls.Cookbook.Domain;
-using Gls.Cookbook.Domain.Commands;
+using Gls.Cookbook.Domain.Commands.Measurements;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Repositories;
 
-namespace Gls.Cookbook.Logic
+namespace Gls.Cookbook.Logic.Measurements
 {
     public class CreateMeasurementService : ICommandService<CreateMeasurementCommand>
     {
@@ -20,7 +20,7 @@ namespace Gls.Cookbook.Logic
             await using (ICookbookContext cookbookContext = await cookbookContextFactory.CreateAsync())
             {
                 Measurement existingMeasurement = await cookbookContext.MeasurementRepository.GetByNameTypeAndSystemAsync(command.Name, command.MeasurementType, command.MeasurementSystem);
-                if (existingMeasurement == null)
+                if (existingMeasurement != null)
                     return Result.Fail("Measurement with that name already exists.");
 
                 Measurement measurement = new Measurement()

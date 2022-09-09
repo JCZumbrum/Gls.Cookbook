@@ -1,7 +1,9 @@
 ﻿using Gls.Cookbook.DataAccess;
 using Gls.Cookbook.Domain;
-using Gls.Cookbook.Domain.Commands;
+using Gls.Cookbook.Domain.Commands.Measurements;
 using Gls.Cookbook.Domain.Repositories;
+using Gls.Cookbook.Logic.Measurements;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Gls.Cookbook.App
 {
@@ -19,6 +21,9 @@ namespace Gls.Cookbook.App
                 });
 
             builder.Services.AddSingleton<ICookbookContextFactory, EfCookbookContextFactory>();
+            builder.Services.AddTransient<ICommandService<CreateMeasurementCommand>, CreateMeasurementService>();
+            builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand>, UpdateMeasurementService>();
+            builder.Services.AddTransient<ICommandService<DeleteMeasurementCommand>, DeleteMeasurementService>();
 
             return builder.Build();
         }
