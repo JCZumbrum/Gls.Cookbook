@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.Metrics;
 using System.Net.NetworkInformation;
 using Gls.Cookbook.DataAccess;
+using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Repositories;
 
@@ -102,8 +103,8 @@ namespace Gls.Cookbook.Cmd
             {
                 flourIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Flour");
                 waterIngredient = await cookbookContext.IngredientRepository.GetByNameAsync("Water");
-                cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Cup");
-                fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameAsync("Fluid Ounce");
+                cupMeasurement = await cookbookContext.MeasurementRepository.GetByNameTypeAndSystemAsync("Cup", MeasurementType.Volume, MeasurementSystem.UsCustomary);
+                fluidOunceMeasurement = await cookbookContext.MeasurementRepository.GetByNameTypeAndSystemAsync("Fluid Ounce", MeasurementType.Volume, MeasurementSystem.UsCustomary);
 
                 recipe = await cookbookContext.RecipeRepository.GetByNameAsync("Bread");
             }

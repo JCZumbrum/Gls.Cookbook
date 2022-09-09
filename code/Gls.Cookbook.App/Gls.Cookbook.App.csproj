@@ -44,6 +44,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Gls.Cookbook.DataAccess\Gls.Cookbook.DataAccess.csproj" />
+	  <ProjectReference Include="..\Gls.Cookbook.Domain\Gls.Cookbook.Domain.csproj" />
+	  <ProjectReference Include="..\Gls.Cookbook.Logic\Gls.Cookbook.Logic.csproj" />
+	  <ProjectReference Include="..\Gls.Cookbook.ViewSystem\Gls.Cookbook.ViewSystem.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\CreateRecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

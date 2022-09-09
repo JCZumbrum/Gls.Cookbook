@@ -8,6 +8,6 @@ namespace Gls.Cookbook.Domain
 {
     public interface ICommandService<TCommand>
     {
-        Task ExecuteAsync(TCommand command);
+        Task<Result> ExecuteAsync(TCommand command);
     }
 }
