@@ -21,6 +21,8 @@ namespace Gls.Cookbook.App
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<INavigationService, ShellNavigationService>();
+
             builder.Services.AddSingleton<ICookbookContextFactory, EfCookbookContextFactory>();
 
             builder.Services.AddTransient<ICommandService<CreateMeasurementCommand>, CreateMeasurementService>();
