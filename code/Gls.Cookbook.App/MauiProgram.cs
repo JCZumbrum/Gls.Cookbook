@@ -1,10 +1,12 @@
-﻿using Gls.Cookbook.DataAccess;
+﻿using Gls.Cookbook.App.Views;
+using Gls.Cookbook.DataAccess;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Ingredients;
 using Gls.Cookbook.Domain.Commands.Measurements;
 using Gls.Cookbook.Domain.Repositories;
 using Gls.Cookbook.Logic.Ingredients;
 using Gls.Cookbook.Logic.Measurements;
+using Gls.Cookbook.ViewSystem.ViewModels;
 
 namespace Gls.Cookbook.App
 {
@@ -25,6 +27,7 @@ namespace Gls.Cookbook.App
 
             builder.Services.AddSingleton<ICookbookContextFactory, EfCookbookContextFactory>();
 
+            // commands
             builder.Services.AddTransient<ICommandService<CreateMeasurementCommand>, CreateMeasurementService>();
             builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand>, UpdateMeasurementService>();
             builder.Services.AddTransient<ICommandService<DeleteMeasurementCommand>, DeleteMeasurementService>();
@@ -32,6 +35,18 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<ICommandService<CreateIngredientCommand>, CreateIngredientService>();
             builder.Services.AddTransient<ICommandService<UpdateIngredientCommand>, UpdateIngredientService>();
             builder.Services.AddTransient<ICommandService<DeleteIngredientCommand>, DeleteIngredientService>();
+
+            // pages
+            builder.Services.AddTransient<CreateRecipePage>();
+            builder.Services.AddTransient<MeasurementsPage>();
+            builder.Services.AddTransient<SearchPage>();
+            builder.Services.AddTransient<SettingsPage>();
+
+            // view models
+            builder.Services.AddTransient<CreateRecipeViewModel>();
+            builder.Services.AddTransient<MeasurementsViewModel>();
+            builder.Services.AddTransient<SearchViewModel>();
+            builder.Services.AddTransient<SettingsViewModel>();
 
             return builder.Build();
         }

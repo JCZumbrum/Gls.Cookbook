@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class SettingsViewModel : IViewModel
+    public class SettingsViewModel : ObservableObject, IViewModel
     {
         private INavigationService navigationService;
 

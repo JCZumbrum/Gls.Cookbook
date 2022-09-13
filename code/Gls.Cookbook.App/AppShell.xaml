@@ -8,10 +8,10 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <ShellContent Title="Search" Route="searchPage"
+        <ShellContent Title="Search"
                      Icon="search.png"
                      ContentTemplate="{DataTemplate views:SearchPage}" />
-        <ShellContent Title="Add" Route="createRecipePage"
+        <ShellContent Title="Add"
                      Icon="add.png"
                      ContentTemplate="{DataTemplate views:CreateRecipePage}" />
         <ShellContent Title="Settings"

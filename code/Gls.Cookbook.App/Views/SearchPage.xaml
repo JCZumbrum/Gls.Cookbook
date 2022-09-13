@@ -4,10 +4,8 @@
              x:Class="Gls.Cookbook.App.Views.SearchPage"
              Title="SearchPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <SearchBar />
+        <SearchBar Placeholder="Search..." />
+        <Button Text="All" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" />
+        <Line StrokeThickness="1" BackgroundColor="LightGray" Margin="5,0" />
     </VerticalStackLayout>
 </ContentPage>
