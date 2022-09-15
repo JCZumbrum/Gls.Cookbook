@@ -44,6 +44,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Gls.Cookbook.DataAccess\Gls.Cookbook.DataAccess.csproj" />
 	  <ProjectReference Include="..\Gls.Cookbook.Domain\Gls.Cookbook.Domain.csproj" />
 	  <ProjectReference Include="..\Gls.Cookbook.Logic\Gls.Cookbook.Logic.csproj" />

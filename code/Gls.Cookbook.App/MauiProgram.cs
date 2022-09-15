@@ -1,4 +1,5 @@
-﻿using Gls.Cookbook.App.Views;
+﻿using CommunityToolkit.Maui;
+using Gls.Cookbook.App.Views;
 using Gls.Cookbook.DataAccess;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Ingredients;
@@ -17,6 +18,7 @@ namespace Gls.Cookbook.App
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
