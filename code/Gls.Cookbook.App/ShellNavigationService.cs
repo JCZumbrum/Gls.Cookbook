@@ -17,18 +17,21 @@ namespace Gls.Cookbook.App
             { typeof(MeasurementsViewModel), typeof(MeasurementsPage) }
         };
 
-        public async Task GoToAsync<T>() where T : IViewModel
+        public async Task GoBackAsync()
         {
-            Type pageType = viewModelToPageMap[typeof(T)];
-
-            await Shell.Current.GoToAsync(pageType.Name);
+            await Shell.Current.GoToAsync("..");
         }
 
-        public async Task GoToAsync<T>(IDictionary<string, object> parameters) where T : IViewModel
+        public async Task GoToAsync<TViewModel, TArgs>(TArgs args) where TViewModel : IViewModel<TArgs>
         {
-            Type pageType = viewModelToPageMap[typeof(T)];
+            Type pageType = viewModelToPageMap[typeof(TViewModel)];
 
-            await Shell.Current.GoToAsync(pageType.Name, parameters);
+            await Shell.Current.GoToAsync(pageType.Name);
+
+            if (Shell.Current.CurrentPage.BindingContext is not TViewModel viewModel)
+                throw new InvalidOperationException();
+
+            await viewModel.InitializeAsync(args);
         }
     }
 }

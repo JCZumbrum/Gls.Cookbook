@@ -9,7 +9,7 @@ using Gls.Cookbook.Domain;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class SettingsViewModel : ObservableObject, IViewModel
+    public class SettingsViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
         private INavigationService navigationService;
 
@@ -24,7 +24,12 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private async Task ViewMeasurements()
         {
-            await navigationService.GoToAsync<MeasurementsViewModel>();
+            await navigationService.GoToAsync<MeasurementsViewModel, EmptyArgs>(new EmptyArgs());
+        }
+
+        public Task InitializeAsync(EmptyArgs args)
+        {
+            throw new NotImplementedException();
         }
     }
 }

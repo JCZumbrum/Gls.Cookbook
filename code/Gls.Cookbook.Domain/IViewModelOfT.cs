@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gls.Cookbook.Domain
 {
-    public interface INavigationService
+    public interface IViewModel<TArgs>
     {
-        Task GoBackAsync();
-        Task GoToAsync<TViewModel, TArgs>(TArgs args) where TViewModel : IViewModel<TArgs>;
+        Task InitializeAsync(TArgs args);
     }
 }

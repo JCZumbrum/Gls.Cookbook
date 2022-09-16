@@ -8,7 +8,11 @@ using Gls.Cookbook.Domain;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class CreateRecipeViewModel : ObservableObject, IViewModel
+    public class CreateRecipeViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
+        public Task InitializeAsync(EmptyArgs args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
