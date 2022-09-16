@@ -17,6 +17,20 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public class ObservableMeasurement : ObservableObject
         {
+            public int Id { get; set; }
+
+            private string name;
+            public string Name
+            {
+                get
+                {
+                    return name;
+                }
+                set
+                {
+                    SetProperty(ref name, value);
+                }
+            }
         }
 
         public ObservableCollection<ObservableMeasurement> UsMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
@@ -30,6 +44,21 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         public async Task InitializeAsync(EmptyArgs args)
         {
             List<Measurement> allMeasurements = await queryMeasurementService.GetAllAsync();
+
+            var measurementGroupings =  allMeasurements.GroupBy(m => m.MeasurementSystem);
+            foreach(var measurementGrouping in measurementGroupings)
+            {
+                switch(measurementGrouping.Key)
+                {
+                    case MeasurementSystem.UsCustomary:
+                        UsMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { }));
+                        break;
+                    case MeasurementSystem.Metric:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
