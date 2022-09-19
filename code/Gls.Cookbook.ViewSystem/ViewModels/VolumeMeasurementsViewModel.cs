@@ -25,7 +25,16 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public async Task InitializeAsync(EmptyArgs args)
         {
-            List<Measurement> volumeMeasurements = await queryMeasurementService.GetByTypeAsync(MeasurementType.Volume);
+            List<Measurement> volumeMeasurements = null;
+
+            try
+            {
+                volumeMeasurements = await queryMeasurementService.GetByTypeAsync(MeasurementType.Volume);
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             var measurementGroupings = volumeMeasurements.GroupBy(m => m.MeasurementSystem);
             foreach (var measurementGrouping in measurementGroupings)

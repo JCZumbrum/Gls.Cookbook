@@ -2,11 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gls.Cookbook.App.Views.WeightMeasurementsPage"
-             Title="WeightMeasurementsPage">
+             Title="Weight Measurements">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the Weights page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Text="US" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
+        <Label Text="Metric" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
     </VerticalStackLayout>
 </ContentPage>
