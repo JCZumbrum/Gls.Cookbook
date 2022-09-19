@@ -4,6 +4,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Gls.Cookbook.DataAccess.Models;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
@@ -54,6 +55,12 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Name == name && m.MeasurementType == measurementType && m.MeasurementSystem == measurementSystem);
             return measurementEntity.MapToMeasurement();
+        }
+
+        public async Task<List<Measurement>> GetByTypeAsync(MeasurementType measurementType)
+        {
+            IQueryable<MeasurementEntity> entities = dbContext.Measurements.Where(m => m.MeasurementType == measurementType);
+            return await entities.Select(e => e.MapToMeasurement()).ToListAsync();
         }
 
         public async Task UpdateAsync(Measurement measurement)

@@ -14,12 +14,14 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         private INavigationService navigationService;
 
         public IAsyncRelayCommand MeasurementsCommand { get; }
+        public IAsyncRelayCommand IngredientsCommand { get; }
 
         public SettingsViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
 
             this.MeasurementsCommand = new AsyncRelayCommand(ViewMeasurements);
+            this.IngredientsCommand = new AsyncRelayCommand(ViewIngredients);
         }
 
         private async Task ViewMeasurements()
@@ -27,9 +29,11 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             await navigationService.GoToAsync<MeasurementsViewModel, EmptyArgs>(new EmptyArgs());
         }
 
-        public Task InitializeAsync(EmptyArgs args)
+        private async Task ViewIngredients()
         {
-            throw new NotImplementedException();
+            await navigationService.GoToAsync<IngredientsViewModel, EmptyArgs>(new EmptyArgs());
         }
+
+        public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
     }
 }

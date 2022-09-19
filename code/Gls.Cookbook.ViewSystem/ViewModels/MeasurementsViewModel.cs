@@ -5,60 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableObject, IViewModel<EmptyArgs>
+    public partial class MeasurementsViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
-        private IQueryMeasurementService queryMeasurementService;
+        private INavigationService navigationService;
 
-        public class ObservableMeasurement : ObservableObject
+        public IAsyncRelayCommand VolumeMeasurementsCommand { get; }
+        public IAsyncRelayCommand WeightMeasurementsCommand { get; }
+
+        public MeasurementsViewModel(INavigationService navigationService)
         {
-            public int Id { get; set; }
+            this.navigationService = navigationService;
 
-            private string name;
-            public string Name
-            {
-                get
-                {
-                    return name;
-                }
-                set
-                {
-                    SetProperty(ref name, value);
-                }
-            }
+            this.VolumeMeasurementsCommand = new AsyncRelayCommand(ViewVolumeMeasurements);
+            this.WeightMeasurementsCommand = new AsyncRelayCommand(ViewWeightMeasurements);
         }
 
-        public ObservableCollection<ObservableMeasurement> UsMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
-        public ObservableCollection<ObservableMeasurement> MetricMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
-
-        public MeasurementsViewModel(IQueryMeasurementService queryMeasurementService)
+        private async Task ViewVolumeMeasurements()
         {
-            this.queryMeasurementService = queryMeasurementService;
+            await navigationService.GoToAsync<MeasurementsViewModel, EmptyArgs>(new EmptyArgs());
         }
 
-        public async Task InitializeAsync(EmptyArgs args)
+        private async Task ViewWeightMeasurements()
         {
-            List<Measurement> allMeasurements = await queryMeasurementService.GetAllAsync();
-
-            var measurementGroupings =  allMeasurements.GroupBy(m => m.MeasurementSystem);
-            foreach(var measurementGrouping in measurementGroupings)
-            {
-                switch(measurementGrouping.Key)
-                {
-                    case MeasurementSystem.UsCustomary:
-                        UsMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { }));
-                        break;
-                    case MeasurementSystem.Metric:
-                        break;
-                    default:
-                        break;
-                }
-            }
+            await navigationService.GoToAsync<IngredientsViewModel, EmptyArgs>(new EmptyArgs());
         }
+
+        public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
     }
 }

@@ -4,10 +4,10 @@ namespace Gls.Cookbook.App.Views;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage(SettingsViewModel settingsViewModel)
+	public SettingsPage(SettingsViewModel viewModel)
 	{
 		InitializeComponent();
 
-		this.BindingContext = settingsViewModel;
-	}
+        this.BindingContext = viewModel;
+    }
 }

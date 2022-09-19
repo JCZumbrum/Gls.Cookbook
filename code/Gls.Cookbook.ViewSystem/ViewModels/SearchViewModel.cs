@@ -10,9 +10,6 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 {
     public class SearchViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
-        public Task InitializeAsync(EmptyArgs args)
-        {
-            throw new NotImplementedException();
-        }
+        public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
     }
 }

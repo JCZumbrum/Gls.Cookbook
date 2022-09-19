@@ -4,10 +4,10 @@ namespace Gls.Cookbook.App.Views;
 
 public partial class CreateRecipePage : ContentPage
 {
-	public CreateRecipePage(CreateRecipeViewModel createRecipeViewModel)
+	public CreateRecipePage(CreateRecipeViewModel viewModel)
 	{
 		InitializeComponent();
 
-		this.BindingContext = createRecipeViewModel;
-	}
+        this.BindingContext = viewModel;
+    }
 }

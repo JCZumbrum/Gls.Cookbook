@@ -4,6 +4,7 @@ using Gls.Cookbook.DataAccess;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Ingredients;
 using Gls.Cookbook.Domain.Commands.Measurements;
+using Gls.Cookbook.Domain.Queries;
 using Gls.Cookbook.Domain.Repositories;
 using Gls.Cookbook.Logic.Ingredients;
 using Gls.Cookbook.Logic.Measurements;
@@ -38,17 +39,26 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<ICommandService<UpdateIngredientCommand>, UpdateIngredientService>();
             builder.Services.AddTransient<ICommandService<DeleteIngredientCommand>, DeleteIngredientService>();
 
+            // queries
+            builder.Services.AddTransient<IQueryMeasurementService, QueryMeasurementService>();
+
             // pages
             builder.Services.AddTransient<CreateRecipePage>();
+            builder.Services.AddTransient<IngredientsPage>();
             builder.Services.AddTransient<MeasurementsPage>();
             builder.Services.AddTransient<SearchPage>();
             builder.Services.AddTransient<SettingsPage>();
+            builder.Services.AddTransient<VolumeMeasurementsPage>();
+            builder.Services.AddTransient<WeightMeasurementsPage>();
 
             // view models
             builder.Services.AddTransient<CreateRecipeViewModel>();
+            builder.Services.AddTransient<IngredientsViewModel>();
             builder.Services.AddTransient<MeasurementsViewModel>();
             builder.Services.AddTransient<SearchViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<VolumeMeasurementsViewModel>();
+            builder.Services.AddTransient<WeightMeasurementsViewModel>();
 
             return builder.Build();
         }

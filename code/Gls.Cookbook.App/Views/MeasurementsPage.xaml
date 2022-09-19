@@ -4,9 +4,7 @@
              x:Class="Gls.Cookbook.App.Views.MeasurementsPage"
              Title="MeasurementsPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Button Text="Volume" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding VolumeMeasurementsCommand}" />
+        <Button Text="Weight" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding WeightMeasurementsCommand}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -4,10 +4,10 @@ namespace Gls.Cookbook.App.Views;
 
 public partial class MeasurementsPage : ContentPage
 {
-	public MeasurementsPage(MeasurementsViewModel measurementsViewModel)
+	public MeasurementsPage(MeasurementsViewModel viewModel)
 	{
 		InitializeComponent();
 
-		this.BindingContext = measurementsViewModel;
-	}
+        this.BindingContext = viewModel;
+    }
 }
