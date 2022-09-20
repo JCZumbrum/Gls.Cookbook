@@ -213,32 +213,32 @@ namespace Gls.Cookbook.DataAccess.Migrations
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Teaspoon", "t", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Teaspoon", "tsp.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Tablespoon", "T", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Tablespoon", "tbsp.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Cup", "c", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Cup", "c.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Pint", "pt", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Pint", "pt.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Quart", "qt", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Quart", "qt.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Fluid Ounce", "fl. oz", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Fluid Ounce", "fl. oz.", (int)MeasurementType.Volume, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
@@ -253,12 +253,12 @@ namespace Gls.Cookbook.DataAccess.Migrations
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Ounce", "oz", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Ounce", "oz.", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Pound", "lb", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
+                new object[] { "Pound", "lb.", (int)MeasurementType.Weight, (int)MeasurementSystem.UsCustomary });
 
             migrationBuilder.InsertData(
                 "Measurements",
