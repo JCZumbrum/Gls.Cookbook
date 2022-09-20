@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
@@ -59,9 +60,17 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         public ObservableCollection<ObservableMeasurement> UsMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
         public ObservableCollection<ObservableMeasurement> MetricMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
 
+        public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
+
         public VolumeMeasurementsViewModel(IQueryMeasurementService queryMeasurementService)
         {
             this.queryMeasurementService = queryMeasurementService;
+            this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
+        }
+
+        private Task ViewSelectedMeasurement(ObservableMeasurement arg)
+        {
+            return Task.CompletedTask;
         }
 
         public async Task InitializeAsync(EmptyArgs args)

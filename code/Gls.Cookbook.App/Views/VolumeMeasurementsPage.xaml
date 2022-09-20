@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Gls.Cookbook.App.Views.VolumeMeasurementsPage"
              Title="Volume Measurements">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout>
         <Label Text="US" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
-        <ListView ItemsSource="{Binding UsMeasurements}" >
+        <ListView ItemsSource="{Binding UsMeasurements}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -13,9 +20,14 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="ItemSelected"
+                                                Command="{Binding MeasurementSelectedCommand}"
+                                                EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+            </ListView.Behaviors>
         </ListView>
         <Label Text="Metric" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
-        <ListView ItemsSource="{Binding MetricMeasurements}" >
+        <ListView ItemsSource="{Binding MetricMeasurements}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -23,6 +35,11 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="ItemSelected"
+                                                Command="{Binding MeasurementSelectedCommand}"
+                                                EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+            </ListView.Behaviors>
         </ListView>
     </VerticalStackLayout>
 </ContentPage>
