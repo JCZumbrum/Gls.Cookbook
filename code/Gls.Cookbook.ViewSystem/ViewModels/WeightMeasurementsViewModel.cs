@@ -26,7 +26,8 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 }
                 set
                 {
-                    SetProperty(ref name, value);
+                    if (SetProperty(ref name, value))
+                        OnPropertyChanged(nameof(FullName));
                 }
             }
 
@@ -39,7 +40,16 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 }
                 set
                 {
-                    SetProperty(ref abbreviation, value);
+                    if (SetProperty(ref abbreviation, value))
+                        OnPropertyChanged(nameof(FullName));
+                }
+            }
+
+            public string FullName
+            {
+                get
+                {
+                    return $"{Name} ({Abbreviation})";
                 }
             }
         }
@@ -56,9 +66,9 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public async Task InitializeAsync(EmptyArgs args)
         {
-            List<Measurement> volumeMeasurements = await queryMeasurementService.GetByTypeAsync(MeasurementType.Weight);
+            List<Measurement> weightMeasurements = await queryMeasurementService.GetByTypeAsync(MeasurementType.Weight);
 
-            var measurementGroupings = volumeMeasurements.GroupBy(m => m.MeasurementSystem);
+            var measurementGroupings = weightMeasurements.GroupBy(m => m.MeasurementSystem);
             foreach (var measurementGrouping in measurementGroupings)
             {
                 switch (measurementGrouping.Key)

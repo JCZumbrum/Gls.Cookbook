@@ -5,6 +5,24 @@
              Title="Volume Measurements">
     <VerticalStackLayout>
         <Label Text="US" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
+        <ListView ItemsSource="{Binding UsMeasurements}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label FontSize="Subtitle" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Label Text="Metric" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
+        <ListView ItemsSource="{Binding MetricMeasurements}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label FontSize="Subtitle" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>

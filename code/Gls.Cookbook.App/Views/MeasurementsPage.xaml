@@ -4,7 +4,7 @@
              x:Class="Gls.Cookbook.App.Views.MeasurementsPage"
              Title="Measurements">
     <VerticalStackLayout>
-        <Button Text="Volume" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding VolumeMeasurementsCommand}" />
-        <Button Text="Weight" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding WeightMeasurementsCommand}" />
+        <Button Text="Volume" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding VolumeMeasurementsCommand}" />
+        <Button Text="Weight" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding WeightMeasurementsCommand}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -4,7 +4,7 @@
              x:Class="Gls.Cookbook.App.Views.SettingsPage"
              Title="SettingsPage">
     <VerticalStackLayout>
-        <Button Text="Measurements" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding MeasurementsCommand}" />
-        <Button Text="Ingredients" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" TextColor="Black" Command="{Binding IngredientsCommand}" />
+        <Button Text="Measurements" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding MeasurementsCommand}" />
+        <Button Text="Ingredients" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding IngredientsCommand}" />
     </VerticalStackLayout>
 </ContentPage>
