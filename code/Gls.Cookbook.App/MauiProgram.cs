@@ -60,6 +60,8 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<VolumeMeasurementsViewModel>();
             builder.Services.AddTransient<WeightMeasurementsViewModel>();
 
+            CookbookDbContext.Migrate(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+
             return builder.Build();
         }
     }

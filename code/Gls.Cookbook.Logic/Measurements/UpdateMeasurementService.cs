@@ -21,7 +21,7 @@ namespace Gls.Cookbook.Logic.Measurements
 
         public async Task<Result> ExecuteAsync(UpdateMeasurementCommand command)
         {
-            await using (ICookbookContext cookbookContext = await cookbookContextFactory.CreateAsync())
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 Measurement existingMeasurement = await cookbookContext.MeasurementRepository.GetByIdAsync(command.Id);
                 if (existingMeasurement == null)

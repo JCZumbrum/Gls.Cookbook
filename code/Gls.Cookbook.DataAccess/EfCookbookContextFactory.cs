@@ -9,9 +9,9 @@ namespace Gls.Cookbook.DataAccess
 {
     public class EfCookbookContextFactory : ICookbookContextFactory
     {
-        public async Task<ICookbookContext> CreateAsync()
+        public ICookbookContext Create()
         {
-            return await EfCookbookContext.CreateAsync();
+            return EfCookbookContext.Create();
         }
     }
 }

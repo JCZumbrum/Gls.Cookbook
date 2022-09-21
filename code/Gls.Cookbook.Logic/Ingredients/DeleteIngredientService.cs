@@ -20,7 +20,7 @@ namespace Gls.Cookbook.Logic.Ingredients
 
         public async Task<Result> ExecuteAsync(DeleteIngredientCommand command)
         {
-            await using (ICookbookContext cookbookContext = await cookbookContextFactory.CreateAsync())
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 bool recipeExists = await cookbookContext.RecipeRepository.ExistsByIngredientId(command.Id);
                 if (recipeExists)

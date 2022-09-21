@@ -53,9 +53,9 @@ namespace Gls.Cookbook.DataAccess
             this.dbContext = dbContext;
         }
 
-        public static async Task<EfCookbookContext> CreateAsync()
+        public static EfCookbookContext Create()
         {
-            CookbookDbContext dbContext = await CookbookDbContext.CreateAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            CookbookDbContext dbContext = CookbookDbContext.Create(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
             return new EfCookbookContext(dbContext);
         }
 

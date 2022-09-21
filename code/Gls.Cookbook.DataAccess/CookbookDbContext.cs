@@ -10,8 +10,6 @@ namespace Gls.Cookbook.DataAccess
     {
         private const string dbName = "Cookbook.db3";
 
-        private static bool migrated = false;
-
         private string sourcePath;
 
         public DbSet<RecipeEntity> Recipes { get; set; }
@@ -25,20 +23,14 @@ namespace Gls.Cookbook.DataAccess
 
         private CookbookDbContext(string sourcePath) { this.sourcePath = sourcePath; }
 
-        public static async Task<CookbookDbContext> CreateAsync()
+        public static CookbookDbContext Create()
         {
-            return await CreateAsync(String.Empty);
+            return Create(String.Empty);
         }
 
-        public static async Task<CookbookDbContext> CreateAsync(string sourcePath)
+        public static CookbookDbContext Create(string sourcePath)
         {
             CookbookDbContext cookbookDbContext = new CookbookDbContext(sourcePath);
-
-            if (!migrated)
-            {
-                await cookbookDbContext.Database.MigrateAsync();
-                migrated = true;
-            }
 
             return cookbookDbContext;
         }
@@ -50,6 +42,12 @@ namespace Gls.Cookbook.DataAccess
             optionsBuilder.UseSqlite($"Data Source={filename}");
 
             base.OnConfiguring(optionsBuilder);
+        }
+
+        public static void Migrate(string sourcePath)
+        {
+            CookbookDbContext dbContext = Create(sourcePath);
+            dbContext.Database.Migrate();
         }
     }
 }

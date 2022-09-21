@@ -21,7 +21,7 @@ namespace Gls.Cookbook.Logic.Ingredients
 
         public async Task<Result> ExecuteAsync(UpdateIngredientCommand command)
         {
-            await using (ICookbookContext cookbookContext = await cookbookContextFactory.CreateAsync())
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 Ingredient existingIngredient = await cookbookContext.IngredientRepository.GetByNameAsync(command.Name);
                 if (existingIngredient == null)

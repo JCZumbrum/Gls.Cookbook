@@ -8,7 +8,7 @@ namespace Gls.Cookbook.DataAccess
     {
         public CookbookDbContext CreateDbContext(string[] args)
         {
-            return CookbookDbContext.CreateAsync("..\\").ConfigureAwait(false).GetAwaiter().GetResult();
+            return CookbookDbContext.Create("..\\");
         }
     }
 }

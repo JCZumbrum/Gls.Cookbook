@@ -8,6 +8,6 @@ namespace Gls.Cookbook.Domain.Repositories
 {
     public interface ICookbookContextFactory
     {
-        Task<ICookbookContext> CreateAsync();
+        ICookbookContext Create();
     }
 }

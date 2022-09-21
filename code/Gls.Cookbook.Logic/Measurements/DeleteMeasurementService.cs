@@ -20,7 +20,7 @@ namespace Gls.Cookbook.Logic.Measurements
 
         public async Task<Result> ExecuteAsync(DeleteMeasurementCommand command)
         {
-            await using (ICookbookContext cookbookContext = await cookbookContextFactory.CreateAsync())
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 bool recipeExists = await cookbookContext.RecipeRepository.ExistsByMeasurementId(command.Id);
                 if (recipeExists)
