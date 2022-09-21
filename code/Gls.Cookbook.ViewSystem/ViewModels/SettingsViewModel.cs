@@ -27,7 +27,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private async Task ViewMeasurements()
         {
-            await navigationService.GoToAsync<MeasurementsViewModel, EmptyArgs>(new EmptyArgs());
+            await navigationService.GoToAsync<MeasurementTypesViewModel, EmptyArgs>(new EmptyArgs());
         }
 
         private async Task ViewIngredients()

@@ -58,6 +58,9 @@
 	  <Compile Update="Views\MeasurementListPage.xaml.cs">
 	    <DependentUpon>MeasurementListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\MeasurementTypesPage.xaml.cs">
+	    <DependentUpon>MeasurementTypesPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,7 +73,7 @@
 	  <MauiXaml Update="Views\IngredientsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MeasurementsPage.xaml">
+	  <MauiXaml Update="Views\MeasurementTypesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SearchPage.xaml">

@@ -11,14 +11,14 @@ using Gls.Cookbook.ViewSystem.Args;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public partial class MeasurementsViewModel : ObservableObject, IViewModel<EmptyArgs>
+    public partial class MeasurementTypesViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
         private INavigationService navigationService;
 
         public IAsyncRelayCommand VolumeMeasurementsCommand { get; }
         public IAsyncRelayCommand WeightMeasurementsCommand { get; }
 
-        public MeasurementsViewModel(INavigationService navigationService)
+        public MeasurementTypesViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
 

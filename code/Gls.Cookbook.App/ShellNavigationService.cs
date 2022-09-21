@@ -15,7 +15,7 @@ namespace Gls.Cookbook.App
         {
             { typeof(CreateRecipeViewModel), typeof(CreateRecipePage) },
             { typeof(IngredientsViewModel), typeof(IngredientsPage) },
-            { typeof(MeasurementsViewModel), typeof(MeasurementsPage) },
+            { typeof(MeasurementTypesViewModel), typeof(MeasurementTypesPage) },
             { typeof(SearchViewModel), typeof(SearchPage) },
             { typeof(SettingsViewModel), typeof(SettingsPage) },
             { typeof(MeasurementListViewModel), typeof(MeasurementListPage) },
