@@ -11,7 +11,7 @@
         <ShellContent Title="Search"
                      Icon="search.png"
                      ContentTemplate="{DataTemplate views:SearchPage}" />
-        <ShellContent Title="Add"
+        <ShellContent Title="Create"
                      Icon="add.png"
                      ContentTemplate="{DataTemplate views:CreateRecipePage}" />
         <ShellContent Title="Settings"
