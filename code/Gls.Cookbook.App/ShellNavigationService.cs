@@ -18,8 +18,7 @@ namespace Gls.Cookbook.App
             { typeof(MeasurementsViewModel), typeof(MeasurementsPage) },
             { typeof(SearchViewModel), typeof(SearchPage) },
             { typeof(SettingsViewModel), typeof(SettingsPage) },
-            { typeof(VolumeMeasurementsViewModel), typeof(VolumeMeasurementsPage) },
-            { typeof(WeightMeasurementsViewModel), typeof(WeightMeasurementsPage) },
+            { typeof(MeasurementListViewModel), typeof(MeasurementListPage) },
             { typeof(EditMeasurementViewModel), typeof(EditMeasurementPage) }
         };
 

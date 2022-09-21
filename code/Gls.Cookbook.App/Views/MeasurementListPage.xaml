@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="Gls.Cookbook.App.Views.VolumeMeasurementsPage"
-             Title="Volume Measurements">
+             x:Class="Gls.Cookbook.App.Views.MeasurementListPage"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
+using Gls.Cookbook.ViewSystem.Args;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {

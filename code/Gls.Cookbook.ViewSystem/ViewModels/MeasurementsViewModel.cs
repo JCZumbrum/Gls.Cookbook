@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
+using Gls.Cookbook.ViewSystem.Args;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
@@ -27,12 +28,12 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private async Task ViewVolumeMeasurements()
         {
-            await navigationService.GoToAsync<VolumeMeasurementsViewModel, EmptyArgs>(new EmptyArgs());
+            await navigationService.GoToAsync<MeasurementListViewModel, MeasurementType>(MeasurementType.Volume);
         }
 
         private async Task ViewWeightMeasurements()
         {
-            await navigationService.GoToAsync<WeightMeasurementsViewModel, EmptyArgs>(new EmptyArgs());
+            await navigationService.GoToAsync<MeasurementListViewModel, MeasurementType>(MeasurementType.Weight);
         }
 
         public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
