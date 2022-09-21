@@ -10,6 +10,7 @@ namespace Gls.Cookbook.Domain.Queries
     public interface IQueryMeasurementService
     {
         Task<List<Measurement>> GetAllAsync();
+        Task<Measurement> GetByIdAsync(int measurementId);
         Task<List<Measurement>> GetByTypeAsync(MeasurementType measurementType);
     }
 }

@@ -27,6 +27,14 @@ namespace Gls.Cookbook.Logic.Measurements
             }
         }
 
+        public async Task<Measurement> GetByIdAsync(int measurementId)
+        {
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
+            {
+                return await cookbookContext.MeasurementRepository.GetByIdAsync(measurementId);
+            }
+        }
+
         public async Task<List<Measurement>> GetByTypeAsync(MeasurementType measurementType)
         {
             await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())

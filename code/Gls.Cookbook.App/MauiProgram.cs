@@ -50,6 +50,7 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<SettingsPage>();
             builder.Services.AddTransient<VolumeMeasurementsPage>();
             builder.Services.AddTransient<WeightMeasurementsPage>();
+            builder.Services.AddTransient<EditMeasurementPage>();
 
             // view models
             builder.Services.AddTransient<CreateRecipeViewModel>();
@@ -59,6 +60,7 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<VolumeMeasurementsViewModel>();
             builder.Services.AddTransient<WeightMeasurementsViewModel>();
+            builder.Services.AddTransient<EditMeasurementViewModel>();
 
             CookbookDbContext.Migrate(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 

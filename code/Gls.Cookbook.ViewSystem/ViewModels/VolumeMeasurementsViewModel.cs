@@ -41,7 +41,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 }
                 set
                 {
-                    if(SetProperty(ref abbreviation, value))
+                    if (SetProperty(ref abbreviation, value))
                         OnPropertyChanged(nameof(FullName));
                 }
             }
@@ -55,6 +55,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
+        private INavigationService navigationService;
         private IQueryMeasurementService queryMeasurementService;
 
         public ObservableCollection<ObservableMeasurement> UsMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
@@ -62,15 +63,16 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
 
-        public VolumeMeasurementsViewModel(IQueryMeasurementService queryMeasurementService)
+        public VolumeMeasurementsViewModel(INavigationService navigationService, IQueryMeasurementService queryMeasurementService)
         {
+            this.navigationService = navigationService;
             this.queryMeasurementService = queryMeasurementService;
             this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
         }
 
-        private Task ViewSelectedMeasurement(ObservableMeasurement arg)
+        private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
         {
-            return Task.CompletedTask;
+            await navigationService.GoToAsync<EditMeasurementViewModel, int>(arg.Id);
         }
 
         public async Task InitializeAsync(EmptyArgs args)
@@ -83,10 +85,10 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 switch (measurementGrouping.Key)
                 {
                     case MeasurementSystem.UsCustomary:
-                        UsMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
+                        UsMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
                     case MeasurementSystem.Metric:
-                        MetricMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
+                        MetricMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
                     default:
                         break;

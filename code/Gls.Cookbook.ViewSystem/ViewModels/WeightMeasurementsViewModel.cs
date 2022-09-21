@@ -74,10 +74,10 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 switch (measurementGrouping.Key)
                 {
                     case MeasurementSystem.UsCustomary:
-                        UsMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
+                        UsMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
                     case MeasurementSystem.Metric:
-                        MetricMeasurements.AddRange(measurementGrouping.Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
+                        MetricMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
                     default:
                         break;
