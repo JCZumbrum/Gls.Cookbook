@@ -12,7 +12,7 @@
     </ContentPage.Resources>
     <ScrollView Margin="10">
         <VerticalStackLayout>
-            <Label Text="US" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
+            <Label Text="US" FontAttributes="Bold" FontSize="Subtitle" HorizontalOptions="Start" />
             <ListView ItemsSource="{Binding UsMeasurements}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -28,7 +28,7 @@
                                                     EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
                 </ListView.Behaviors>
             </ListView>
-            <Label Text="Metric" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
+            <Label Text="Metric" FontAttributes="Bold" FontSize="Subtitle" HorizontalOptions="Start" />
             <ListView ItemsSource="{Binding MetricMeasurements}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
