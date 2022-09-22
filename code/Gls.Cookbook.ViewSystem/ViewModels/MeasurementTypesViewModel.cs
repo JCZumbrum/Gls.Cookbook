@@ -8,32 +8,37 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.ViewSystem.Args;
+using static Gls.Cookbook.ViewSystem.ViewModels.MeasurementsViewModel;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public partial class MeasurementTypesViewModel : ObservableObject, IViewModel<EmptyArgs>
+    public class MeasurementTypesViewModel : ObservableObject, IViewModel<EmptyArgs>
     {
+        public class ObservableMeasurementType : ObservableObject
+        {
+            public MeasurementType MeasurementType { get; set; }
+            public string Name { get; set; }
+        }
+
         private INavigationService navigationService;
 
-        public IAsyncRelayCommand VolumeMeasurementsCommand { get; }
-        public IAsyncRelayCommand WeightMeasurementsCommand { get; }
+        public ObservableCollection<ObservableMeasurementType> MeasurementTypes { get; } = new ObservableCollection<ObservableMeasurementType>();
+
+        public IAsyncRelayCommand<ObservableMeasurementType> MeasurementTypeSelectedCommand { get; }
 
         public MeasurementTypesViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
 
-            this.VolumeMeasurementsCommand = new AsyncRelayCommand(ViewVolumeMeasurements);
-            this.WeightMeasurementsCommand = new AsyncRelayCommand(ViewWeightMeasurements);
+            this.MeasurementTypeSelectedCommand = new AsyncRelayCommand<ObservableMeasurementType>(SelectMeasurementType);
+
+            this.MeasurementTypes.Add(new ObservableMeasurementType() { MeasurementType = MeasurementType.Volume, Name = "Volume" });
+            this.MeasurementTypes.Add(new ObservableMeasurementType() { MeasurementType = MeasurementType.Weight, Name = "Weight" });
         }
 
-        private async Task ViewVolumeMeasurements()
+        private async Task SelectMeasurementType(ObservableMeasurementType arg)
         {
-            await navigationService.GoToAsync<MeasurementsViewModel, MeasurementType>(MeasurementType.Volume);
-        }
-
-        private async Task ViewWeightMeasurements()
-        {
-            await navigationService.GoToAsync<MeasurementsViewModel, MeasurementType>(MeasurementType.Weight);
+            await navigationService.GoToAsync<MeasurementsViewModel, MeasurementType>(arg.MeasurementType);
         }
 
         public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
