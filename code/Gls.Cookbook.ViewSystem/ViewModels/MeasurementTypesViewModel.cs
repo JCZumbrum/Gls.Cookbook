@@ -28,12 +28,12 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private async Task ViewVolumeMeasurements()
         {
-            await navigationService.GoToAsync<MeasurementListViewModel, MeasurementType>(MeasurementType.Volume);
+            await navigationService.GoToAsync<MeasurementsViewModel, MeasurementType>(MeasurementType.Volume);
         }
 
         private async Task ViewWeightMeasurements()
         {
-            await navigationService.GoToAsync<MeasurementListViewModel, MeasurementType>(MeasurementType.Weight);
+            await navigationService.GoToAsync<MeasurementsViewModel, MeasurementType>(MeasurementType.Weight);
         }
 
         public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }

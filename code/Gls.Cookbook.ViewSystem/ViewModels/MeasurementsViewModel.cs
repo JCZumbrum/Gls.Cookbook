@@ -13,7 +13,7 @@ using Gls.Cookbook.ViewSystem.Args;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementListViewModel : ObservableObject, IViewModel<MeasurementType>
+    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>
     {
         public class ObservableMeasurement : ObservableObject
         {
@@ -79,7 +79,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
 
-        public MeasurementListViewModel(INavigationService navigationService, IQueryMeasurementService queryMeasurementService)
+        public MeasurementsViewModel(INavigationService navigationService, IQueryMeasurementService queryMeasurementService)
         {
             this.navigationService = navigationService;
             this.queryMeasurementService = queryMeasurementService;

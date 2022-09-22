@@ -16,6 +16,32 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private int measurementId;
 
+        private string measurementType;
+        public string MeasurementType
+        {
+            get
+            {
+                return measurementType;
+            }
+            set
+            {
+                SetProperty(ref measurementType, value);
+            }
+        }
+
+        private string measurementSystem;
+        public string MeasurementSystem
+        {
+            get
+            {
+                return measurementSystem;
+            }
+            set
+            {
+                SetProperty(ref measurementSystem, value);
+            }
+        }
+
         private string name;
         public string Name
         {
@@ -52,6 +78,8 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             Measurement measurement = await queryMeasurementService.GetByIdAsync(measurementId);
 
             this.measurementId = measurement.Id;
+            this.MeasurementType = measurement.MeasurementType.ToString();
+            this.MeasurementSystem = measurement.MeasurementSystem.ToString();
             this.Name = measurement.Name;
             this.Abbreviation = measurement.Abbreviation;
         }

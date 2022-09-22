@@ -2,9 +2,9 @@ using Gls.Cookbook.ViewSystem.ViewModels;
 
 namespace Gls.Cookbook.App.Views;
 
-public partial class MeasurementListPage : ContentPage
+public partial class MeasurementsPage : ContentPage
 {
-	public MeasurementListPage(MeasurementListViewModel viewModel)
+	public MeasurementsPage(MeasurementsViewModel viewModel)
 	{
 		InitializeComponent();
 
