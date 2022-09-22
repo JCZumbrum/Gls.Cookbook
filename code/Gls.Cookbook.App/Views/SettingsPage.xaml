@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:localBehaviors="clr-namespace:Gls.Cookbook.App.Behaviors"
              x:Class="Gls.Cookbook.App.Views.SettingsPage"
              Title="Settings">
-    <VerticalStackLayout>
-        <Button Text="Measurements" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding MeasurementsCommand}" />
-        <Button Text="Ingredients" CornerRadius="0" BorderWidth="0" BackgroundColor="Transparent" FontSize="Title" TextColor="Black" Command="{Binding IngredientsCommand}" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView ItemsSource="{Binding Settings}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label FontSize="Title" TextColor="Black" Text="{Binding Name}" Margin="0,10" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Behaviors>
+            <localBehaviors:DeselectListViewItemBehavior />
+            <toolkit:EventToCommandBehavior EventName="ItemSelected"
+                                            Command="{Binding SettingSelectedCommand}"
+                                            EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+        </ListView.Behaviors>
+    </ListView>
 </ContentPage>
