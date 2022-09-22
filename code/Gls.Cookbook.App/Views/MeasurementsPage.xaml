@@ -7,6 +7,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+            <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Margin="10">
@@ -21,9 +22,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ItemSelected"
+                    <!--<toolkit:EventToCommandBehavior EventName="ItemSelected"
                                                     Command="{Binding MeasurementSelectedCommand}"
-                                                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+                                                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />-->
+                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                                    Command="{Binding MeasurementSelectedCommand}"
+                                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
                 </ListView.Behaviors>
             </ListView>
             <Label Text="Metric" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Start" />
@@ -36,9 +40,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ItemSelected"
+                    <!--<toolkit:EventToCommandBehavior EventName="ItemSelected"
                                                     Command="{Binding MeasurementSelectedCommand}"
-                                                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+                                                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />-->
+                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                                    Command="{Binding MeasurementSelectedCommand}"
+                                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
                 </ListView.Behaviors>
             </ListView>
         </VerticalStackLayout>
