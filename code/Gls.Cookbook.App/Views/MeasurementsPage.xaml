@@ -47,6 +47,6 @@
                 </ListView>
             </VerticalStackLayout>
         </ScrollView>
-        <Button Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" TextColor="White" Text="Add" Command="{Binding AddMeasurementCommand}" />
+        <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}" />
     </Grid>
 </ContentPage>
