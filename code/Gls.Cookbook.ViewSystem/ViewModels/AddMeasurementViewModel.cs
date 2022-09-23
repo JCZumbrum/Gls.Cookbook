@@ -30,11 +30,15 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         private ICommandService<CreateMeasurementCommand> createMeasurementService;
 
         private MeasurementType measurementType;
-        public string MeasurementType
+        public MeasurementType MeasurementType
         {
             get
             {
-                return measurementType.ToString();
+                return measurementType;
+            }
+            set
+            {
+                SetProperty(ref measurementType, value);
             }
         }
 
@@ -90,7 +94,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public Task InitializeAsync(MeasurementType args)
         {
-            this.measurementType = args;
+            this.MeasurementType = args;
 
             return Task.CompletedTask;
         }
