@@ -19,7 +19,8 @@ namespace Gls.Cookbook.App
             { typeof(SearchViewModel), typeof(SearchPage) },
             { typeof(SettingsViewModel), typeof(SettingsPage) },
             { typeof(MeasurementsViewModel), typeof(MeasurementsPage) },
-            { typeof(EditMeasurementViewModel), typeof(EditMeasurementPage) }
+            { typeof(EditMeasurementViewModel), typeof(EditMeasurementPage) },
+            { typeof(AddMeasurementViewModel), typeof(AddMeasurementPage) }
         };
 
         public async Task GoBackAsync()

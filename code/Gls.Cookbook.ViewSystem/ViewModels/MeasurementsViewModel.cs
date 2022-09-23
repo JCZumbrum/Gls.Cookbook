@@ -78,17 +78,24 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         public ObservableCollection<ObservableMeasurement> MetricMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
 
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
+        public IAsyncRelayCommand AddMeasurementCommand { get; }
 
         public MeasurementsViewModel(INavigationService navigationService, IQueryMeasurementService queryMeasurementService)
         {
             this.navigationService = navigationService;
             this.queryMeasurementService = queryMeasurementService;
             this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
+            this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
         }
 
         private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
         {
             await navigationService.GoToAsync<EditMeasurementViewModel, int>(arg.Id);
+        }
+
+        private async Task AddMeasurement()
+        {
+            await navigationService.GoToAsync<AddMeasurementViewModel, MeasurementType>(measurementType);
         }
 
         public async Task InitializeAsync(MeasurementType args)

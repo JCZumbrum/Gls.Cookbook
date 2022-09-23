@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gls.Cookbook.App.Views.AddMeasurementPage"
+             Title="Add Measurement">
+    <VerticalStackLayout Margin="10" Spacing="5">
+        <Label Text="Type" TextColor="LightSlateGrey" FontSize="Title" />
+        <Label Text="{Binding MeasurementType}" FontSize="Subtitle" />
+        <Label Text="System" TextColor="LightSlateGrey" FontSize="Title" />
+        <Picker ItemsSource="{Binding MeasurementSystems}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MeasurementSystem}" TextColor="LightSlateGrey" FontSize="Title" />
+        <Label Text="Name" TextColor="LightSlateGrey" FontSize="Title" />
+        <Entry Text="{Binding Name}" FontSize="Subtitle" />
+        <Label Text="Abbreviation" TextColor="LightSlateGrey" FontSize="Title" Margin="0,5,0,0" />
+        <Entry Text="{Binding Abbreviation}" FontSize="Subtitle" />
+    </VerticalStackLayout>
+</ContentPage>

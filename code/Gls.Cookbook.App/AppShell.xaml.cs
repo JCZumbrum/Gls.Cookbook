@@ -11,7 +11,8 @@ namespace Gls.Cookbook.App
             Routing.RegisterRoute(nameof(IngredientsPage), typeof(IngredientsPage));
             Routing.RegisterRoute(nameof(MeasurementTypesPage), typeof(MeasurementTypesPage));
             Routing.RegisterRoute(nameof(MeasurementsPage), typeof(MeasurementsPage));
-            Routing.RegisterRoute(nameof(EditMeasurementPage), typeof(EditMeasurementPage));            
+            Routing.RegisterRoute(nameof(AddMeasurementPage), typeof(AddMeasurementPage));
+            Routing.RegisterRoute(nameof(EditMeasurementPage), typeof(EditMeasurementPage));
         }
     }
 }
