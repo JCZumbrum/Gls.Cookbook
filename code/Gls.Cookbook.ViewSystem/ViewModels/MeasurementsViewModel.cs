@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
-using Gls.Cookbook.ViewSystem.Args;
+using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>
+    public class MeasurementsViewModel : ObservableRecipient, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>
     {
         public class ObservableMeasurement : ObservableObject
         {
@@ -120,6 +122,24 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                     default:
                         break;
                 }
+            }
+        }
+
+        public void Receive(MeasurementAddedMessage message)
+        {
+            Measurement measurement = message.Measurement;
+
+            if (measurement.MeasurementType != measurementType)
+                return;
+
+            switch (measurement.MeasurementSystem)
+            {
+                case MeasurementSystem.UsCustomary:
+                    UsMeasurements.Add(new ObservableMeasurement() { Id = measurement.Id, Name = measurement.Name, Abbreviation = measurement.Abbreviation });
+                    break;
+                case MeasurementSystem.Metric:
+                    MetricMeasurements.Add(new ObservableMeasurement() { Id = measurement.Id, Name = measurement.Name, Abbreviation = measurement.Abbreviation });
+                    break;
             }
         }
     }
