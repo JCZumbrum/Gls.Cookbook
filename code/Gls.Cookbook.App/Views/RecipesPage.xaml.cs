@@ -2,9 +2,9 @@ using Gls.Cookbook.ViewSystem.ViewModels;
 
 namespace Gls.Cookbook.App.Views;
 
-public partial class SearchPage : ContentPage
+public partial class RecipesPage : ContentPage
 {
-	public SearchPage(SearchViewModel viewModel)
+	public RecipesPage(RecipesViewModel viewModel)
 	{
 		InitializeComponent();
 
