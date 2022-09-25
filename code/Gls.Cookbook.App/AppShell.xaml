@@ -9,11 +9,14 @@
 
     <TabBar>
         <ShellContent Title="Recipes"
-                     Icon="search.png"
+                     Icon="recipes.png"
                      ContentTemplate="{DataTemplate views:RecipesPage}" />
-        <ShellContent Title="Settings"
-                     Icon="setting.png"
-                     ContentTemplate="{DataTemplate views:SettingsPage}" />
+        <ShellContent Title="Ingredients"
+                      Icon="carrot.png"
+                     ContentTemplate="{DataTemplate views:IngredientsPage}" />
+        <ShellContent Title="Measurements"
+                     Icon="recipient.png"
+                     ContentTemplate="{DataTemplate views:MeasurementTypesPage}" />
     </TabBar>
 
 </Shell>

@@ -48,7 +48,6 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<IngredientsPage>();
             builder.Services.AddTransient<MeasurementTypesPage>();
             builder.Services.AddTransient<RecipesPage>();
-            builder.Services.AddTransient<SettingsPage>();
             builder.Services.AddTransient<MeasurementsPage>();
             builder.Services.AddTransient<AddMeasurementPage>();
             builder.Services.AddTransient<EditMeasurementPage>();
@@ -58,7 +57,6 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<IngredientsViewModel>();
             builder.Services.AddTransient<MeasurementTypesViewModel>();
             builder.Services.AddTransient<RecipesViewModel>();
-            builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<MeasurementsViewModel>();
             builder.Services.AddTransient<AddMeasurementViewModel>();
             builder.Services.AddTransient<EditMeasurementViewModel>();
