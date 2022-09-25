@@ -14,7 +14,7 @@
         <ScrollView Grid.Row="0" Margin="10">
             <VerticalStackLayout>
                 <Label Text="US" FontFamily="OpenSansSemibold" FontSize="16" VerticalTextAlignment="Center" HorizontalOptions="Start" />
-                <ListView ItemsSource="{Binding UsMeasurements}">
+                <ListView ItemsSource="{Binding UsMeasurements}" Margin="10">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -30,7 +30,7 @@
                     </ListView.Behaviors>
                 </ListView>
                 <Label Text="Metric" FontFamily="OpenSansSemibold" FontSize="16" VerticalTextAlignment="Center" HorizontalOptions="Start" />
-                <ListView ItemsSource="{Binding MetricMeasurements}">
+                <ListView ItemsSource="{Binding MetricMeasurements}" Margin="10">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -47,6 +47,11 @@
                 </ListView>
             </VerticalStackLayout>
         </ScrollView>
-        <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}" />
+        <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}">
+            <ImageButton.Shadow Brush="Black"
+                Offset="32,32"
+                Radius="32"
+                Opacity="0.8" />
+        </ImageButton>
     </Grid>
 </ContentPage>

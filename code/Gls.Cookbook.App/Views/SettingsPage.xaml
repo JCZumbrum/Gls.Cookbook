@@ -10,7 +10,7 @@
             <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ListView ItemsSource="{Binding Settings}">
+    <ListView ItemsSource="{Binding Settings}" Margin="10">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
