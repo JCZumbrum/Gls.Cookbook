@@ -21,7 +21,7 @@ namespace Gls.Cookbook.Logic.Measurements
             {
                 Measurement existingMeasurement = await cookbookContext.MeasurementRepository.GetByNameTypeAndSystemAsync(command.Name, command.MeasurementType, command.MeasurementSystem);
                 if (existingMeasurement != null)
-                    return Result.Fail($"Measurement with Name {command.Name} already exists for Type {command.MeasurementType} and System {command.MeasurementSystem}.");
+                    return Result.Fail($"Measurement with name {command.Name} already exists for type {command.MeasurementType} and system {command.MeasurementSystem}.");
 
                 Measurement measurement = new Measurement()
                 {
