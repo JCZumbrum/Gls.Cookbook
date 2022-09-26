@@ -15,7 +15,7 @@ using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableRecipient, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>
+    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>
     {
         public class ObservableMeasurement : ObservableObject
         {
@@ -88,6 +88,8 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.queryMeasurementService = queryMeasurementService;
             this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
+
+            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementAddedMessage>(this, (r, m) => r.Receive(m));
         }
 
         private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
