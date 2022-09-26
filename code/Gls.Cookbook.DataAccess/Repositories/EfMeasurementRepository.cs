@@ -27,6 +27,8 @@ namespace Gls.Cookbook.DataAccess.Repositories
             MeasurementEntity measurementEntity = measurement.MapToEntity();
             await dbContext.Measurements.AddAsync(measurementEntity);
             await dbContext.SaveChangesAsync();
+
+            measurement.Id = measurementEntity.Id;
         }
 
         public async Task DeleteAsync(int measurementId)
