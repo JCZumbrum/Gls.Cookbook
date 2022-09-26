@@ -11,6 +11,9 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public static RecipeIngredientEntity MapToEntity(this RecipeIngredient recipeIngredient, RecipeSectionEntity recipeSectionEntity)
         {
+            if (recipeIngredient == null)
+                return null;
+
             return new RecipeIngredientEntity()
             {
                 Id = recipeIngredient.Id,

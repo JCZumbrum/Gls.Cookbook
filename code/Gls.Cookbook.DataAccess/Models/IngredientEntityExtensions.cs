@@ -11,6 +11,9 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public static IngredientEntity MapToEntity(this Ingredient ingredient)
         {
+            if (ingredient == null)
+                return null;
+
             return new IngredientEntity()
             {
                 Id = ingredient.Id,
@@ -21,6 +24,9 @@ namespace Gls.Cookbook.DataAccess.Models
 
         public static Ingredient MapToIngredient(this IngredientEntity entity)
         {
+            if (entity == null)
+                return null;
+
             return new Ingredient()
             {
                 Id = entity.Id,

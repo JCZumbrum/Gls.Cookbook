@@ -12,6 +12,9 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public static RecipeEntity MapToEntity(this Recipe recipe)
         {
+            if (recipe == null)
+                return null;
+
             RecipeEntity entity = new RecipeEntity()
             {
                 Id = recipe.Id,

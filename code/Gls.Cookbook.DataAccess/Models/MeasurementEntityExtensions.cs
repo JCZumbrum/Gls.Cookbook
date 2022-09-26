@@ -11,6 +11,9 @@ namespace Gls.Cookbook.DataAccess.Models
     {
         public static MeasurementEntity MapToEntity(this Measurement measurement)
         {
+            if (measurement == null)
+                return null;
+
             return new MeasurementEntity()
             {
                 Id = measurement.Id,
@@ -23,6 +26,9 @@ namespace Gls.Cookbook.DataAccess.Models
 
         public static Measurement MapToMeasurement(this MeasurementEntity entity)
         {
+            if (entity == null)
+                return null;
+
             return new Measurement()
             {
                 Id = entity.Id,

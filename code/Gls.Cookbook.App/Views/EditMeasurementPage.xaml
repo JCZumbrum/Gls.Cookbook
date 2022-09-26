@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gls.Cookbook.App.Views.EditMeasurementPage"
              Title="Edit Measurement">
+    <Shell.TitleView>
+        <Grid>
+            <ImageButton HorizontalOptions="End" HeightRequest="36" WidthRequest="36" Source="delete.png" BackgroundColor="Transparent" />
+        </Grid>
+    </Shell.TitleView>
     <VerticalStackLayout Margin="10" Spacing="5">
         <Label Text="Type" TextColor="LightSlateGrey" FontSize="Title" />
         <Label Text="{Binding MeasurementType}" FontSize="Subtitle" />
