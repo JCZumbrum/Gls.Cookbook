@@ -6,22 +6,16 @@ using System.Threading.Tasks;
 
 namespace Gls.Cookbook.Domain
 {
-    public class Result
+    public class EmptyResultValue { }
+
+    public class Result : Result<EmptyResultValue>
     {
-        public bool Success { get; set; }
-        public string Message { get; set; }
-
-        public Result()
-        {
-            this.Message = String.Empty;
-        }
-
         public static Result Pass()
         {
-            return new Result() { Success = true };
+            return new Result() { Success = true, Value = new EmptyResultValue() };
         }
 
-        public static Result Fail(string message)
+        public static new Result Fail(string message)
         {
             return new Result() { Success = false, Message = message };
         }
