@@ -9,13 +9,13 @@ using Gls.Cookbook.Domain;
 
 namespace Gls.Cookbook.App
 {
-    public class ToastService : IToastService
+    public class SnackBarService : ISnackBarService
     {
         public async Task ShowAsync(string message)
         {
-            using (IToast toast = Toast.Make(message))
+            using (ISnackbar snackbar = Snackbar.Make(message))
             {
-                await toast.Show();
+                await snackbar.Show();
             }
         }
     }

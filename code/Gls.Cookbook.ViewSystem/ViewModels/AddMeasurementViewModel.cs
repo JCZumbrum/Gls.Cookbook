@@ -30,7 +30,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         }
 
         private INavigationService navigationService;
-        private IToastService toastService;
+        private ISnackBarService snackBarService;
         private ICommandService<CreateMeasurementCommand> createMeasurementService;
 
         private MeasurementType measurementType;
@@ -89,10 +89,10 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public ObservableCollection<ObservableMeasurementSystem> MeasurementSystems { get; } = new ObservableCollection<ObservableMeasurementSystem>();
 
-        public AddMeasurementViewModel(INavigationService navigationService, IToastService toastService, ICommandService<CreateMeasurementCommand> createMeasurementService)
+        public AddMeasurementViewModel(INavigationService navigationService, ISnackBarService snackBarService, ICommandService<CreateMeasurementCommand> createMeasurementService)
         {
             this.navigationService = navigationService;
-            this.toastService = toastService;
+            this.snackBarService = snackBarService;
             this.createMeasurementService = createMeasurementService;
 
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurmentAsync);
@@ -120,7 +120,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             else
             {
                 // toast the user with the failure
-                toastService.Make(result.Message);
+                await snackBarService.ShowAsync(result.Message);
             }
         }
     }

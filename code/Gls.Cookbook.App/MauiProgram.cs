@@ -28,6 +28,7 @@ namespace Gls.Cookbook.App
 
             builder.Services.AddSingleton<INavigationService, ShellNavigationService>();
             builder.Services.AddSingleton<IToastService, ToastService>();
+            builder.Services.AddSingleton<ISnackBarService, SnackBarService>();
 
             builder.Services.AddSingleton<ICookbookContextFactory, EfCookbookContextFactory>();
 

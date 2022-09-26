@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gls.Cookbook.Domain
 {
-    public interface IToastService
+    public interface ISnackBarService
     {
         Task ShowAsync(string message);
     }
