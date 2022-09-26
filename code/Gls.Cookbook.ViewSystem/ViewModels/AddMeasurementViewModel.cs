@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Measurements;
 using Gls.Cookbook.Domain.Queries;
+using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
@@ -27,6 +30,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         }
 
         private INavigationService navigationService;
+        private IToastService toastService;
         private ICommandService<CreateMeasurementCommand> createMeasurementService;
 
         private MeasurementType measurementType;
@@ -81,12 +85,17 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
+        public IAsyncRelayCommand AddMeasurementCommand { get; }
+
         public ObservableCollection<ObservableMeasurementSystem> MeasurementSystems { get; } = new ObservableCollection<ObservableMeasurementSystem>();
 
-        public AddMeasurementViewModel(INavigationService navigationService, ICommandService<CreateMeasurementCommand> createMeasurementService)
+        public AddMeasurementViewModel(INavigationService navigationService, IToastService toastService, ICommandService<CreateMeasurementCommand> createMeasurementService)
         {
             this.navigationService = navigationService;
+            this.toastService = toastService;
             this.createMeasurementService = createMeasurementService;
+
+            this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurmentAsync);
 
             this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.UsCustomary });
             this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.Metric });
@@ -97,6 +106,22 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.MeasurementType = args;
 
             return Task.CompletedTask;
+        }
+
+        private async Task AddMeasurmentAsync()
+        {
+            Result result = await createMeasurementService.ExecuteAsync(new CreateMeasurementCommand() { MeasurementType = this.MeasurementType, MeasurementSystem = this.MeasurementSystem.MeasurementSystem, Name = this.Name, Abbreviation = this.Abbreviation });
+            if (result.Success)
+            {
+                // notify listeners and go back
+                WeakReferenceMessenger.Default.Send(new MeasurementAddedMessage());
+                await navigationService.GoBackAsync();
+            }
+            else
+            {
+                // toast the user with the failure
+                toastService.Make(result.Message);
+            }
         }
     }
 }
