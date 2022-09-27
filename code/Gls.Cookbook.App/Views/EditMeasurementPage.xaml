@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Gls.Cookbook.App.Views.EditMeasurementPage"
              Title="Edit Measurement">
     <Shell.TitleView>
         <Grid>
-            <ImageButton HorizontalOptions="End" HeightRequest="36" WidthRequest="36" Source="delete.png" BackgroundColor="Transparent" Command="{Binding DeleteMeasurementCommand}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ImageButton Grid.Column="1" Margin="36,0" HeightRequest="36" WidthRequest="36" Source="trash.png" BackgroundColor="Transparent" Command="{Binding DeleteMeasurementCommand}" />
+            <ImageButton Grid.Column="2" Margin="8,0" HeightRequest="36" WidthRequest="36" Source="ok.png" BackgroundColor="Transparent" Command="{Binding UpdateMeasurementCommand}" />
         </Grid>
     </Shell.TitleView>
     <VerticalStackLayout Margin="10" Spacing="5">
@@ -14,8 +21,8 @@
         <Label Text="System" TextColor="LightSlateGrey" FontSize="Title" />
         <Label Text="{Binding MeasurementSystem}" FontSize="Subtitle" />
         <Label Text="Name" TextColor="LightSlateGrey" FontSize="Title" />
-        <Label Text="{Binding Name}" FontSize="Subtitle" />
+        <Entry Text="{Binding Name}" FontSize="Subtitle" />
         <Label Text="Abbreviation" TextColor="LightSlateGrey" FontSize="Title" Margin="0,5,0,0" />
-        <Label Text="{Binding Abbreviation}" FontSize="Subtitle" />
+        <Entry Text="{Binding Abbreviation}" FontSize="Subtitle" />
     </VerticalStackLayout>
 </ContentPage>

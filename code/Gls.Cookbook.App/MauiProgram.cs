@@ -35,7 +35,7 @@ namespace Gls.Cookbook.App
 
             // commands
             builder.Services.AddTransient<ICommandService<CreateMeasurementCommand, Measurement>, CreateMeasurementService>();
-            builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand>, UpdateMeasurementService>();
+            builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand, Measurement>, UpdateMeasurementService>();
             builder.Services.AddTransient<ICommandService<DeleteMeasurementCommand>, DeleteMeasurementService>();
 
             builder.Services.AddTransient<ICommandService<CreateIngredientCommand>, CreateIngredientService>();

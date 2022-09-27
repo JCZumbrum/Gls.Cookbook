@@ -16,7 +16,7 @@ using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>, IRecipient<MeasurementDeletedMessage>
+    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>, IRecipient<MeasurementUpdatedMessage>, IRecipient<MeasurementDeletedMessage>
     {
         public class ObservableMeasurement : ObservableObject
         {
@@ -91,6 +91,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
 
             WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementAddedMessage>(this, (r, m) => r.Receive(m));
+            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementUpdatedMessage>(this, (r, m) => r.Receive(m));
             WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementDeletedMessage>(this, (r, m) => r.Receive(m));
         }
 
@@ -147,6 +148,34 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
+        public void Receive(MeasurementUpdatedMessage message)
+        {
+            Measurement measurement = message.Measurement;
+
+            if (measurement.MeasurementType != measurementType)
+                return;
+
+            switch (measurement.MeasurementSystem)
+            {
+                case MeasurementSystem.UsCustomary:
+                    ObservableMeasurement usMeasurement = UsMeasurements.FirstOrDefault(m => m.Id == measurement.Id);
+                    if (usMeasurement != null)
+                    {
+                        usMeasurement.Name = measurement.Name;
+                        usMeasurement.Abbreviation = measurement.Abbreviation;
+                    }
+                    break;
+                case MeasurementSystem.Metric:
+                    ObservableMeasurement metricMeasurement = MetricMeasurements.FirstOrDefault(m => m.Id == measurement.Id);
+                    if (metricMeasurement != null)
+                    {
+                        metricMeasurement.Name = measurement.Name;
+                        metricMeasurement.Abbreviation = measurement.Abbreviation;
+                    }
+                    break;
+            }
+        }
+
         public void Receive(MeasurementDeletedMessage message)
         {
             if (message.MeasurementType != measurementType)
@@ -155,12 +184,14 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             switch (message.MeasurementSystem)
             {
                 case MeasurementSystem.UsCustomary:
-                    ObservableMeasurement usMeasurment = UsMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
-                    UsMeasurements.Remove(usMeasurment);
+                    ObservableMeasurement usMeasurement = UsMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
+                    if (usMeasurement != null)
+                        UsMeasurements.Remove(usMeasurement);
                     break;
                 case MeasurementSystem.Metric:
-                    ObservableMeasurement metricMeasurment = MetricMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
-                    MetricMeasurements.Remove(metricMeasurment);
+                    ObservableMeasurement metricMeasurement = MetricMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
+                    if (metricMeasurement != null)
+                        MetricMeasurements.Remove(metricMeasurement);
                     break;
             }
         }

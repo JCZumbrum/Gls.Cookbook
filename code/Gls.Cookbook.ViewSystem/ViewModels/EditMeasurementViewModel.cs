@@ -20,7 +20,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         private ISnackBarService snackBarService;
         private IQueryMeasurementService queryMeasurementService;
         private ICommandService<DeleteMeasurementCommand> deleteMeasurementService;
-
+        private ICommandService<UpdateMeasurementCommand, Measurement> updateMeasurementService;
         private int measurementId;
 
         private MeasurementType measurementType;
@@ -76,15 +76,18 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         }
 
         public IAsyncRelayCommand DeleteMeasurementCommand { get; }
+        public IAsyncRelayCommand UpdateMeasurementCommand { get; }
 
-        public EditMeasurementViewModel(INavigationService navigationService, ISnackBarService snackBarService, IQueryMeasurementService queryMeasurementService, ICommandService<DeleteMeasurementCommand> deleteMeasurementService)
+        public EditMeasurementViewModel(INavigationService navigationService, ISnackBarService snackBarService, IQueryMeasurementService queryMeasurementService, ICommandService<UpdateMeasurementCommand, Measurement> updateMeasurementService, ICommandService<DeleteMeasurementCommand> deleteMeasurementService)
         {
             this.navigationService = navigationService;
             this.snackBarService = snackBarService;
             this.queryMeasurementService = queryMeasurementService;
             this.deleteMeasurementService = deleteMeasurementService;
+            this.updateMeasurementService = updateMeasurementService;
 
             this.DeleteMeasurementCommand = new AsyncRelayCommand(DeleteMeasurement);
+            this.UpdateMeasurementCommand = new AsyncRelayCommand(UpdateMeasurement);
         }
 
         private async Task DeleteMeasurement()
@@ -94,6 +97,23 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             {
                 // notify listeners and go back
                 WeakReferenceMessenger.Default.Send(new MeasurementDeletedMessage() { MeasurementId = this.measurementId, MeasurementType = this.MeasurementType, MeasurementSystem = this.MeasurementSystem });
+                await navigationService.GoBackAsync();
+            }
+            else
+            {
+                // toast the user with the failure
+                await snackBarService.ShowAsync(result.Message);
+            }
+        }
+
+        private async Task UpdateMeasurement()
+        {
+            Result<Measurement> result = await updateMeasurementService.ExecuteAsync(new UpdateMeasurementCommand() { Id = this.measurementId, Name = this.Name, Abbreviation = this.Abbreviation, MeasurementType = this.MeasurementType, MeasurementSystem = this.MeasurementSystem });
+
+            if (result.Success)
+            {
+                // notify listeners and go back
+                WeakReferenceMessenger.Default.Send(new MeasurementUpdatedMessage() { Measurement = result.Value });
                 await navigationService.GoBackAsync();
             }
             else
