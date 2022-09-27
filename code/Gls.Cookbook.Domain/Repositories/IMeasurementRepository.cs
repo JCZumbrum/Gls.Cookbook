@@ -9,7 +9,7 @@ namespace Gls.Cookbook.Domain.Repositories
 {
     public interface IMeasurementRepository
     {
-        Task AddAsync(Measurement measurement);
+        Task<int> AddAsync(Measurement measurement);
         Task<Measurement> GetByIdAsync(int measurementId);
         Task<Measurement> GetByNameTypeAndSystemAsync(string name, MeasurementType measurementType, MeasurementSystem measurementSystem);
         Task<List<Measurement>> GetAllAsync();
