@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>
+    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>, IRecipient<MeasurementDeletedMessage>
     {
         public class ObservableMeasurement : ObservableObject
         {
@@ -90,6 +91,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
 
             WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementAddedMessage>(this, (r, m) => r.Receive(m));
+            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementDeletedMessage>(this, (r, m) => r.Receive(m));
         }
 
         private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
@@ -141,6 +143,24 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                     break;
                 case MeasurementSystem.Metric:
                     MetricMeasurements.Add(new ObservableMeasurement() { Id = measurement.Id, Name = measurement.Name, Abbreviation = measurement.Abbreviation });
+                    break;
+            }
+        }
+
+        public void Receive(MeasurementDeletedMessage message)
+        {
+            if (message.MeasurementType != measurementType)
+                return;
+
+            switch (message.MeasurementSystem)
+            {
+                case MeasurementSystem.UsCustomary:
+                    ObservableMeasurement usMeasurment = UsMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
+                    UsMeasurements.Remove(usMeasurment);
+                    break;
+                case MeasurementSystem.Metric:
+                    ObservableMeasurement metricMeasurment = MetricMeasurements.FirstOrDefault(m => m.Id == message.MeasurementId);
+                    MetricMeasurements.Remove(metricMeasurment);
                     break;
             }
         }

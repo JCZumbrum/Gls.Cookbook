@@ -5,7 +5,7 @@
              Title="Edit Measurement">
     <Shell.TitleView>
         <Grid>
-            <ImageButton HorizontalOptions="End" HeightRequest="36" WidthRequest="36" Source="delete.png" BackgroundColor="Transparent" />
+            <ImageButton HorizontalOptions="End" HeightRequest="36" WidthRequest="36" Source="delete.png" BackgroundColor="Transparent" Command="{Binding DeleteMeasurementCommand}" />
         </Grid>
     </Shell.TitleView>
     <VerticalStackLayout Margin="10" Spacing="5">
