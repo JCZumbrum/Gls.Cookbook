@@ -31,9 +31,10 @@ namespace Gls.Cookbook.Logic.Measurements
                     MeasurementSystem = command.MeasurementSystem
                 };
 
-                await cookbookContext.MeasurementRepository.AddAsync(measurement);
+                int measurementId = await cookbookContext.MeasurementRepository.AddAsync(measurement);
+                Measurement newMeasurement = await cookbookContext.MeasurementRepository.GetByIdAsync(measurementId);
 
-                return Result<Measurement>.Pass(measurement);
+                return Result<Measurement>.Pass(newMeasurement);
             }
         }
     }

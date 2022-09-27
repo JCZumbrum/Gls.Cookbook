@@ -34,7 +34,9 @@ namespace Gls.Cookbook.Logic.Measurements
 
                 await cookbookContext.MeasurementRepository.UpdateAsync(existingMeasurement);
 
-                return Result<Measurement>.Pass(existingMeasurement);
+                Measurement updatedMeasurement = await cookbookContext.MeasurementRepository.GetByIdAsync(existingMeasurement.Id);
+
+                return Result<Measurement>.Pass(updatedMeasurement);
             }
         }
     }
