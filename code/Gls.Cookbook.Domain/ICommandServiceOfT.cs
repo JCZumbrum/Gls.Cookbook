@@ -10,4 +10,9 @@ namespace Gls.Cookbook.Domain
     {
         Task<Result> ExecuteAsync(TCommand command);
     }
+
+    public interface ICommandService<TCommand, TResult>
+    {
+        Task<Result<TResult>> ExecuteAsync(TCommand command);
+    }
 }

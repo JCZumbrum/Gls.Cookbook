@@ -4,6 +4,7 @@ using Gls.Cookbook.DataAccess;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Ingredients;
 using Gls.Cookbook.Domain.Commands.Measurements;
+using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
 using Gls.Cookbook.Domain.Repositories;
 using Gls.Cookbook.Logic.Ingredients;
@@ -33,7 +34,7 @@ namespace Gls.Cookbook.App
             builder.Services.AddSingleton<ICookbookContextFactory, EfCookbookContextFactory>();
 
             // commands
-            builder.Services.AddTransient<ICommandService<CreateMeasurementCommand>, CreateMeasurementService>();
+            builder.Services.AddTransient<ICommandService<CreateMeasurementCommand, Measurement>, CreateMeasurementService>();
             builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand>, UpdateMeasurementService>();
             builder.Services.AddTransient<ICommandService<DeleteMeasurementCommand>, DeleteMeasurementService>();
 

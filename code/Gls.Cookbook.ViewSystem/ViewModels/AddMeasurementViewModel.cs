@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Measurements;
+using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
 using Gls.Cookbook.ViewSystem.Messages;
 
@@ -31,7 +32,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private INavigationService navigationService;
         private ISnackBarService snackBarService;
-        private ICommandService<CreateMeasurementCommand> createMeasurementService;
+        private ICommandService<CreateMeasurementCommand, Measurement> createMeasurementService;
 
         private MeasurementType measurementType;
         public MeasurementType MeasurementType
@@ -89,7 +90,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public ObservableCollection<ObservableMeasurementSystem> MeasurementSystems { get; } = new ObservableCollection<ObservableMeasurementSystem>();
 
-        public AddMeasurementViewModel(INavigationService navigationService, ISnackBarService snackBarService, ICommandService<CreateMeasurementCommand> createMeasurementService)
+        public AddMeasurementViewModel(INavigationService navigationService, ISnackBarService snackBarService, ICommandService<CreateMeasurementCommand, Measurement> createMeasurementService)
         {
             this.navigationService = navigationService;
             this.snackBarService = snackBarService;
@@ -110,11 +111,11 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         private async Task AddMeasurmentAsync()
         {
-            Result result = await createMeasurementService.ExecuteAsync(new CreateMeasurementCommand() { MeasurementType = this.MeasurementType, MeasurementSystem = this.MeasurementSystem.MeasurementSystem, Name = this.Name, Abbreviation = this.Abbreviation });
+            Result<Measurement> result = await createMeasurementService.ExecuteAsync(new CreateMeasurementCommand() { MeasurementType = this.MeasurementType, MeasurementSystem = this.MeasurementSystem.MeasurementSystem, Name = this.Name, Abbreviation = this.Abbreviation });
             if (result.Success)
             {
                 // notify listeners and go back
-                WeakReferenceMessenger.Default.Send(new MeasurementAddedMessage());
+                WeakReferenceMessenger.Default.Send(new MeasurementAddedMessage() { Measurement = result.Value });
                 await navigationService.GoBackAsync();
             }
             else
