@@ -19,11 +19,13 @@ namespace Gls.Cookbook.DataAccess.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task AddAsync(Ingredient ingredient)
+        public async Task<int> AddAsync(Ingredient ingredient)
         {
             IngredientEntity ingredientEntity = ingredient.MapToEntity();
             await dbContext.Ingredients.AddAsync(ingredientEntity);
             await dbContext.SaveChangesAsync();
+
+            return ingredientEntity.Id;
         }
 
         public async Task DeleteAsync(int ingredientId)

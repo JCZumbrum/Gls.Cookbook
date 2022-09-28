@@ -9,7 +9,7 @@ namespace Gls.Cookbook.Domain.Repositories
 {
     public interface IIngredientRepository
     {
-        Task AddAsync(Ingredient ingredient);
+        Task<int> AddAsync(Ingredient ingredient);
         Task<Ingredient> GetByNameAsync(string name);
         Task<Ingredient> GetByIdAsync(int ingredientId);
         Task<List<Ingredient>> GetAllAsync();

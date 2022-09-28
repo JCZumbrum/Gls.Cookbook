@@ -34,12 +34,14 @@ namespace Gls.Cookbook.DataAccess.Repositories
                 .Include(r => r.Sections).ThenInclude(s => s.Directions);
         }
 
-        public async Task AddAsync(Recipe recipe)
+        public async Task<int> AddAsync(Recipe recipe)
         {
             RecipeEntity recipeEntity = recipe.MapToEntity();
 
             await dbContext.Recipes.AddAsync(recipeEntity);
             await dbContext.SaveChangesAsync();
+
+            return recipeEntity.Id;
         }
 
         public async Task DeleteAsync(int recipeId)
