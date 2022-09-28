@@ -10,6 +10,10 @@
             <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding LoadedCommand}" />
+        <toolkit:EventToCommandBehavior EventName="Unloaded" Command="{Binding UnloadedCommand}" />
+    </ContentPage.Behaviors>
     <Grid>
         <ScrollView Grid.Row="0" Margin="10">
             <VerticalStackLayout>

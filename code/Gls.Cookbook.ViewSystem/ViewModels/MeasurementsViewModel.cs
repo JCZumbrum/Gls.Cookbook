@@ -16,7 +16,7 @@ using Gls.Cookbook.ViewSystem.Messages;
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
     public class MeasurementsViewModel : 
-        ObservableObject,
+        ObservableRecipient,
         IViewModel<MeasurementType>,
         IRecipient<MeasurementAddedMessage>,
         IRecipient<MeasurementUpdatedMessage>,
@@ -87,6 +87,9 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
         public IAsyncRelayCommand AddMeasurementCommand { get; }
 
+        public IRelayCommand LoadedCommand { get; }
+        public IRelayCommand UnloadedCommand { get; }
+
         public MeasurementsViewModel(INavigationService navigationService, IQueryMeasurementService queryMeasurementService)
         {
             this.navigationService = navigationService;
@@ -94,9 +97,18 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
 
-            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementAddedMessage>(this, (r, m) => r.Receive(m));
-            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementUpdatedMessage>(this, (r, m) => r.Receive(m));
-            WeakReferenceMessenger.Default.Register<MeasurementsViewModel, MeasurementDeletedMessage>(this, (r, m) => r.Receive(m));
+            this.LoadedCommand = new RelayCommand(Load);
+            this.UnloadedCommand = new RelayCommand(Unload);
+        }
+
+        private void Load()
+        {
+            this.IsActive = true;
+        }
+
+        private void Unload()
+        {
+            this.IsActive = false;
         }
 
         private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
