@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +15,12 @@ using Gls.Cookbook.ViewSystem.Messages;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class MeasurementsViewModel : ObservableObject, IViewModel<MeasurementType>, IRecipient<MeasurementAddedMessage>, IRecipient<MeasurementUpdatedMessage>, IRecipient<MeasurementDeletedMessage>
+    public class MeasurementsViewModel : 
+        ObservableObject,
+        IViewModel<MeasurementType>,
+        IRecipient<MeasurementAddedMessage>,
+        IRecipient<MeasurementUpdatedMessage>,
+        IRecipient<MeasurementDeletedMessage>
     {
         public class ObservableMeasurement : ObservableObject
         {
