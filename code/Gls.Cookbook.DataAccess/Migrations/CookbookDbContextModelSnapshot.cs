@@ -23,10 +23,10 @@ namespace Gls.Cookbook.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Note")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
