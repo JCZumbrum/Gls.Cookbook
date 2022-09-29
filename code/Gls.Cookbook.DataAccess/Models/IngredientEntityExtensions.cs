@@ -18,7 +18,7 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = ingredient.Id,
                 Name = ingredient.Name,
-                Description = ingredient.Description
+                Note = ingredient.Note
             };
         }
 
@@ -31,7 +31,7 @@ namespace Gls.Cookbook.DataAccess.Models
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Description = entity.Description
+                Note = entity.Note
             };
         }
     }

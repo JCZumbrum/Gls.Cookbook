@@ -9,6 +9,6 @@ namespace Gls.Cookbook.Domain.Commands.Ingredients
     public class CreateIngredientCommand
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Note { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Gls.Cookbook.Logic.Ingredients
                 Ingredient ingredient = new Ingredient()
                 {
                     Name = command.Name,
-                    Description = command.Description
+                    Note = command.Note
                 };
 
                 await cookbookContext.IngredientRepository.AddAsync(ingredient);

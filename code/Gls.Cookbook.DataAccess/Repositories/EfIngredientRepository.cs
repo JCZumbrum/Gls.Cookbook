@@ -61,7 +61,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
             IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == ingredient.Id);
 
             ingredientEntity.Name = ingredient.Name;
-            ingredientEntity.Description = ingredient.Description;
+            ingredientEntity.Note = ingredient.Note;
 
             dbContext.Ingredients.Update(ingredientEntity);
             await dbContext.SaveChangesAsync();

@@ -28,7 +28,7 @@ namespace Gls.Cookbook.Logic.Ingredients
                     return Result.Fail("Ingredient does not exist.");
 
                 existingIngredient.Name = command.Name;
-                existingIngredient.Description = command.Description;
+                existingIngredient.Note = command.Note;
 
                 await cookbookContext.IngredientRepository.UpdateAsync(existingIngredient);
 
