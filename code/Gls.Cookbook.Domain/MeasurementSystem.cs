@@ -10,6 +10,6 @@ namespace Gls.Cookbook.Domain
     {
         UsCustomary = 1,
         Metric = 2,
-        Agnostic = 3
+        Universal = 3
     }
 }
