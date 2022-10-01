@@ -273,7 +273,7 @@ namespace Gls.Cookbook.DataAccess.Migrations
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
-                new object[] { "Each", "each", (int)MeasurementType.Each, (int)MeasurementSystem.Universal });
+                new object[] { "28.5 Ounce Can", "28.5 oz. can", (int)MeasurementType.Each, (int)MeasurementSystem.Universal });
         }
     }
 }
