@@ -15,42 +15,28 @@
         <toolkit:EventToCommandBehavior EventName="Unloaded" Command="{Binding UnloadedCommand}" />
     </ContentPage.Behaviors>
     <Grid>
-        <ScrollView Grid.Row="0" Margin="10">
-            <VerticalStackLayout>
-                <Label Text="US" FontFamily="OpenSansSemibold" FontSize="16" VerticalTextAlignment="Center" HorizontalOptions="Start" />
-                <ListView ItemsSource="{Binding UsMeasurements}" Margin="10">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.Behaviors>
-                        <localBehaviors:DeselectListViewItemBehavior />
-                        <toolkit:EventToCommandBehavior EventName="ItemSelected"
+        <ListView Grid.Row="0" ItemsSource="{Binding Measurements}" IsGroupingEnabled="True">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding Name}" FontFamily="OpenSansSemibold" FontSize="16" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <localBehaviors:DeselectListViewItemBehavior />
+                <toolkit:EventToCommandBehavior EventName="ItemSelected"
                                                     Command="{Binding MeasurementSelectedCommand}"
                                                     EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
-                    </ListView.Behaviors>
-                </ListView>
-                <Label Text="Metric" FontFamily="OpenSansSemibold" FontSize="16" VerticalTextAlignment="Center" HorizontalOptions="Start" />
-                <ListView ItemsSource="{Binding MetricMeasurements}" Margin="10">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.Behaviors>
-                        <localBehaviors:DeselectListViewItemBehavior />
-                        <toolkit:EventToCommandBehavior EventName="ItemSelected"
-                                                    Command="{Binding MeasurementSelectedCommand}"
-                                                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
-                    </ListView.Behaviors>
-                </ListView>
-            </VerticalStackLayout>
-        </ScrollView>
+            </ListView.Behaviors>
+        </ListView>
         <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}">
             <ImageButton.Shadow Brush="Black"
                 Offset="32,32"

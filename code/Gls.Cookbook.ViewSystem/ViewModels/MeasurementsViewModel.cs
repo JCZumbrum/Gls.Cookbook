@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -22,6 +23,11 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         IRecipient<MeasurementUpdatedMessage>,
         IRecipient<MeasurementDeletedMessage>
     {
+        public class ObservableMeasurementTypeCollection : ObservableCollection<ObservableMeasurement>
+        {
+            public string Name { get; set; }
+        }
+
         public class ObservableMeasurement : ObservableObject
         {
             public int Id { get; set; }
@@ -81,8 +87,11 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
-        public ObservableCollection<ObservableMeasurement> UsMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
-        public ObservableCollection<ObservableMeasurement> MetricMeasurements { get; } = new ObservableCollection<ObservableMeasurement>();
+        public ObservableCollection<ObservableMeasurementTypeCollection> Measurements { get; } = new ObservableCollection<ObservableMeasurementTypeCollection>();
+
+        private ObservableMeasurementTypeCollection UsMeasurements { get; } = new ObservableMeasurementTypeCollection() { Name = "US" };
+        private ObservableMeasurementTypeCollection MetricMeasurements { get; } = new ObservableMeasurementTypeCollection() { Name = "Metric" };
+        private ObservableMeasurementTypeCollection UniversalMeasurements { get; } = new ObservableMeasurementTypeCollection() { Name = "Universal" };
 
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
         public IAsyncRelayCommand AddMeasurementCommand { get; }
@@ -127,6 +136,18 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
             this.Title = $"{measurementType}s";
 
+            switch (this.measurementType)
+            {
+                case MeasurementType.Volume:
+                case MeasurementType.Weight:
+                    this.Measurements.Add(UsMeasurements);
+                    this.Measurements.Add(MetricMeasurements);
+                    break;
+                case MeasurementType.Each:
+                    this.Measurements.Add(UniversalMeasurements);
+                    break;
+            }
+
             List<Measurement> measurements = await queryMeasurementService.GetByTypeAsync(args);
 
             var measurementGroupings = measurements.GroupBy(m => m.MeasurementSystem);
@@ -140,7 +161,8 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                     case MeasurementSystem.Metric:
                         MetricMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
-                    default:
+                    case MeasurementSystem.Universal:
+                        UniversalMeasurements.AddRange(measurementGrouping.OrderBy(m => m.Name).Select(m => new ObservableMeasurement() { Id = m.Id, Name = m.Name, Abbreviation = m.Abbreviation }));
                         break;
                 }
             }
