@@ -97,14 +97,25 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.createMeasurementService = createMeasurementService;
 
             this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurmentAsync);
-
-            this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.UsCustomary });
-            this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.Metric });
         }
 
         public Task InitializeAsync(MeasurementType args)
         {
             this.MeasurementType = args;
+
+            switch (this.MeasurementType)
+            {
+                case MeasurementType.Volume:
+                case MeasurementType.Weight:
+                    this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.UsCustomary });
+                    this.MeasurementSystems.Add(new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.Metric });
+                    break;
+                case MeasurementType.Each:
+                    ObservableMeasurementSystem measurementSystem = new ObservableMeasurementSystem() { MeasurementSystem = Domain.MeasurementSystem.Universal };
+                    this.MeasurementSystems.Add(measurementSystem);
+                    this.MeasurementSystem = measurementSystem;
+                    break;
+            }
 
             return Task.CompletedTask;
         }
