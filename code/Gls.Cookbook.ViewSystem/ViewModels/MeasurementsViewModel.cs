@@ -182,6 +182,9 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
                 case MeasurementSystem.Metric:
                     MetricMeasurements.Add(new ObservableMeasurement() { Id = measurement.Id, Name = measurement.Name, Abbreviation = measurement.Abbreviation });
                     break;
+                case MeasurementSystem.Universal:
+                    UniversalMeasurements.Add(new ObservableMeasurement() { Id = measurement.Id, Name = measurement.Name, Abbreviation = measurement.Abbreviation });
+                    break;
             }
         }
 
