@@ -34,6 +34,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
             this.MeasurementTypes.Add(new ObservableMeasurementType() { MeasurementType = MeasurementType.Volume, Name = "Volume" });
             this.MeasurementTypes.Add(new ObservableMeasurementType() { MeasurementType = MeasurementType.Weight, Name = "Weight" });
+            this.MeasurementTypes.Add(new ObservableMeasurementType() { MeasurementType = MeasurementType.Each, Name = "Eaches" });
         }
 
         private async Task SelectMeasurementType(ObservableMeasurementType arg)
