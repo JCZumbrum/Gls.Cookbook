@@ -133,7 +133,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         {
             this.measurementType = args;
 
-            this.Title = $"{measurementType}s";
+            this.Title = measurementType == MeasurementType.Each ? "Eaches" : $"{measurementType}s";
 
             switch (this.measurementType)
             {

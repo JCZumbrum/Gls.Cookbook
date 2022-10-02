@@ -15,18 +15,11 @@
         <toolkit:EventToCommandBehavior EventName="Unloaded" Command="{Binding UnloadedCommand}" />
     </ContentPage.Behaviors>
     <Grid>
-        <ListView Grid.Row="0" ItemsSource="{Binding Measurements}" IsGroupingEnabled="True">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Label VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Name}" FontFamily="OpenSansSemibold" FontSize="16" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
+        <ListView Grid.Row="0" ItemsSource="{Binding Measurements}" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" Margin="10,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="20,10" />
+                        <Label VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="10,10" />
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
