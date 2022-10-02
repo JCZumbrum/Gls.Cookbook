@@ -6,15 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
 using Gls.Cookbook.ViewSystem.Args;
+using Gls.Cookbook.ViewSystem.Messages;
 using static Gls.Cookbook.ViewSystem.ViewModels.MeasurementsViewModel;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
-    public class IngredientsViewModel : ObservableRecipient, IViewModel<EmptyArgs>
+    public class IngredientsViewModel :
+        ObservableRecipient, 
+        IViewModel<EmptyArgs>,
+        IRecipient<IngredientAddedMessage>,
+        IRecipient<IngredientUpdatedMessage>,
+        IRecipient<IngredientDeletedMessage>
     {
         public class ObservableIngredient : ObservableObject
         {
@@ -80,6 +87,21 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             List<Ingredient> ingredients = await queryIngredientService.GetAllAsync();
 
             Ingredients.AddRange(ingredients.OrderBy(m => m.Name).Select(m => new ObservableIngredient() { Id = m.Id, Name = m.Name }));
+        }
+
+        public void Receive(IngredientAddedMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Receive(IngredientUpdatedMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Receive(IngredientDeletedMessage message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

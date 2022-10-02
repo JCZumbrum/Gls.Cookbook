@@ -13,11 +13,13 @@ namespace Gls.Cookbook.App
     {
         private Dictionary<Type, Type> viewModelToPageMap = new Dictionary<Type, Type>()
         {
+            { typeof(RecipesViewModel), typeof(RecipesPage) },
             { typeof(CreateRecipeViewModel), typeof(CreateRecipePage) },
             { typeof(IngredientsViewModel), typeof(IngredientsPage) },
-            { typeof(MeasurementTypesViewModel), typeof(MeasurementTypesPage) },
-            { typeof(RecipesViewModel), typeof(RecipesPage) },
+            { typeof(EditIngredientViewModel), typeof(EditIngredientPage) },
+            { typeof(AddIngredientViewModel), typeof(AddIngredientPage) },
             { typeof(MeasurementsViewModel), typeof(MeasurementsPage) },
+            { typeof(MeasurementTypesViewModel), typeof(MeasurementTypesPage) },
             { typeof(EditMeasurementViewModel), typeof(EditMeasurementPage) },
             { typeof(AddMeasurementViewModel), typeof(AddMeasurementPage) }
         };

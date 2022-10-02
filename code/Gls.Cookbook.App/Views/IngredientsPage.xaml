@@ -15,7 +15,7 @@
         <toolkit:EventToCommandBehavior EventName="Unloaded" Command="{Binding UnloadedCommand}" />
     </ContentPage.Behaviors>
     <Grid>
-        <CollectionView Grid.Row="0" ItemsSource="{Binding Ingredients}" Margin="10,0" EmptyView="No ingredients to display">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Ingredients}" Margin="10,0" SelectionMode="Single" EmptyView="No ingredients to display">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Label VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />

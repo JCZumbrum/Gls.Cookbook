@@ -47,19 +47,23 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<IQueryIngredientService, QueryIngredientService>();
 
             // pages
+            builder.Services.AddTransient<RecipesPage>();
             builder.Services.AddTransient<CreateRecipePage>();
             builder.Services.AddTransient<IngredientsPage>();
+            builder.Services.AddTransient<AddIngredientPage>();
+            builder.Services.AddTransient<EditIngredientPage>();
             builder.Services.AddTransient<MeasurementTypesPage>();
-            builder.Services.AddTransient<RecipesPage>();
             builder.Services.AddTransient<MeasurementsPage>();
             builder.Services.AddTransient<AddMeasurementPage>();
             builder.Services.AddTransient<EditMeasurementPage>();
 
             // view models
+            builder.Services.AddTransient<RecipesViewModel>();
             builder.Services.AddTransient<CreateRecipeViewModel>();
             builder.Services.AddTransient<IngredientsViewModel>();
+            builder.Services.AddTransient<AddIngredientViewModel>();
+            builder.Services.AddTransient<EditIngredientViewModel>();
             builder.Services.AddTransient<MeasurementTypesViewModel>();
-            builder.Services.AddTransient<RecipesViewModel>();
             builder.Services.AddTransient<MeasurementsViewModel>();
             builder.Services.AddTransient<AddMeasurementViewModel>();
             builder.Services.AddTransient<EditMeasurementViewModel>();
