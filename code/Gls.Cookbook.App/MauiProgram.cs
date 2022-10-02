@@ -44,6 +44,7 @@ namespace Gls.Cookbook.App
 
             // queries
             builder.Services.AddTransient<IQueryMeasurementService, QueryMeasurementService>();
+            builder.Services.AddTransient<IQueryIngredientService, QueryIngredientService>();
 
             // pages
             builder.Services.AddTransient<CreateRecipePage>();
