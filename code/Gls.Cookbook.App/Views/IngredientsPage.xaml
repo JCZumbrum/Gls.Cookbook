@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:localBehaviors="clr-namespace:Gls.Cookbook.App.Behaviors"
              x:Class="Gls.Cookbook.App.Views.IngredientsPage"
              Title="Ingredients">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the Ingredients page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding LoadedCommand}" />
+        <toolkit:EventToCommandBehavior EventName="Unloaded" Command="{Binding UnloadedCommand}" />
+    </ContentPage.Behaviors>
+    <Grid>
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Ingredients}" Margin="10,0" EmptyView="No ingredients to display">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="14" TextColor="Black" Text="{Binding FullName}" Margin="0,10" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}">
+            <ImageButton.Shadow Brush="Black"
+                Offset="32,32"
+                Radius="32"
+                Opacity="0.8" />
+        </ImageButton>
+    </Grid>
 </ContentPage>
