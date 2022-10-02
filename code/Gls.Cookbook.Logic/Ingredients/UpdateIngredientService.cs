@@ -10,7 +10,7 @@ using Gls.Cookbook.Domain.Repositories;
 
 namespace Gls.Cookbook.Logic.Ingredients
 {
-    public class UpdateIngredientService : ICommandService<UpdateIngredientCommand>
+    public class UpdateIngredientService : ICommandService<UpdateIngredientCommand, Ingredient>
     {
         private ICookbookContextFactory cookbookContextFactory;
 
@@ -19,20 +19,22 @@ namespace Gls.Cookbook.Logic.Ingredients
             this.cookbookContextFactory = cookbookContextFactory;
         }
 
-        public async Task<Result> ExecuteAsync(UpdateIngredientCommand command)
+        public async Task<Result<Ingredient>> ExecuteAsync(UpdateIngredientCommand command)
         {
             await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 Ingredient existingIngredient = await cookbookContext.IngredientRepository.GetByNameAsync(command.Name);
                 if (existingIngredient == null)
-                    return Result.Fail("Ingredient does not exist.");
+                    return Result<Ingredient>.Fail("Ingredient does not exist.");
 
                 existingIngredient.Name = command.Name;
                 existingIngredient.Note = command.Note;
 
                 await cookbookContext.IngredientRepository.UpdateAsync(existingIngredient);
 
-                return Result.Pass();
+                Ingredient updatedIngredient = await cookbookContext.IngredientRepository.GetByIdAsync(existingIngredient.Id);
+
+                return Result<Ingredient>.Pass(updatedIngredient);
             }
         }
     }

@@ -3,10 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gls.Cookbook.App.Views.EditIngredientPage"
              Title="EditIngredientPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ImageButton Grid.Column="1" Margin="36,0" HeightRequest="36" WidthRequest="36" Source="trash.png" BackgroundColor="Transparent" Command="{Binding DeleteIngredientCommand}" />
+            <ImageButton Grid.Column="2" Margin="8,0" HeightRequest="36" WidthRequest="36" Source="ok.png" BackgroundColor="Transparent" Command="{Binding UpdateIngredientCommand}" />
+        </Grid>
+    </Shell.TitleView>
+    <Grid Margin="10" RowSpacing="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="Name" TextColor="LightSlateGrey" FontSize="Title" />
+        <Entry Grid.Row="1" Text="{Binding Name}" FontSize="Subtitle" />
+        <Label Grid.Row="2" Text="Note" TextColor="LightSlateGrey" FontSize="Title" Margin="0,5,0,0" />
+        <Editor Grid.Row="3" Text="{Binding Note}" FontSize="Subtitle" />
+    </Grid>
 </ContentPage>

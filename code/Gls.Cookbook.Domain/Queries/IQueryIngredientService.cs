@@ -10,5 +10,6 @@ namespace Gls.Cookbook.Domain.Queries
     public interface IQueryIngredientService
     {
         Task<List<Ingredient>> GetAllAsync();
+        Task<Ingredient> GetByIdAsync(int ingredientId);
     }
 }

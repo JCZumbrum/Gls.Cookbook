@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace Gls.Cookbook.Logic.Ingredients
             await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 return await cookbookContext.IngredientRepository.GetAllAsync();
+            }
+        }
+
+        public async Task<Ingredient> GetByIdAsync(int ingredientId)
+        {
+            await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
+            {
+                return await cookbookContext.IngredientRepository.GetByIdAsync(ingredientId);
             }
         }
     }

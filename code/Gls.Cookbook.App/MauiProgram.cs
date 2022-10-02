@@ -38,8 +38,8 @@ namespace Gls.Cookbook.App
             builder.Services.AddTransient<ICommandService<UpdateMeasurementCommand, Measurement>, UpdateMeasurementService>();
             builder.Services.AddTransient<ICommandService<DeleteMeasurementCommand>, DeleteMeasurementService>();
 
-            builder.Services.AddTransient<ICommandService<CreateIngredientCommand>, CreateIngredientService>();
-            builder.Services.AddTransient<ICommandService<UpdateIngredientCommand>, UpdateIngredientService>();
+            builder.Services.AddTransient<ICommandService<CreateIngredientCommand, Ingredient>, CreateIngredientService>();
+            builder.Services.AddTransient<ICommandService<UpdateIngredientCommand, Ingredient>, UpdateIngredientService>();
             builder.Services.AddTransient<ICommandService<DeleteIngredientCommand>, DeleteIngredientService>();
 
             // queries

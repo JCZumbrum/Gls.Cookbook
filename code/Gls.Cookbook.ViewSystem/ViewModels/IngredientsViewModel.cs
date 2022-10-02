@@ -17,7 +17,7 @@ using static Gls.Cookbook.ViewSystem.ViewModels.MeasurementsViewModel;
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
     public class IngredientsViewModel :
-        ObservableRecipient, 
+        ObservableRecipient,
         IViewModel<EmptyArgs>,
         IRecipient<IngredientAddedMessage>,
         IRecipient<IngredientUpdatedMessage>,
@@ -48,7 +48,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public IAsyncRelayCommand<ObservableMeasurement> IngredientSelectedCommand { get; }
         public IAsyncRelayCommand AddIngredientCommand { get; }
-        public IRelayCommand LoadedCommand { get; }
+        public IAsyncRelayCommand LoadedCommand { get; }
         public IRelayCommand UnloadedCommand { get; }
 
         public IngredientsViewModel(INavigationService navigationService, IQueryIngredientService queryIngredientService)
@@ -58,12 +58,16 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
             this.IngredientSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewIngredient);
             this.AddIngredientCommand = new AsyncRelayCommand(AddIngredient);
-            this.LoadedCommand = new RelayCommand(Load);
+            this.LoadedCommand = new AsyncRelayCommand(LoadAsync);
             this.UnloadedCommand = new RelayCommand(Unload);
         }
 
-        private void Load()
+        private async Task LoadAsync()
         {
+            List<Ingredient> ingredients = await queryIngredientService.GetAllAsync();
+
+            Ingredients.AddRange(ingredients.OrderBy(m => m.Name).Select(m => new ObservableIngredient() { Id = m.Id, Name = m.Name }));
+
             this.IsActive = true;
         }
 
@@ -82,26 +86,31 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             await navigationService.GoToAsync<AddIngredientViewModel, EmptyArgs>(new EmptyArgs());
         }
 
-        public async Task InitializeAsync(EmptyArgs args)
-        {
-            List<Ingredient> ingredients = await queryIngredientService.GetAllAsync();
-
-            Ingredients.AddRange(ingredients.OrderBy(m => m.Name).Select(m => new ObservableIngredient() { Id = m.Id, Name = m.Name }));
-        }
+        public Task InitializeAsync(EmptyArgs args) { return Task.CompletedTask; }
 
         public void Receive(IngredientAddedMessage message)
         {
-            throw new NotImplementedException();
+            Ingredient ingredient = message.Ingredient;
+
+            Ingredients.Add(new ObservableIngredient() { Id = ingredient.Id, Name = ingredient.Name });
         }
 
         public void Receive(IngredientUpdatedMessage message)
         {
-            throw new NotImplementedException();
+            Ingredient ingredient = message.Ingredient;
+
+            ObservableIngredient existingMeasurement = Ingredients.FirstOrDefault(m => m.Id == ingredient.Id);
+            if (existingMeasurement != null)
+            {
+                existingMeasurement.Name = ingredient.Name;
+            }
         }
 
         public void Receive(IngredientDeletedMessage message)
         {
-            throw new NotImplementedException();
+            ObservableIngredient ingredient = Ingredients.FirstOrDefault(m => m.Id == message.IngredientId);
+            if (ingredient != null)
+                Ingredients.Remove(ingredient);
         }
     }
 }
