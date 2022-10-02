@@ -94,7 +94,6 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
         public IAsyncRelayCommand<ObservableMeasurement> MeasurementSelectedCommand { get; }
         public IAsyncRelayCommand AddMeasurementCommand { get; }
-
         public IRelayCommand LoadedCommand { get; }
         public IRelayCommand UnloadedCommand { get; }
 
@@ -102,9 +101,9 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         {
             this.navigationService = navigationService;
             this.queryMeasurementService = queryMeasurementService;
-            this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewSelectedMeasurement);
-            this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
 
+            this.MeasurementSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewMeasurement);
+            this.AddMeasurementCommand = new AsyncRelayCommand(AddMeasurement);
             this.LoadedCommand = new RelayCommand(Load);
             this.UnloadedCommand = new RelayCommand(Unload);
         }
@@ -119,7 +118,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.IsActive = false;
         }
 
-        private async Task ViewSelectedMeasurement(ObservableMeasurement arg)
+        private async Task ViewMeasurement(ObservableMeasurement arg)
         {
             await navigationService.GoToAsync<EditMeasurementViewModel, int>(arg.Id);
         }
