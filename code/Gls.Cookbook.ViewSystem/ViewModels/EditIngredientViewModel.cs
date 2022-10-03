@@ -45,8 +45,8 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
-        public IAsyncRelayCommand DeleteMeasurementCommand { get; }
-        public IAsyncRelayCommand UpdateMeasurementCommand { get; }
+        public IAsyncRelayCommand DeleteIngredientCommand { get; }
+        public IAsyncRelayCommand UpdateIngredientCommand { get; }
 
         public EditIngredientViewModel(INavigationService navigationService, ISnackBarService snackBarService, IQueryIngredientService queryIngredientService, ICommandService<UpdateIngredientCommand, Ingredient> updateIngredientService, ICommandService<DeleteIngredientCommand> deleteIngredientService)
         {
@@ -56,11 +56,11 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.deleteIngredientService = deleteIngredientService;
             this.updateIngredientService = updateIngredientService;
 
-            this.DeleteMeasurementCommand = new AsyncRelayCommand(DeleteMeasurement);
-            this.UpdateMeasurementCommand = new AsyncRelayCommand(UpdateMeasurement);
+            this.DeleteIngredientCommand = new AsyncRelayCommand(DeleteIngredient);
+            this.UpdateIngredientCommand = new AsyncRelayCommand(UpdateIngredient);
         }
 
-        private async Task DeleteMeasurement()
+        private async Task DeleteIngredient()
         {
             Result result = await deleteIngredientService.ExecuteAsync(new DeleteIngredientCommand() { Id = ingredientId });
             if (result.Success)
@@ -76,7 +76,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             }
         }
 
-        private async Task UpdateMeasurement()
+        private async Task UpdateIngredient()
         {
             Result<Ingredient> result = await updateIngredientService.ExecuteAsync(new UpdateIngredientCommand() { Id = this.ingredientId, Name = this.Name, Note = this.Note });
 
