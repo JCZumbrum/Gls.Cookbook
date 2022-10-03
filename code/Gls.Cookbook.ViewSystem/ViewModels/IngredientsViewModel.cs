@@ -95,9 +95,9 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
 
             int ingredientId = SelectedIngredient.Id;
 
-            SelectedIngredient = null;
-
             await navigationService.GoToAsync<EditIngredientViewModel, int>(ingredientId);
+
+            SelectedIngredient = null;
         }
 
         private async Task AddIngredient()
