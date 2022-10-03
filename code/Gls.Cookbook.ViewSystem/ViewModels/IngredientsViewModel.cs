@@ -12,7 +12,6 @@ using Gls.Cookbook.Domain.Models;
 using Gls.Cookbook.Domain.Queries;
 using Gls.Cookbook.ViewSystem.Args;
 using Gls.Cookbook.ViewSystem.Messages;
-using static Gls.Cookbook.ViewSystem.ViewModels.MeasurementsViewModel;
 
 namespace Gls.Cookbook.ViewSystem.ViewModels
 {
@@ -44,9 +43,22 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
         private INavigationService navigationService;
         private IQueryIngredientService queryIngredientService;
 
+        private ObservableIngredient selectedIngredient;
+        public ObservableIngredient SelectedIngredient
+        {
+            get
+            {
+                return selectedIngredient;
+            }
+            set
+            {
+                SetProperty(ref selectedIngredient, value);
+            }
+        }
+
         public ObservableCollection<ObservableIngredient> Ingredients { get; } = new ObservableCollection<ObservableIngredient>();
 
-        public IAsyncRelayCommand<ObservableMeasurement> IngredientSelectedCommand { get; }
+        public IAsyncRelayCommand IngredientSelectedCommand { get; }
         public IAsyncRelayCommand AddIngredientCommand { get; }
         public IAsyncRelayCommand LoadedCommand { get; }
         public IRelayCommand UnloadedCommand { get; }
@@ -56,7 +68,7 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.navigationService = navigationService;
             this.queryIngredientService = queryIngredientService;
 
-            this.IngredientSelectedCommand = new AsyncRelayCommand<ObservableMeasurement>(ViewIngredient);
+            this.IngredientSelectedCommand = new AsyncRelayCommand(ViewIngredient);
             this.AddIngredientCommand = new AsyncRelayCommand(AddIngredient);
             this.LoadedCommand = new AsyncRelayCommand(LoadAsync);
             this.UnloadedCommand = new RelayCommand(Unload);
@@ -76,9 +88,16 @@ namespace Gls.Cookbook.ViewSystem.ViewModels
             this.IsActive = false;
         }
 
-        private async Task ViewIngredient(ObservableMeasurement arg)
+        private async Task ViewIngredient()
         {
-            await navigationService.GoToAsync<EditIngredientViewModel, int>(arg.Id);
+            if (SelectedIngredient == null)
+                return;
+
+            int ingredientId = SelectedIngredient.Id;
+
+            SelectedIngredient = null;
+
+            await navigationService.GoToAsync<EditIngredientViewModel, int>(ingredientId);
         }
 
         private async Task AddIngredient()
