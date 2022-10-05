@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Gls.Cookbook.Domain;
 using Gls.Cookbook.Domain.Commands.Measurements;
 using Gls.Cookbook.Domain.Models;
@@ -17,6 +18,9 @@ namespace Gls.Cookbook.Logic.Measurements
 
         public async Task<Result<Measurement>> ExecuteAsync(CreateMeasurementCommand command)
         {
+            if (String.IsNullOrEmpty(command.Name))
+                return Result<Measurement>.Fail("Measurement name is required.");
+
             await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 Measurement existingMeasurement = await cookbookContext.MeasurementRepository.GetByNameTypeAndSystemAsync(command.Name, command.MeasurementType, command.MeasurementSystem);

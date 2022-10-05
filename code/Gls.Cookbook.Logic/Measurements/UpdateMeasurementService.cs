@@ -21,6 +21,9 @@ namespace Gls.Cookbook.Logic.Measurements
 
         public async Task<Result<Measurement>> ExecuteAsync(UpdateMeasurementCommand command)
         {
+            if (String.IsNullOrEmpty(command.Name))
+                return Result<Measurement>.Fail("Measurement name is required.");
+
             await using (ICookbookContext cookbookContext = cookbookContextFactory.Create())
             {
                 Measurement existingMeasurement = await cookbookContext.MeasurementRepository.GetByIdAsync(command.Id);
