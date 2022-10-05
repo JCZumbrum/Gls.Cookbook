@@ -9,7 +9,7 @@ namespace Gls.Cookbook.DataAccess.Models
 {
     public static class RecipeIngredientEntityExtensions
     {
-        public static RecipeIngredientEntity MapToEntity(this RecipeIngredient recipeIngredient, RecipeSectionEntity recipeSectionEntity)
+        public static RecipeIngredientEntity MapToEntity(this RecipeIngredient recipeIngredient, RecipeIngredientSectionEntity recipeIngredientSectionEntity)
         {
             if (recipeIngredient == null)
                 return null;
@@ -17,12 +17,12 @@ namespace Gls.Cookbook.DataAccess.Models
             return new RecipeIngredientEntity()
             {
                 Id = recipeIngredient.Id,
-                RecipeSection = recipeSectionEntity,
+                RecipeIngredientSection = recipeIngredientSectionEntity,
                 Index = recipeIngredient.Index,
-                IngredientId = recipeIngredient.IngredientId,
+                MinimumQuantityText = recipeIngredient.MinimumQuantityText,
+                MaximumQuantityText = recipeIngredient.MaximumQuantityText,
                 MeasurementId = recipeIngredient.MeasurementId,
-                QuantityText = recipeIngredient.QuantityText,
-                Quantity = recipeIngredient.Quantity,
+                IngredientId = recipeIngredient.IngredientId,
                 Note = recipeIngredient.Note
             };
         }

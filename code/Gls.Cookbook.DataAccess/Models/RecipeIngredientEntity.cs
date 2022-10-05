@@ -10,17 +10,17 @@ namespace Gls.Cookbook.DataAccess.Models
     public class RecipeIngredientEntity
     {
         public int Id { get; set; }
-        public RecipeSectionEntity RecipeSection { get; set; }
+        public RecipeIngredientSectionEntity RecipeIngredientSection { get; set; }
         public int Index { get; set; }
 
-        public int IngredientId { get; set; }
-        public IngredientEntity Ingredient { get; set; }
-
-        public string QuantityText { get; set; }
-        public double Quantity { get; set; }
+        public string MinimumQuantityText { get; set; }
+        public string MaximumQuantityText { get; set; }
 
         public int MeasurementId { get; set; }
         public MeasurementEntity Measurement { get; set; }
+
+        public int IngredientId { get; set; }
+        public IngredientEntity Ingredient { get; set; }
 
         public string Note { get; set; }
     }

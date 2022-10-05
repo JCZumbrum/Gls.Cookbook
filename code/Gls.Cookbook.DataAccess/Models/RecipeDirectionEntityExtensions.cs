@@ -9,7 +9,7 @@ namespace Gls.Cookbook.DataAccess.Models
 {
     public static class RecipeDirectionEntityExtensions
     {
-        public static RecipeDirectionEntity MapToEntity(this RecipeDirection instruction, RecipeSectionEntity recipeSectionEntity)
+        public static RecipeDirectionEntity MapToEntity(this RecipeDirection instruction, RecipeDirectionSectionEntity recipeDirectionSectionEntity)
         {
             if (instruction == null)
                 return null;
@@ -17,7 +17,7 @@ namespace Gls.Cookbook.DataAccess.Models
             return new RecipeDirectionEntity()
             {
                 Id = instruction.Id,
-                RecipeSection = recipeSectionEntity,
+                RecipeDirectionSection = recipeDirectionSectionEntity,
                 Index = instruction.Index,
                 Direction = instruction.Direction,
                 Note = instruction.Note
