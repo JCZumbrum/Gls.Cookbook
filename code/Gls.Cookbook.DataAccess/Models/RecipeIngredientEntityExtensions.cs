@@ -26,5 +26,22 @@ namespace Gls.Cookbook.DataAccess.Models
                 Note = recipeIngredient.Note
             };
         }
+
+        public static RecipeIngredient MapToDomain(this RecipeIngredientEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new RecipeIngredient()
+            {
+                Id = entity.Id,
+                Index = entity.Index,
+                MinimumQuantityText = entity.MinimumQuantityText,
+                MaximumQuantityText = entity.MaximumQuantityText,
+                MeasurementId = entity.MeasurementId,
+                IngredientId = entity.IngredientId,
+                Note = entity.Note
+            };
+        }
     }
 }

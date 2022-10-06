@@ -41,19 +41,19 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public async Task<List<Ingredient>> GetAllAsync()
         {
-            return await dbContext.Ingredients.Select(e => e.MapToIngredient()).ToListAsync();
+            return await dbContext.Ingredients.Select(e => e.MapToDomain()).ToListAsync();
         }
 
         public async Task<Ingredient> GetByIdAsync(int ingredientId)
         {
             IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Id == ingredientId);
-            return ingredientEntity.MapToIngredient();
+            return ingredientEntity.MapToDomain();
         }
 
         public async Task<Ingredient> GetByNameAsync(string name)
         {
             IngredientEntity ingredientEntity = await dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
-            return ingredientEntity.MapToIngredient();
+            return ingredientEntity.MapToDomain();
         }
 
         public async Task UpdateAsync(Ingredient ingredient)

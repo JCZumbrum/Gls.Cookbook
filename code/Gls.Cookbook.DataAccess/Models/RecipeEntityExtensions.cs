@@ -36,7 +36,7 @@ namespace Gls.Cookbook.DataAccess.Models
             return entity;
         }
 
-        public static Recipe MapToRecipe(this RecipeEntity entity)
+        public static Recipe MapToDomain(this RecipeEntity entity)
         {
             if (entity == null)
                 return null;
@@ -56,7 +56,7 @@ namespace Gls.Cookbook.DataAccess.Models
                         Note = n.Note
                     }).ToList();
             recipe.Sections = entity.Sections.Select(
-                    s => s.MapToRecipeSection()).ToList();
+                    s => s.MapToDomain()).ToList();
 
             return recipe;
         }

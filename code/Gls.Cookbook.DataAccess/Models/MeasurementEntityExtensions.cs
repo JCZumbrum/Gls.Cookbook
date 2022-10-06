@@ -24,7 +24,7 @@ namespace Gls.Cookbook.DataAccess.Models
             };
         }
 
-        public static Measurement MapToMeasurement(this MeasurementEntity entity)
+        public static Measurement MapToDomain(this MeasurementEntity entity)
         {
             if (entity == null)
                 return null;

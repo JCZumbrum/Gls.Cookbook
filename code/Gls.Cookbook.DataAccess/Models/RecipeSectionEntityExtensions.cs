@@ -22,25 +22,18 @@ namespace Gls.Cookbook.DataAccess.Models
                 Name = recipeSection.Name
             };
 
-            entity.Ingredients = new List<RecipeIngredientEntity>(
-                recipeSection.Ingredients.Select(
-                    i => i.MapToEntity(entity)));
+            entity.IngredientSections = new List<RecipeIngredientSectionEntity>(
+                recipeSection.IngredientSections.Select(
+                    s => s.MapToEntity(entity)));
 
-            entity.Directions = new List<RecipeDirectionEntity>(
-                recipeSection.Directions.Select(
-                    i => new RecipeDirectionEntity()
-                    {
-                        Id = i.Id,
-                        RecipeSection = entity,
-                        Index = i.Index,
-                        Direction = i.Direction,
-                        Note = i.Note
-                    }));
+            entity.DirectionSections = new List<RecipeDirectionSectionEntity>(
+                recipeSection.DirectionSections.Select(
+                    s => s.MapToEntity(entity)));
 
             return entity;
         }
 
-        public static RecipeSection MapToRecipeSection(this RecipeSectionEntity entity)
+        public static RecipeSection MapToDomain(this RecipeSectionEntity entity)
         {
             if (entity == null)
                 return null;
@@ -52,26 +45,13 @@ namespace Gls.Cookbook.DataAccess.Models
                 Name = entity.Name
             };
 
-            recipeSection.Ingredients = new List<RecipeIngredient>(
-                entity.Ingredients.Select(
-                    i => new RecipeIngredient()
-                    {
-                        Id = i.Id,
-                        Index = i.Index,
-                        IngredientId = i.IngredientId,
-                        MeasurementId = i.MeasurementId,
-                        Note = i.Note
-                    }));
+            recipeSection.IngredientSections = new List<RecipeIngredientSection>(
+                entity.IngredientSections.Select(
+                    s => s.MapToDomain()));
 
-            recipeSection.Directions = new List<RecipeDirection>(
-                entity.Directions.Select(
-                    i => new RecipeDirection()
-                    {
-                        Id = i.Id,
-                        Index = i.Index,
-                        Direction = i.Direction,
-                        Note = i.Note
-                    }));
+            recipeSection.DirectionSections = new List<RecipeDirectionSection>(
+                entity.DirectionSections.Select(
+                    s => s.MapToDomain()));
 
             return recipeSection;
         }

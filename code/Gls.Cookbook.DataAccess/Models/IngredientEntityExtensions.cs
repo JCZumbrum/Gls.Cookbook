@@ -22,7 +22,7 @@ namespace Gls.Cookbook.DataAccess.Models
             };
         }
 
-        public static Ingredient MapToIngredient(this IngredientEntity entity)
+        public static Ingredient MapToDomain(this IngredientEntity entity)
         {
             if (entity == null)
                 return null;

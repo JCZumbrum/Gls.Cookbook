@@ -44,25 +44,25 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public async Task<List<Measurement>> GetAllAsync()
         {
-            return await dbContext.Measurements.Select(e => e.MapToMeasurement()).ToListAsync();
+            return await dbContext.Measurements.Select(e => e.MapToDomain()).ToListAsync();
         }
 
         public async Task<Measurement> GetByIdAsync(int measurementId)
         {
             MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Id == measurementId);
-            return measurementEntity.MapToMeasurement();
+            return measurementEntity.MapToDomain();
         }
 
         public async Task<Measurement> GetByNameTypeAndSystemAsync(string name, MeasurementType measurementType, MeasurementSystem measurementSystem)
         {
             MeasurementEntity measurementEntity = await dbContext.Measurements.FirstOrDefaultAsync(m => m.Name == name && m.MeasurementType == measurementType && m.MeasurementSystem == measurementSystem);
-            return measurementEntity.MapToMeasurement();
+            return measurementEntity.MapToDomain();
         }
 
         public async Task<List<Measurement>> GetByTypeAsync(MeasurementType measurementType)
         {
             IQueryable<MeasurementEntity> entities = dbContext.Measurements.Where(m => m.MeasurementType == measurementType);
-            return await entities.Select(e => e.MapToMeasurement()).ToListAsync();
+            return await entities.Select(e => e.MapToDomain()).ToListAsync();
         }
 
         public async Task UpdateAsync(Measurement measurement)

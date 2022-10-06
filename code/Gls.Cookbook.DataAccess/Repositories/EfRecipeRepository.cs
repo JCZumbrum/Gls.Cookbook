@@ -70,19 +70,19 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         public async Task<List<Recipe>> GetAllAsync()
         {
-            return await GetEntities().Select(e => e.MapToRecipe()).ToListAsync();
+            return await GetEntities().Select(e => e.MapToDomain()).ToListAsync();
         }
 
         public async Task<Recipe> GetByIdAsync(int recipeId)
         {
             RecipeEntity entity = await GetEntityByIdAsync(recipeId);
-            return entity.MapToRecipe();
+            return entity.MapToDomain();
         }
 
         public async Task<Recipe> GetByNameAsync(string name)
         {
             RecipeEntity entity = await GetEntities().FirstOrDefaultAsync(r => r.Name == name);
-            return entity.MapToRecipe();
+            return entity.MapToDomain();
         }
 
         public async Task UpdateAsync(Recipe recipe)

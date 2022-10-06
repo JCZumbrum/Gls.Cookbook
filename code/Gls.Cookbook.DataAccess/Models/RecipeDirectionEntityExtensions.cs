@@ -23,5 +23,19 @@ namespace Gls.Cookbook.DataAccess.Models
                 Note = instruction.Note
             };
         }
+
+        public static RecipeDirection MapToDomain(this RecipeDirectionEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new RecipeDirection()
+            {
+                Id = entity.Id,
+                Index = entity.Index,
+                Direction = entity.Direction,
+                Note = entity.Note
+            };
+        }
     }
 }
