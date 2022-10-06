@@ -18,7 +18,7 @@ namespace Gls.Cookbook.DataAccess
         public DbSet<RecipeIngredientSectionEntity> RecipeIngredientSections { get; set; }
         public DbSet<RecipeDirectionSectionEntity> RecipeDirectionSections { get; set; }
         public DbSet<RecipeIngredientEntity> RecipeIngredients { get; set; }
-        public DbSet<RecipeDirectionEntity> RecipeInstructions { get; set; }
+        public DbSet<RecipeDirectionEntity> RecipeDirections { get; set; }
 
         public DbSet<IngredientEntity> Ingredients { get; set; }
         public DbSet<MeasurementEntity> Measurements { get; set; }
