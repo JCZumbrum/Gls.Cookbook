@@ -30,8 +30,8 @@ namespace Gls.Cookbook.DataAccess.Repositories
         {
             return dbContext.Recipes
                 .Include(r => r.Notes)
-                .Include(r => r.Sections).ThenInclude(s => s.Ingredients)
-                .Include(r => r.Sections).ThenInclude(s => s.Directions);
+                .Include(r => r.Sections).ThenInclude(s => s.IngredientSections).ThenInclude(s => s.Ingredients)
+                .Include(r => r.Sections).ThenInclude(s => s.DirectionSections).ThenInclude(s => s.Directions);
         }
 
         public async Task<int> AddAsync(Recipe recipe)
@@ -154,11 +154,21 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         private void DeleteSection(RecipeSectionEntity section)
         {
-            foreach (RecipeDirectionEntity instruction in section.Directions)
-                dbContext.RecipeInstructions.Remove(instruction);
+            foreach (RecipeDirectionSectionEntity directionSection in section.DirectionSections)
+            {
+                foreach (RecipeDirectionEntity direction in directionSection.Directions)
+                    dbContext.RecipeDirections.Remove(direction);
 
-            foreach (RecipeIngredientEntity ingredient in section.Ingredients)
-                dbContext.RecipeIngredients.Remove(ingredient);
+                dbContext.RecipeDirectionSections.Remove(directionSection);
+            }
+
+            foreach (RecipeIngredientSectionEntity ingredientSection in section.IngredientSections)
+            {
+                foreach (RecipeIngredientEntity ingredient in ingredientSection.Ingredients)
+                    dbContext.RecipeIngredients.Remove(ingredient);
+
+                dbContext.RecipeIngredientSections.Remove(ingredientSection);
+            }
 
             dbContext.RecipeSections.Remove(section);
         }
@@ -187,10 +197,10 @@ namespace Gls.Cookbook.DataAccess.Repositories
                 RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
 
                 ingredientEntity.Index = modifyIngredient.Index;
-                ingredientEntity.IngredientId = modifyIngredient.IngredientId;
-                ingredientEntity.QuantityText = modifyIngredient.QuantityText;
-                ingredientEntity.Quantity = modifyIngredient.Quantity;
+                ingredientEntity.MinimumQuantityText = modifyIngredient.MinimumQuantityText;
+                ingredientEntity.MaximumQuantityText = modifyIngredient.MaximumQuantityText;
                 ingredientEntity.MeasurementId = modifyIngredient.MeasurementId;
+                ingredientEntity.IngredientId = modifyIngredient.IngredientId;
                 ingredientEntity.Note = modifyIngredient.Note;
             }
 
