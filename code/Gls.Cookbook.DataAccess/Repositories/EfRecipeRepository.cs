@@ -213,11 +213,8 @@ namespace Gls.Cookbook.DataAccess.Repositories
             // directionSectionLookupByState[false] => direction sections that are not new
             foreach (RecipeDirectionSection modifyDirectionSection in directionSectionLookupByState[false])
             {
-                RecipeDirectionEntity instructionEntity = entityInstructionDictionary[modifyInstruction.Id];
-
-                instructionEntity.Index = modifyInstruction.Index;
-                instructionEntity.Direction = modifyInstruction.Direction;
-                instructionEntity.Note = modifyInstruction.Note;
+                RecipeDirectionSectionEntity recipeDirectionSectionEntity = entityDirectionSectionDictionary[modifyDirectionSection.Id];
+                UpdateDirectionSection(recipeDirectionSectionEntity, modifyDirectionSection);
             }
 
             // add new instructions
@@ -286,9 +283,36 @@ namespace Gls.Cookbook.DataAccess.Repositories
             dbContext.RecipeDirectionSections.Remove(directionSection);
         }
 
-        private void UpdateDirectionSection()
+        private void UpdateDirectionSection(RecipeDirectionSectionEntity recipeDirectionSectionEntity, RecipeDirectionSection recipeDirectionSection)
         {
-            throw new NotImplementedException();
+            recipeDirectionSectionEntity.Index = recipeDirectionSection.Index;
+            recipeDirectionSectionEntity.Name = recipeDirectionSection.Name;
+
+            Dictionary<int, RecipeDirectionEntity> entityDirectionDictionary = recipeDirectionSectionEntity.Directions.ToDictionary(i => i.Id);
+            ILookup<bool, RecipeDirection> directionLookupByState = recipeDirectionSection.Directions.ToLookup(i => i.Id == 0);
+            List<RecipeDirectionEntity> exceptDirectionList = recipeDirectionSectionEntity.Directions.ExceptBy(directionLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+
+            // delete directions that no longer exist
+            foreach (RecipeDirectionEntity exceptDirection in exceptDirectionList)
+            {
+                recipeDirectionSectionEntity.Directions.Remove(exceptDirection);
+                dbContext.RecipeDirections.Remove(exceptDirection);
+            }
+
+            // update existing directions
+            // directionLookupByState[false] => directions that are not new
+            foreach (RecipeDirection modifyDirection in directionLookupByState[false])
+            {
+                RecipeDirectionEntity directionEntity = entityDirectionDictionary[modifyDirection.Id];
+
+                directionEntity.Index = modifyDirection.Index;
+                directionEntity.Direction = modifyDirection.Direction;
+                directionEntity.Note = modifyDirection.Note;
+            }
+
+            // add new directions
+            foreach (RecipeDirection newDirection in directionLookupByState[true])
+                recipeDirectionSectionEntity.Directions.Add(newDirection.MapToEntity(recipeDirectionSectionEntity));
         }
 
         #endregion
