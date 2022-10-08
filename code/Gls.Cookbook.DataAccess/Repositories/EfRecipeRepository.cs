@@ -166,6 +166,7 @@ namespace Gls.Cookbook.DataAccess.Repositories
 
         private void UpdateSection(RecipeSectionEntity recipeSectionEntity, RecipeSection recipeSection)
         {
+            recipeSectionEntity.Index = recipeSection.Index;
             recipeSectionEntity.Name = recipeSection.Name;
 
             #region Refresh Ingredient Sections
@@ -185,14 +186,8 @@ namespace Gls.Cookbook.DataAccess.Repositories
             // ingredientSectionLookupByState[false] => ingredient sections that are not new
             foreach (RecipeIngredientSection modifyIngredientSection in ingredientSectionLookupByState[false])
             {
-                RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
-
-                ingredientEntity.Index = modifyIngredient.Index;
-                ingredientEntity.MinimumQuantityText = modifyIngredient.MinimumQuantityText;
-                ingredientEntity.MaximumQuantityText = modifyIngredient.MaximumQuantityText;
-                ingredientEntity.MeasurementId = modifyIngredient.MeasurementId;
-                ingredientEntity.IngredientId = modifyIngredient.IngredientId;
-                ingredientEntity.Note = modifyIngredient.Note;
+                RecipeIngredientSectionEntity recipeIngredientSectionEntity = entityIngredientSectionDictionary[modifyIngredientSection.Id];
+                UpdateIngredientSection(recipeIngredientSectionEntity, modifyIngredientSection);
             }
 
             // add new ingredient sections
@@ -244,9 +239,39 @@ namespace Gls.Cookbook.DataAccess.Repositories
             dbContext.RecipeIngredientSections.Remove(ingredientSection);
         }
 
-        private void UpdateIngredientSection()
+        private void UpdateIngredientSection(RecipeIngredientSectionEntity recipeIngredientSectionEntity, RecipeIngredientSection recipeIngredientSection)
         {
-            throw new NotImplementedException();
+            recipeIngredientSectionEntity.Index = recipeIngredientSection.Index;
+            recipeIngredientSectionEntity.Name = recipeIngredientSection.Name;
+
+            Dictionary<int, RecipeIngredientEntity> entityIngredientDictionary = recipeIngredientSectionEntity.Ingredients.ToDictionary(i => i.Id);
+            ILookup<bool, RecipeIngredient> ingredientLookupByState = recipeIngredientSection.Ingredients.ToLookup(i => i.Id == 0);
+            List<RecipeIngredientEntity> exceptIngredientList = recipeIngredientSectionEntity.Ingredients.ExceptBy(ingredientLookupByState[false].Select(n => n.Id), e => e.Id).ToList();
+
+            // delete ingredients that no longer exist
+            foreach (RecipeIngredientEntity exceptIngredient in exceptIngredientList)
+            {
+                recipeIngredientSectionEntity.Ingredients.Remove(exceptIngredient);
+                dbContext.RecipeIngredients.Remove(exceptIngredient);
+            }
+
+            // update existing ingredients
+            // ingredientLookupByState[false] => ingredients that are not new
+            foreach (RecipeIngredient modifyIngredient in ingredientLookupByState[false])
+            {
+                RecipeIngredientEntity ingredientEntity = entityIngredientDictionary[modifyIngredient.Id];
+
+                ingredientEntity.Index = modifyIngredient.Index;
+                ingredientEntity.MinimumQuantityText = modifyIngredient.MinimumQuantityText;
+                ingredientEntity.MaximumQuantityText = modifyIngredient.MaximumQuantityText;
+                ingredientEntity.MeasurementId = modifyIngredient.MeasurementId;
+                ingredientEntity.IngredientId = modifyIngredient.IngredientId;
+                ingredientEntity.Note = modifyIngredient.Note;
+            }
+
+            // add new ingredients
+            foreach (RecipeIngredient newIngredient in ingredientLookupByState[true])
+                recipeIngredientSectionEntity.Ingredients.Add(newIngredient.MapToEntity(recipeIngredientSectionEntity));
         }
 
         #endregion
