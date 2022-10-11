@@ -210,6 +210,8 @@ namespace Gls.Cookbook.DataAccess.Migrations
 
         private void SeedData(MigrationBuilder migrationBuilder)
         {
+            // measurments
+
             migrationBuilder.InsertData(
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
@@ -274,6 +276,678 @@ namespace Gls.Cookbook.DataAccess.Migrations
                 "Measurements",
                 new string[] { "Name", "Abbreviation", "MeasurementType", "MeasurementSystem" },
                 new object[] { "28.5 Ounce Can", "28.5 oz. can", (int)MeasurementType.Each, (int)MeasurementSystem.Universal });
+
+            // ingredients
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Active Dry Yeast" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "All Purpose Flour" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Almond Extract" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Almonds" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Anchovy Paste" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Apple" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Apple Cider" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Bacon" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Baking Powder" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Baking Soda" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Balsamic Vinegar" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Bay Leaves" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Beef Stock" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Black Pepper" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Black Peppercorns" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Brown Sugar" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Butter" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Canned Chiles" });
+
+            migrationBuilder.InsertData(
+                "Ingredients",
+                new string[] { "Name" },
+                new object[] { "Canned Tomatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Capers" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Carrots" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Cayenne Pepper" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Celery" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Chicken" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Chicken Breasts" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Chicken Stock" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Chili Powder" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ground Cinnamon" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Cinnamon Sticks" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Coarse Salt" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Coconut Milk" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Cornstarch" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Couscous" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Crushed Tomatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Cumin" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Curry Powder" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Diced Tomatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dijon Mustard" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Basil" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Bread Crumbs" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Oregano" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Parsley" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Rosemary" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Sage" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Taragon" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dried Thyme" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Dry Mustard" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Eggs" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fish Sauce" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Flour" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Basil" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Chiles" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Ginger" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Oregano" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Parsley" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Rosemary" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Sage" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Spinach" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Taragon" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Fresh Thyme" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Frozen Spinach" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Garlic Cloves" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Garlic Powder" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ginger" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Gold Potatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Granulated Sugar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ground Beef" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ground Ginger" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ground Nutmeg" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Heavy Cream" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Honey" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Hot Sauce" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Instant Yeast" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Italian Seasoning" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Ketchup" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Kidney Beans" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Kosher Salt" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Lemon Juice" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Lemons" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Lentils" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Lime Juice" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Limes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Maple Syrup" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Marjoram" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Mayonnaise" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Milk" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Mushrooms" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Mustard" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Nutmeg" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Olive Oil" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Olives" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Onion" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Onion Powder" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Orange" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Orange Juice" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Panko Bread Crumbs" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Paprika" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Parmesan" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Pecorino" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Pepper" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Pork" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Potatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Powdered Sugar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Prepared Horseradish" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Red Onion" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Red Pepper Flakes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Red Wine" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Rice" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Rice Wine Vinegar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Russet Potatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Salt" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Salted Butter" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "San Marzano Tomatoes" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Scallions" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Shallots" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Shrimp" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Soy Sauce" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Sugar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Sweet Cream Butter" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Sweet Onion" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Tomato Paste" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Tomato Sauce" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Turmeric" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Unsalted Butter" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Vanilla Extract" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Vegetable Oil" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Vinegar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "White Sugar" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "White Wine" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Whole Milk" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Whole Nutmeg" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Worcestershire Sauce" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Yellow Mustard" });
+
+            migrationBuilder.InsertData(
+            "Ingredients",
+            new string[] { "Name" },
+            new object[] { "Yellow Onion" });
         }
     }
 }
