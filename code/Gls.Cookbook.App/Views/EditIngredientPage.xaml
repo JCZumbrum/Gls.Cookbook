@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gls.Cookbook.App.Views.EditIngredientPage"
-             Title="EditIngredientPage">
+             Title="Edit Ingredient">
     <Shell.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -10,8 +10,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ImageButton Grid.Column="1" Margin="36,0" HeightRequest="36" WidthRequest="36" Source="trash.png" BackgroundColor="Transparent" Command="{Binding DeleteIngredientCommand}" />
-            <ImageButton Grid.Column="2" Margin="8,0" HeightRequest="36" WidthRequest="36" Source="ok.png" BackgroundColor="Transparent" Command="{Binding UpdateIngredientCommand}" />
+            <Label Grid.Column="0" Text="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=Title}" />
+            <Button Grid.Column="1" Margin="36,0" FontSize="{OnPlatform Android=Large, WinUI=20}" BorderWidth="0" FontFamily="SegoeUiSymbol" Text="&#xE107;" BackgroundColor="Transparent" Command="{Binding DeleteIngredientCommand}" />
+            <Button Grid.Column="2" Margin="8,0" FontSize="{OnPlatform Android=Large, WinUI=20}" BorderWidth="0" FontFamily="SegoeUiSymbol" Text="&#xE105;" BackgroundColor="Transparent" Command="{Binding UpdateIngredientCommand}" />
         </Grid>
     </Shell.TitleView>
     <Grid Margin="10" RowSpacing="5">

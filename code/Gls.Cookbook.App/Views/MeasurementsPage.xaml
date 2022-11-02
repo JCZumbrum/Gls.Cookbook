@@ -30,11 +30,13 @@
                                                     EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
             </ListView.Behaviors>
         </ListView>
-        <ImageButton Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" Source="addbutton.png" Aspect="Center" Command="{Binding AddMeasurementCommand}">
-            <ImageButton.Shadow Brush="Black"
-                Offset="32,32"
-                Radius="32"
-                Opacity="0.8" />
-        </ImageButton>
+        <Button Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" HeightRequest="64" WidthRequest="64" CornerRadius="32" Margin="10" BackgroundColor="DarkGreen" FontSize="Small" FontFamily="SegoeUiSymbol" Text="&#xE109;" Command="{Binding AddMeasurementCommand}">
+            <Button.Shadow>
+                <Shadow Brush="Black"
+                Offset="5,5"
+                Radius="8"
+                Opacity="0.6" />
+            </Button.Shadow>
+        </Button>
     </Grid>
 </ContentPage>
