@@ -25,6 +25,7 @@ namespace Gls.Cookbook.App
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("seguisym.ttf", "SegoeUiSymbol");
                 });
 
             builder.Services.AddSingleton<INavigationService, ShellNavigationService>();
